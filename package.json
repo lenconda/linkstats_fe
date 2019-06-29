@@ -2,16 +2,21 @@
   "name": "linkstats_fe",
   "version": "0.1.0",
   "proxy": "http://localhost:6217",
+  "theme": {
+    "primary-color": "#faad14"
+  },
   "private": true,
   "dependencies": {
     "@types/antd": "^1.0.0",
     "@types/jest": "24.0.15",
     "@types/node": "12.0.10",
+    "@types/query-string": "^6.3.0",
     "@types/react": "16.8.22",
     "@types/react-dom": "16.8.4",
     "@types/react-router": "^5.0.2",
     "@types/react-router-dom": "^4.3.4",
     "antd": "^3.19.8",
+    "query-string": "^6.8.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.1",
