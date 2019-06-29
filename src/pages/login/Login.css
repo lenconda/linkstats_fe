@@ -1,4 +1,6 @@
-.banner {
+.login-box-wrapper {
+  background: #f1f1f1;
+  padding: 20px;
   height: 100%;
   display: flex !important;
   justify-content: center;
