@@ -28,7 +28,7 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
 
   return (
       <Row className={'login-box-wrapper'}>
-        <Col xs={24} sm={16} md={14} lg={10} xl={6}>
+        <Col xs={24} sm={16} md={14} lg={10} xl={6} xxl={5}>
           <Card title={'验证你的凭据'}
                 type={'inner'}
                 style={{textAlign: 'left'}}
