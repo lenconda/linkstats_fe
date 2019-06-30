@@ -24,18 +24,17 @@ const ResetForm: React.FC = (props: any): JSX.Element => {
   const handleSubmit = (e: any) => {
     e.preventDefault()
     props.form.validateFields((err: any, values: any) => {
-      if (!err)
-        http.post('/api/auth/reset',
-            {
-              uuid: params.user,
-              code: params.code,
-              password: values.password
+      if (!err) {
+        const data = {
+            ...params,
+          password: values.password
+        }
+        http.post('/api/auth/reset', data)
+            .then(res => {
+              if (res)
+                history.push('/login')
             })
-            .then(
-                res => {
-                  if (res)
-                    history.push('/login')
-                })
+      }
     })
   }
 

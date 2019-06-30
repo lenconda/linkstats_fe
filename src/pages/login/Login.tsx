@@ -31,12 +31,11 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
 
   useEffect(() => {
     if (params.action === 'active' && params.user && params.code) {
-        http.get(`/api/auth/active`,
-            {
-              params: {
-                user: params.user,
-                code: params.code
-              }})
+      const query = {
+        user: params.user,
+        code: params.code
+      }
+      http.get(`/api/auth/active`, {params: query})
     }
   }, [])
 
@@ -47,15 +46,14 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
         const { email, password, remember } = values
         localStorage.setItem('persist', remember)
         http.post('/api/auth/login', { email, password })
-            .then(
-                res => {
-                  if (res) {
-                    remember
-                        ? localStorage.setItem('token', res.data.data.token)
-                        : sessionStorage.setItem('token', res.data.data.token)
-                    history.push(params.redirect ? Base64.decode(params.redirect) : '/dashboard')
-                  }
-                })
+            .then(res => {
+              if (res) {
+                remember
+                    ? localStorage.setItem('token', res.data.data.token)
+                    : sessionStorage.setItem('token', res.data.data.token)
+                history.push(params.redirect ? Base64.decode(params.redirect) : '/dashboard')
+              }
+            })
       }
     })
   }
@@ -65,11 +63,11 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
       message.warn('请填写邮箱地址')
       return
     }
-    http.get('/api/auth/forgot', {
-      params: {
-        user: email
-      }
-    })
+
+    const query = {
+      user: email
+    }
+    http.get('/api/auth/forgot', {params: query})
   }
 
   return (
