@@ -8,7 +8,9 @@
   "private": true,
   "dependencies": {
     "@types/antd": "^1.0.0",
+    "@types/axios": "^0.14.0",
     "@types/jest": "24.0.15",
+    "@types/js-base64": "^2.3.1",
     "@types/node": "12.0.10",
     "@types/query-string": "^6.3.0",
     "@types/react": "16.8.22",
@@ -16,6 +18,8 @@
     "@types/react-router": "^5.0.2",
     "@types/react-router-dom": "^4.3.4",
     "antd": "^3.19.8",
+    "axios": "^0.19.0",
+    "js-base64": "^2.5.1",
     "query-string": "^6.8.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

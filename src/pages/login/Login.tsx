@@ -10,18 +10,20 @@ import {
   Checkbox
 } from 'antd'
 import queryString from 'query-string'
+import { Base64 } from 'js-base64'
 import './Login.css'
 
 const LoginForm: React.FC = (props: any): JSX.Element => {
   const { getFieldDecorator } = props.form
 
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState<string>('')
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
     props.form.validateFields((err: any, values: any) => {
       if (!err) {
-        console.log('Received values of form: ', values)
+        const search: string = JSON.stringify(queryString.parse(props.location.search)) || ''
+        const redirect = Base64.decode(JSON.parse(search).return)
       }
     })
   }
@@ -63,7 +65,11 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
                   initialValue: true,
                 })(<Checkbox>使我保持登录状态</Checkbox>)}
                 <section>
-                  <Button type={'primary'} block={true} htmlType={'submit'} className={'login-form-button'}>
+                  <Button type={'primary'}
+                          block={true}
+                          htmlType={'submit'}
+                          className={'login-form-button'}
+                  >
                     登录
                   </Button>
                 </section>
