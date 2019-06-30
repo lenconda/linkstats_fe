@@ -34,7 +34,7 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
           <Card title={'验证你的凭据'}
                 type={'inner'}
                 style={{textAlign: 'left'}}
-                actions={[<a onClick={() => console.log(email)}>忘记密码</a>, <a>注册一个账户</a>]}
+                actions={[<a onClick={() => console.log(email)}>忘记密码</a>, <a>创建一个账户</a>]}
           >
             <Form onSubmit={handleSubmit} className={'login-form'}>
               <Form.Item>
@@ -42,7 +42,7 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
                   rules: [{ required: true, message: '请输入你的邮箱地址' }],
                 })(
                     <Input
-                        prefix={<Icon type={'user'} style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        prefix={<Icon type={'user'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
                         placeholder={'邮箱地址'}
                         onChange={e => setEmail(e.target.value)}
                     />,
@@ -53,7 +53,7 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
                   rules: [{ required: true, message: '请输入你的密码' }],
                 })(
                     <Input
-                        prefix={<Icon type={'lock'} style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        prefix={<Icon type={'lock'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
                         type={'password'}
                         placeholder={'密码'}
                     />,
