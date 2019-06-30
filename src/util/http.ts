@@ -12,6 +12,13 @@ axios.interceptors.request.use(config => {
   return config
 })
 axios.interceptors.response.use((response: any) => {
+  if (response.data.token)
+    if (!!JSON.parse(localStorage.getItem('persist') || 'false')) {
+      localStorage.setItem('token', response.data.token)
+    } else {
+      sessionStorage.setItem('token', response.data.token)
+    }
+
   if (response.data.data &&
       Object.prototype.toString.call(response.data.data) === "[object String]")
     message.success(response.data.data)

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Button,
   Input,
@@ -7,23 +7,67 @@ import {
   Card,
   Icon,
   Form,
-  Checkbox
+  Checkbox,
+  message
 } from 'antd'
-import queryString from 'query-string'
+import { Link } from 'react-router-dom'
+import qs from 'query-string'
 import { Base64 } from 'js-base64'
 import './Login.css'
+import http from '../../util/http'
+import { history } from '../../App'
 
 const LoginForm: React.FC = (props: any): JSX.Element => {
   const { getFieldDecorator } = props.form
+  const search = JSON.parse(JSON.stringify(qs.parse(props.location.search)))
+  const params = {
+    action: search.action || '',
+    user: search.user || '',
+    code: search.code || '',
+    redirect: search.redirect || ''
+  }
 
   const [email, setEmail] = useState<string>('')
+
+  useEffect(() => {
+    if (params.action === 'active' && params.user && params.code) {
+        http.get(`/api/auth/active`,
+            {
+              params: {
+                user: params.user,
+                code: params.code
+              }})
+    }
+  }, [])
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
     props.form.validateFields((err: any, values: any) => {
       if (!err) {
-        const search: string = JSON.stringify(queryString.parse(props.location.search)) || ''
-        const redirect = Base64.decode(JSON.parse(search).return)
+        const { email, password, remember } = values
+        localStorage.setItem('persist', remember)
+        http.post('/api/auth/login', { email, password })
+            .then(
+                res => {
+                  if (res) {
+                    remember
+                        ? localStorage.setItem('token', res.data.data.token)
+                        : sessionStorage.setItem('token', res.data.data.token)
+                    history.push(params.redirect ? Base64.decode(params.redirect) : '/dashboard')
+                  }
+                })
+      }
+    })
+  }
+
+  const handleForgotPassword = () => {
+    if (!email) {
+      message.warn('请填写邮箱地址')
+      return
+    }
+    http.get('/api/auth/forgot', {
+      params: {
+        user: email
       }
     })
   }
@@ -34,11 +78,11 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
           <Card title={'验证你的凭据'}
                 type={'inner'}
                 style={{textAlign: 'left'}}
-                actions={[<a onClick={() => console.log(email)}>忘记密码</a>, <a>创建一个账户</a>]}
+                actions={[<a onClick={() => handleForgotPassword()}>忘记密码</a>, <Link to={'/signin'}>创建一个账户</Link>]}
           >
             <Form onSubmit={handleSubmit} className={'login-form'}>
               <Form.Item>
-                {getFieldDecorator('username', {
+                {getFieldDecorator('email', {
                   rules: [{ required: true, message: '请输入你的邮箱地址' }],
                 })(
                     <Input

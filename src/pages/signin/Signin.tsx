@@ -10,6 +10,7 @@ import {
   Checkbox
 } from 'antd'
 import './Signin.css'
+import http from '../../util/http'
 
 const SigninForm: React.FC = (props: any): JSX.Element => {
   const { getFieldDecorator } = props.form
@@ -17,9 +18,9 @@ const SigninForm: React.FC = (props: any): JSX.Element => {
   const handleSubmit = (e: any) => {
     e.preventDefault()
     props.form.validateFields((err: any, values: any) => {
-      if (!err) {
-        console.log(values)
-      }
+      const { name, email, password } = values
+      if (!err)
+        http.post('/api/auth/register', { email, name, password })
     })
   }
 
@@ -51,7 +52,7 @@ const SigninForm: React.FC = (props: any): JSX.Element => {
                 )}
               </Form.Item>
               <Form.Item label={'昵称'}>
-                {getFieldDecorator('username', {
+                {getFieldDecorator('name', {
                   rules: [{ required: true, message: '请输入你的昵称' }],
                 })(
                     <Input
@@ -93,7 +94,12 @@ const SigninForm: React.FC = (props: any): JSX.Element => {
                 {getFieldDecorator('agree', {
                   valuePropName: 'agree',
                   initialValue: false,
-                })(<Checkbox>已同意<a>用户协议</a>和<a>隐私政策</a></Checkbox>)}
+                })(
+                    <Checkbox>已同意
+                      <a href={'https://legal.linkstats.cc/license'} target={'_blank'}>用户协议</a>和
+                      <a href={'https://legal.linkstats.cc/privacy_polity'} target={'_blank'}>隐私政策</a>
+                    </Checkbox>
+                )}
                 <section>
                   <Button type={'primary'}
                           block={true}

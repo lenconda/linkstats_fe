@@ -6,20 +6,36 @@ import {
   Col,
   Card,
   Icon,
-  Form,
-  Checkbox
+  Form
 } from 'antd'
 import './Reset.css'
+import qs from 'query-string'
+import http from '../../util/http'
+import { history } from '../../App'
 
 const ResetForm: React.FC = (props: any): JSX.Element => {
   const { getFieldDecorator } = props.form
+  const search = JSON.parse(JSON.stringify(qs.parse(props.location.search)))
+  const params = {
+    user: search.user || '',
+    code: search.code || ''
+  }
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
     props.form.validateFields((err: any, values: any) => {
-      if (!err) {
-        console.log(values)
-      }
+      if (!err)
+        http.post('/api/auth/reset',
+            {
+              uuid: params.user,
+              code: params.code,
+              password: values.password
+            })
+            .then(
+                res => {
+                  if (res)
+                    history.push('/login')
+                })
     })
   }
 
