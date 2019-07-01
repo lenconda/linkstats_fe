@@ -1,14 +1,22 @@
 import React from 'react'
-import http from '../../util/http'
+import Navigate from '../../components/navigate/Navigate'
 import {
   Layout,
   Menu,
-  Icon
+  Icon,
+  Divider
 } from 'antd'
 import './Dashboard.css'
-import { Link } from 'react-router-dom'
+import {
+  Link,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom'
 
-const { Header, Content, Footer, Sider } = Layout
+const Links = React.lazy(() => import('./links/Links'))
+
+const { Header, Content, Sider } = Layout
 
 const Dashboard: React.FC = (props: any): JSX.Element => {
   return (
@@ -30,15 +38,18 @@ const Dashboard: React.FC = (props: any): JSX.Element => {
             </Menu.Item>
           </Menu>
         </Sider>
-        <Layout>
-          <Header style={{background: '#fff', padding: 0}}/>
+        <Layout style={{overflowY: 'auto'}}>
+          <Header className={'header'}>
+            <Navigate pathname={props.location.pathname}/>
+          </Header>
           <Content style={{margin: '24px 16px 0'}}>
-            <div className={'content'}>content</div>
+            <div className={'content'}>
+              <Switch>
+                <Route path={'/dashboard/links'} component={Links}/>
+                <Redirect to={'/dashboard/links'}/>
+              </Switch>
+            </div>
           </Content>
-          <Footer style={{textAlign: 'center'}}>
-            ©️{new Date().getFullYear()} LinkStats, Inc. 了解我们的
-            <a href={'https://legal.linkstats.cc/privacy_polity'} target={'_blank'}>隐私政策</a>
-          </Footer>
         </Layout>
       </Layout>
   )

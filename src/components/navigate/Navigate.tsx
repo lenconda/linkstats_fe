@@ -2,8 +2,12 @@ import React from 'react'
 import { Breadcrumb } from 'antd'
 import { Link } from 'react-router-dom'
 
-const Navigate = (pathname: string): JSX.Element => {
-  const pathSnippets = pathname.split('/').filter(i => i)
+interface Props {
+  pathname: string
+}
+
+const Navigate = (props: Props): JSX.Element => {
+  const pathSnippets = props.pathname.split('/').filter(i => i)
 
   const breadcrumbNameMap: any = {
     '/dashboard': '控制台',
