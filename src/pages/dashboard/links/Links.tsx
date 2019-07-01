@@ -5,18 +5,34 @@ import {
   Icon,
   Table,
   Divider,
-  Typography
+  Typography,
+  Modal,
+  message,
+  Popconfirm,
+  Input
 } from 'antd'
 import moment from 'moment'
 import qs from 'query-string'
 import { history } from '../../../App'
 import './Links.css'
 
+interface Item {
+  uuid: string
+  createTime: number
+  originalUrl: string
+  shorternUrl: string
+  qrCode: string
+}
+
 const Links = (props: any): JSX.Element => {
-  const [data, setData] = useState([])
-  const [count, setCount] = useState(0)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [selection, setSelection] = useState<number[]>([])
+  const [data, setData] = useState<Item[]>([])
+  const [count, setCount] = useState<number>(0)
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [selection, setSelection] = useState<string[]>([])
+  const [newLink, setNewLink] = useState<string>('')
+  const [visible, setVisible] = useState<boolean>(false)
+
+  const urlChecker = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g
 
   const page = parseInt(JSON.parse(JSON.stringify(qs.parse(props.location.search))).page) || 1
   const fetch = () => {
@@ -32,10 +48,54 @@ const Links = (props: any): JSX.Element => {
   useEffect(() => {
     setCurrentPage(page)
     fetch()
-  }, [props.location])
+  }, [page])
 
   const handlePageChange = (page: any, pageSize: any) => {
     history.push(`/dashboard/links?page=${page}`)
+  }
+
+  const viewQRCode = (imgSrc: string) => {
+    Modal.info({
+      content: (
+          <img src={imgSrc} width={'100%'} alt={'QR Code'}/>
+      ),
+      maskClosable: true,
+      okText: '确定',
+      icon: null,
+      width: 320
+    })
+  }
+
+  const handleDeleteLink = () => {
+    Modal.confirm({
+      title: `确定要删除这${selection.length}个链接吗？`,
+      okText: '确定',
+      cancelText: '取消',
+      onOk: () => {
+        deleteLink(selection)
+      }
+    })
+  }
+
+  const deleteLink = (links: string[]) => {
+    http.delete('/api/links', {
+      data: { links }})
+        .then(res => {
+          if (res) {
+            fetch()
+            setSelection([])
+          }
+        })
+  }
+
+  const handleCreateLink = (url: string) => {
+    http
+    .post('/api/links', { url })
+    .then(res => {
+      fetch()
+      setVisible(false)
+      setNewLink('')
+    })
   }
 
   const columns = [
@@ -77,25 +137,31 @@ const Links = (props: any): JSX.Element => {
     {
       title: '操作',
       dataIndex: '',
-      render: () =>
+      render: (text: any, record: any) =>
           <div>
-            <a><Icon type="qrcode" />&nbsp;二维码</a>
+            <a onClick={() => viewQRCode(record.qrCode)}><Icon type="qrcode" />&nbsp;二维码</a>
             <Divider type={'vertical'}/>
-            <a>
-              <Typography.Text type={'danger'}><Icon type="delete" />&nbsp;删除</Typography.Text>
-            </a>
+            <Popconfirm title={'你确定要删除这个链接吗？'}
+                        okText={'确定'}
+                        cancelText={'取消'}
+                        onConfirm={() => deleteLink([record.uuid])}
+            >
+              <a>
+                <Typography.Text type={'danger'}><Icon type="delete"/>&nbsp;删除</Typography.Text>
+              </a>
+            </Popconfirm>
           </div>
     }
   ]
 
   return (
       <main className={'table-content'}>
-        <Button type={'primary'}>
+        <Button type={'primary'} onClick={() => setVisible(true)}>
           <Icon type="file-add" />&nbsp;创建链接
         </Button>&nbsp;&nbsp;
         {
           selection.length > 0 ?
-              <Button type={'danger'}>
+              <Button type={'danger'} onClick={handleDeleteLink}>
                 <Icon type="delete" />&nbsp;删除{selection.length}项
               </Button> : null
         }
@@ -106,12 +172,33 @@ const Links = (props: any): JSX.Element => {
                  pageSize: 10,
                  current: currentPage
                }}
+               rowKey={record => record.uuid}
                onChange={(page, size) => handlePageChange(page.current, size)}
                style={{marginTop: 20}}
                rowSelection={{
                  onChange: (rows: any[]) => setSelection(rows)
                }}
         />
+        <Modal title={'创建一个新的链接'}
+               visible={visible}
+               onOk={() => {
+                 if (!newLink) {
+                   message.error('请将URL填写完整')
+                   return
+                 }
+                 if (!urlChecker.test(newLink)) {
+                   message.error('请输入合法的URL')
+                   return
+                 }
+                 handleCreateLink(newLink)
+               }}
+               onCancel={() => setVisible(false)}
+        >
+          <Input type={'text'}
+                 placeholder={'合法的URL，如 https://www.google.com'}
+                 onChange={e => setNewLink(e.target.value)}
+          />
+        </Modal>
       </main>
   )
 }

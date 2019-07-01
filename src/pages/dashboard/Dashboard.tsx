@@ -3,8 +3,7 @@ import Navigate from '../../components/navigate/Navigate'
 import {
   Layout,
   Menu,
-  Icon,
-  Divider
+  Icon
 } from 'antd'
 import './Dashboard.css'
 import {
