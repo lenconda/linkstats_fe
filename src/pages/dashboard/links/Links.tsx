@@ -106,15 +106,13 @@ const Links = (props: any): JSX.Element => {
       title: '链接ID',
       dataIndex: 'uuid',
       key: 'uuid',
-      sorter: (alpha: any, beta: any) => alpha.uuid.localeCompare(beta.uuid),
-      sortOrder: 'descend' as 'descend'
+      sorter: (alpha: any, beta: any) => alpha.uuid.localeCompare(beta.uuid)
     },
     {
       title: '原链接',
       dataIndex: 'originalUrl',
       key: 'originalUrl',
       sorter: (alpha: any, beta: any) => alpha.originalUrl.localeCompare(beta.originalUrl),
-      sortOrder: 'descend' as 'descend',
       render: (text: string) => <a href={text} target={'_blank'}>{text}</a>
     },
     {
@@ -122,7 +120,6 @@ const Links = (props: any): JSX.Element => {
       dataIndex: 'shorternUrl',
       key: 'shorternUrl',
       sorter: (alpha: any, beta: any) => alpha.shorternUrl.localeCompare(beta.shorternUrl),
-      sortOrder: 'descend' as 'descend',
       render: (text: string) => <a href={text} target={'_blank'}>{text}</a>
     },
     {
@@ -134,7 +131,6 @@ const Links = (props: any): JSX.Element => {
           return 0
         return alpha.createTime > beta.createTime ? -1 : 1
       },
-      sortOrder: 'descend' as 'descend',
       render: (text: string) => moment(text).format('YY-MM-DD HH:mm:ss')
     },
     {

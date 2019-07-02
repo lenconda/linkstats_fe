@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import Navigate from '../../components/navigate/Navigate'
 import {
   Layout,
@@ -14,6 +14,8 @@ import {
 } from 'react-router-dom'
 
 const Links = React.lazy(() => import('./links/Links'))
+const Records = React.lazy(() => import('./records/Records'))
+const Detail = React.lazy(() => import('./records/detail/Detail'))
 
 const { Header, Content, Sider } = Layout
 
@@ -35,6 +37,12 @@ const Dashboard: React.FC = (props: any): JSX.Element => {
                 <span className={'nav-text'}>链接列表</span>
               </Link>
             </Menu.Item>
+            <Menu.Item key={'/dashboard/records'}>
+              <Link to={'/dashboard/records'}>
+                <Icon type="unordered-list" />
+                <span className={'nav-text'}>访问记录</span>
+              </Link>
+            </Menu.Item>
           </Menu>
         </Sider>
         <Layout style={{overflowY: 'auto'}}>
@@ -43,10 +51,14 @@ const Dashboard: React.FC = (props: any): JSX.Element => {
           </Header>
           <Content style={{margin: '24px 16px 0'}}>
             <div className={'content'}>
-              <Switch>
-                <Route path={'/dashboard/links'} component={Links}/>
-                <Redirect to={'/dashboard/links'}/>
-              </Switch>
+              <Suspense fallback={null}>
+                <Switch>
+                  <Route path={'/dashboard/links'} component={Links}/>
+                  <Route path={'/dashboard/records'} component={Records}/>
+                  <Route path={'/dashboard/record/detail'} component={Detail}/>
+                  <Redirect to={'/dashboard/links'}/>
+                </Switch>
+              </Suspense>
             </div>
           </Content>
         </Layout>
