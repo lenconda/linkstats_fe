@@ -31,16 +31,19 @@ const Links = (props: any): JSX.Element => {
   const [selection, setSelection] = useState<string[]>([])
   const [newLink, setNewLink] = useState<string>('')
   const [visible, setVisible] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
 
   const urlChecker = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g
 
   const page = parseInt(JSON.parse(JSON.stringify(qs.parse(props.location.search))).page) || 1
   const fetch = () => {
+    setLoading(true)
     http.get(`/api/links?page=${page}`)
         .then(res => {
           if (res) {
             setData(res.data.data.items)
             setCount(res.data.data.count)
+            setLoading(false)
           }
         })
   }
@@ -167,6 +170,7 @@ const Links = (props: any): JSX.Element => {
         }
         <Table columns={columns}
                dataSource={data}
+               loading={loading}
                pagination={{
                  total: count,
                  pageSize: 10,

@@ -11,7 +11,8 @@ const Navigate = (props: Props): JSX.Element => {
 
   const breadcrumbNameMap: any = {
     '/dashboard': '控制台',
-    '/dashboard/links': '链接列表'
+    '/dashboard/links': '链接列表',
+    '/dashboard/records': '访问记录'
   }
 
   const breadcrumbItems = pathSnippets.map((_, index) => {
