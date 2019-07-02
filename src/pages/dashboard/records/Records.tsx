@@ -60,7 +60,7 @@ const Records = (props: any): JSX.Element => {
     .get(`/api/record/export${uuid ? `?link=${uuid}` : ''}`)
     .then(res => {
       if (res)
-        download(res.data.data, `${Date.parse(new Date().toString())}.csv`)
+        download(res.data.data.text, `${Date.parse(new Date().toString())}.csv`)
     })
   }
 
