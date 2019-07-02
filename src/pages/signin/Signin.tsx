@@ -38,7 +38,6 @@ const SigninForm: React.FC = (props: any): JSX.Element => {
         <Col xs={24} sm={16} md={14} lg={10} xl={6} xxl={5}>
           <Card title={'创建一个账户'}
                 type={'inner'}
-                style={{textAlign: 'left'}}
           >
             <Form onSubmit={handleSubmit} className={'login-form'}>
               <Form.Item label={'邮箱地址'}>

@@ -14,7 +14,10 @@ const Navigate = (props: Props): JSX.Element => {
     '/dashboard/links': '链接列表',
     '/dashboard/records': '访问记录',
     '/dashboard/record': '访问记录',
-    '/dashboard/record/detail': '详细信息'
+    '/dashboard/record/detail': '详细信息',
+    '/dashboard/profile': '账户管理',
+    '/dashboard/profile/detail': '我的资料',
+    '/dashboard/profile/changepw': '修改密码'
   }
 
   const breadcrumbItems = pathSnippets.map((_, index) => {

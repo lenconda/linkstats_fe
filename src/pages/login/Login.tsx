@@ -75,7 +75,6 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
         <Col xs={24} sm={16} md={14} lg={10} xl={6} xxl={5}>
           <Card title={'验证你的凭据'}
                 type={'inner'}
-                style={{textAlign: 'left'}}
                 actions={[<a onClick={() => handleForgotPassword()}>忘记密码</a>, <Link to={'/signin'}>创建一个账户</Link>]}
           >
             <Form onSubmit={handleSubmit} className={'login-form'}>

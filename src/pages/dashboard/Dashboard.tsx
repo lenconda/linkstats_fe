@@ -3,7 +3,8 @@ import Navigate from '../../components/navigate/Navigate'
 import {
   Layout,
   Menu,
-  Icon
+  Icon,
+  Dropdown
 } from 'antd'
 import './Dashboard.css'
 import {
@@ -20,6 +21,38 @@ const Detail = React.lazy(() => import('./records/detail/Detail'))
 const { Header, Content, Sider } = Layout
 
 const Dashboard: React.FC = (props: any): JSX.Element => {
+  const menu = (
+      <Menu>
+        <Menu.Item key={'links'}>
+          <Link to={'/dashboard/links'}>
+            <Icon type={'file-text'} theme={'filled'}/>&nbsp;链接列表
+          </Link>
+        </Menu.Item>
+        <Menu.Item key={'records'}>
+          <Link to={'/dashboard/records'}>
+            <Icon type={'unordered-list'}/>&nbsp;访问记录
+          </Link>
+        </Menu.Item>
+        <Menu.Divider/>
+        <Menu.Item key={'detail'}>
+          <Link to={'/dashboard/profile/detail'}>
+            <Icon type={'idcard'} theme={'filled'}/>&nbsp;我的资料
+          </Link>
+        </Menu.Item>
+        <Menu.Item key={'changepw'}>
+          <Link to={'/dashboard/profile/changepw'}>
+            <Icon type={'lock'} theme={'filled'}/>&nbsp;修改密码
+          </Link>
+        </Menu.Item>
+        <Menu.Divider/>
+        <Menu.Item key={'signout'}>
+          <a>
+            <Icon type={'logout'}/>&nbsp;退出登录
+          </a>
+        </Menu.Item>
+      </Menu>
+  )
+
   return (
       <Layout style={{height: '100%'}}>
         <Sider
@@ -30,7 +63,9 @@ const Dashboard: React.FC = (props: any): JSX.Element => {
           <div className={'logo'}>
             LinkStats, Inc.
           </div>
-          <Menu theme={'dark'} mode={'inline'} selectedKeys={[props.location.pathname]}>
+          <Menu theme={'dark'} mode={'inline'}
+                selectedKeys={[props.location.pathname]}
+          >
             <Menu.Item key={'/dashboard/links'}>
               <Link to={'/dashboard/links'}>
                 <Icon type="file-text" theme="filled"/>
@@ -43,11 +78,33 @@ const Dashboard: React.FC = (props: any): JSX.Element => {
                 <span className={'nav-text'}>访问记录</span>
               </Link>
             </Menu.Item>
+            <Menu.SubMenu title={<div><Icon type={'user'}/>&nbsp;账户管理</div>}>
+              <Menu.Item key={'/dashboard/profile/detail'}>
+                <Link to={'/dashboard/profile/detail'}>
+                  <span className={'nav-text'}>我的资料</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key={'/dashboard/profile/changepw'}>
+                <Link to={'/dashboard/profile/changepw'}>
+                  <span className={'nav-text'}>修改密码</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item>
+                <a>
+                  <span className={'nav-text'}>退出登录</span>
+                </a>
+              </Menu.Item>
+            </Menu.SubMenu>
           </Menu>
         </Sider>
         <Layout style={{overflowY: 'auto'}}>
           <Header className={'header'}>
             <Navigate pathname={props.location.pathname}/>
+            <Dropdown overlay={menu} trigger={['click']} className={'dropdown'}>
+              <a className={'ant-dropdown-link'}>
+                <img src={'/user.svg'} alt={'user-logo'} height={30}/>
+              </a>
+            </Dropdown>
           </Header>
           <Content style={{margin: '24px 16px 0'}}>
             <div className={'content'}>

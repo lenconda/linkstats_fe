@@ -18,6 +18,7 @@
 
 .sidebar {
   height: 100%;
+  z-index: 99;
 }
 
 .content {
@@ -29,8 +30,14 @@
 .header {
   background: #fff;
   padding: 0;
-  padding-left: 26px;
+  padding: 0 26px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
+}
+
+@media (max-width: 721px) {
+  .dropdown {
+    display: none;
+  }
 }

@@ -52,7 +52,6 @@ const ResetForm: React.FC = (props: any): JSX.Element => {
         <Col xs={24} sm={16} md={14} lg={10} xl={6} xxl={5}>
           <Card title={'重置密码'}
                 type={'inner'}
-                style={{textAlign: 'left'}}
           >
             <Form onSubmit={handleSubmit} className={'login-form'}>
               <Form.Item hasFeedback={true}>
