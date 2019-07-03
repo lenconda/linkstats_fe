@@ -13,6 +13,7 @@ import {
   Route,
   Redirect
 } from 'react-router-dom'
+import { history } from '../../App'
 
 const Links = React.lazy(() => import('./links/Links'))
 const Records = React.lazy(() => import('./records/Records'))
@@ -48,13 +49,19 @@ const Dashboard: React.FC = (props: any): JSX.Element => {
           </Link>
         </Menu.Item>
         <Menu.Divider/>
-        <Menu.Item key={'signout'}>
+        <Menu.Item key={'signout'} onClick={() => handleSignout()}>
           <a>
             <Icon type={'logout'}/>&nbsp;退出登录
           </a>
         </Menu.Item>
       </Menu>
   )
+
+  const handleSignout = () => {
+    localStorage.removeItem('token')
+    sessionStorage.removeItem('token')
+    history.push('/login')
+  }
 
   return (
       <Layout style={{height: '100%'}}>
@@ -92,7 +99,7 @@ const Dashboard: React.FC = (props: any): JSX.Element => {
                   <span className={'nav-text'}>修改密码</span>
                 </Link>
               </Menu.Item>
-              <Menu.Item>
+              <Menu.Item onClick={() => handleSignout()}>
                 <a>
                   <span className={'nav-text'}>退出登录</span>
                 </a>
