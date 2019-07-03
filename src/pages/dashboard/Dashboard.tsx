@@ -18,6 +18,9 @@ const Links = React.lazy(() => import('./links/Links'))
 const Records = React.lazy(() => import('./records/Records'))
 const Detail = React.lazy(() => import('./records/detail/Detail'))
 
+const ProfileDetail = React.lazy(() => import('./profile/detail/Detail'))
+const ProfileChangepw = React.lazy(() => import('./profile/change_password/ChangePassword'))
+
 const { Header, Content, Sider } = Layout
 
 const Dashboard: React.FC = (props: any): JSX.Element => {
@@ -113,6 +116,8 @@ const Dashboard: React.FC = (props: any): JSX.Element => {
                   <Route path={'/dashboard/links'} component={Links}/>
                   <Route path={'/dashboard/records'} component={Records}/>
                   <Route path={'/dashboard/record/detail'} component={Detail}/>
+                  <Route path={'/dashboard/profile/detail'} component={ProfileDetail}/>
+                  <Route path={'/dashboard/profile/changepw'} component={ProfileChangepw}/>
                   <Redirect to={'/dashboard/links'}/>
                 </Switch>
               </Suspense>
