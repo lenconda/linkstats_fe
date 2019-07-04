@@ -5,10 +5,11 @@ import { Base64 } from 'js-base64'
 
 axios.defaults.timeout = 3600000
 axios.interceptors.request.use(config => {
-  config.headers = {
-    Authorization:
-        `Bearer ${localStorage.getItem('token') || sessionStorage.getItem('token')}`
-  }
+  if (localStorage.getItem('token') || sessionStorage.getItem('token'))
+    config.headers = {
+      Authorization:
+          `Bearer ${localStorage.getItem('token') || sessionStorage.getItem('token')}`
+    }
   return config
 })
 axios.interceptors.response.use((response: any) => {
