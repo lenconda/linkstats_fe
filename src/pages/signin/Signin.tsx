@@ -7,8 +7,7 @@ import {
   Card,
   Icon,
   Form,
-  Checkbox,
-  Spin
+  Checkbox
 } from 'antd'
 import './Signin.css'
 import http from '../../util/http'
