@@ -7,10 +7,12 @@ import {
   Card,
   Icon,
   Form,
-  Checkbox
+  Checkbox,
+  Spin
 } from 'antd'
 import './Signin.css'
 import http from '../../util/http'
+import Loading from '../../components/loading/Loading'
 
 const SigninForm: React.FC = (props: any): JSX.Element => {
   const { getFieldDecorator } = props.form
@@ -34,86 +36,86 @@ const SigninForm: React.FC = (props: any): JSX.Element => {
   }
 
   return (
-      <Row className={'signin-box-wrapper'}>
-        <Col xs={24} sm={16} md={14} lg={10} xl={6} xxl={5}>
-          <Card title={'创建一个账户'}
-                type={'inner'}
-          >
-            <Form onSubmit={handleSubmit} className={'login-form'}>
-              <Form.Item label={'邮箱地址'}>
-                {getFieldDecorator('email', {
-                  rules: [{ required: true, message: '请输入你的邮箱地址' }],
-                })(
-                    <Input
-                        prefix={<Icon type={'mail'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
-                        placeholder={'邮箱地址'}
-                    />,
-                )}
-              </Form.Item>
-              <Form.Item label={'昵称'}>
-                {getFieldDecorator('name', {
-                  rules: [{ required: true, message: '请输入你的昵称' }],
-                })(
-                    <Input
-                        prefix={<Icon type={'user'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
-                        placeholder={'昵称'}
-                    />,
-                )}
-              </Form.Item>
-              <Form.Item label={'密码'} hasFeedback={true}>
-                {getFieldDecorator('password', {
-                  rules: [{ required: true, message: '请输入你的密码' }],
-                })(
-                    <Input
-                        prefix={<Icon type={'lock'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
-                        type={'password'}
-                        placeholder={'密码'}
-                    />,
-                )}
-              </Form.Item>
-              <Form.Item label={'确认密码'} hasFeedback={true}>
-                {getFieldDecorator('confirm', {
-                  rules: [
-                      {
-                        required: true,
-                        message: '请输入你的密码'
-                      },
-                      {
-                        validator: compareToFirstPassword
-                      }],
-                })(
-                    <Input
-                        prefix={<Icon type={'lock'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
-                        type={'password'}
-                        placeholder={'确认密码'}
-                    />,
-                )}
-              </Form.Item>
-              <Form.Item>
-                {getFieldDecorator('agree', {
-                  valuePropName: 'agree',
-                  initialValue: false,
-                })(
-                    <Checkbox>已同意
-                      <a href={'https://legal.linkstats.cc/license'} target={'_blank'}>用户协议</a>和
-                      <a href={'https://legal.linkstats.cc/privacy_polity'} target={'_blank'}>隐私政策</a>
-                    </Checkbox>
-                )}
-                <section>
-                  <Button type={'primary'}
-                          block={true}
-                          htmlType={'submit'}
-                          className={'login-form-button'}
-                          disabled={!props.form.getFieldValue('agree')}
-                  >
-                    创建账户
-                  </Button>
-                </section>
-              </Form.Item>
-            </Form>
-          </Card>
-        </Col>
-      </Row>
+    <Row className={'signin-box-wrapper'}>
+      <Col xs={24} sm={16} md={14} lg={10} xl={6} xxl={5}>
+        <Card title={'创建一个账户'}
+              type={'inner'}
+        >
+          <Form onSubmit={handleSubmit} className={'login-form'}>
+            <Form.Item label={'邮箱地址'}>
+              {getFieldDecorator('email', {
+                rules: [{ required: true, message: '请输入你的邮箱地址' }],
+              })(
+                  <Input
+                      prefix={<Icon type={'mail'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
+                      placeholder={'邮箱地址'}
+                  />,
+              )}
+            </Form.Item>
+            <Form.Item label={'昵称'}>
+              {getFieldDecorator('name', {
+                rules: [{ required: true, message: '请输入你的昵称' }],
+              })(
+                  <Input
+                      prefix={<Icon type={'user'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
+                      placeholder={'昵称'}
+                  />,
+              )}
+            </Form.Item>
+            <Form.Item label={'密码'} hasFeedback={true}>
+              {getFieldDecorator('password', {
+                rules: [{ required: true, message: '请输入你的密码' }],
+              })(
+                  <Input
+                      prefix={<Icon type={'lock'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
+                      type={'password'}
+                      placeholder={'密码'}
+                  />,
+              )}
+            </Form.Item>
+            <Form.Item label={'确认密码'} hasFeedback={true}>
+              {getFieldDecorator('confirm', {
+                rules: [
+                    {
+                      required: true,
+                      message: '请输入你的密码'
+                    },
+                    {
+                      validator: compareToFirstPassword
+                    }],
+              })(
+                  <Input
+                      prefix={<Icon type={'lock'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
+                      type={'password'}
+                      placeholder={'确认密码'}
+                  />,
+              )}
+            </Form.Item>
+            <Form.Item>
+              {getFieldDecorator('agree', {
+                valuePropName: 'agree',
+                initialValue: false,
+              })(
+                  <Checkbox>已同意
+                    <a href={'https://legal.linkstats.cc/license'} target={'_blank'}>用户协议</a>和
+                    <a href={'https://legal.linkstats.cc/privacy_polity'} target={'_blank'}>隐私政策</a>
+                  </Checkbox>
+              )}
+              <section>
+                <Button type={'primary'}
+                        block={true}
+                        htmlType={'submit'}
+                        className={'login-form-button'}
+                        disabled={!props.form.getFieldValue('agree')}
+                >
+                  创建账户
+                </Button>
+              </section>
+            </Form.Item>
+          </Form>
+        </Card>
+      </Col>
+    </Row>
   )
 }
 

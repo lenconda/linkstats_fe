@@ -4,11 +4,11 @@ import {
   Form,
   Input,
   Button,
-  Spin,
   Row,
   Col
 } from 'antd'
 import { history } from '../../../../App'
+import Content from '../../../../components/content/Content'
 
 const DetailForm = (props: any): JSX.Element => {
   const { getFieldDecorator } = props.form
@@ -35,7 +35,7 @@ const DetailForm = (props: any): JSX.Element => {
   }
 
   return (
-    loading ? <Spin/> :
+    <Content loading={loading}>
       <Row>
         <Col xxl={6} xl={8} lg={10} md={18} sm={24} xs={24}>
           <Form onSubmit={handleSubmit}>
@@ -102,6 +102,7 @@ const DetailForm = (props: any): JSX.Element => {
           </Form>
         </Col>
       </Row>
+    </Content>
   )
 }
 

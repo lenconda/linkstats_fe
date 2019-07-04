@@ -15,6 +15,7 @@ import moment from 'moment'
 import qs from 'query-string'
 import { history } from '../../../App'
 import './Links.css'
+import Loading from '../../../components/loading/Loading'
 
 interface Item {
   uuid: string
@@ -166,7 +167,10 @@ const Links = (props: any): JSX.Element => {
         }
         <Table columns={columns}
                dataSource={data}
-               loading={loading}
+               loading={{
+                 spinning: loading,
+                 indicator: <Loading/>
+               }}
                pagination={{
                  total: count,
                  pageSize: 10,

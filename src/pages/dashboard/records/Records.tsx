@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom'
 import { history } from '../../../App'
 import './Records.css'
 import download from 'js-file-download'
+import Loading from '../../../components/loading/Loading'
 
 interface RecordItem {
   uuid: string
@@ -169,7 +170,10 @@ const Records = (props: any): JSX.Element => {
               </Button>
         }
         <Table columns={columns}
-               loading={loading}
+               loading={{
+                 spinning: loading,
+                 indicator: <Loading/>
+               }}
                dataSource={data}
                pagination={{
                  current: currentPage,
