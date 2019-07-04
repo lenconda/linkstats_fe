@@ -50,6 +50,7 @@ const Records = (props: any): JSX.Element => {
   useEffect(() => {
     setCurrentPage(page)
     fetch()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.location.search])
 
   const handlePageChange = (page: any, pageSize: any) => {

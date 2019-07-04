@@ -52,6 +52,7 @@ const Links = (props: any): JSX.Element => {
   useEffect(() => {
     setCurrentPage(page)
     fetch()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])
 
   const handlePageChange = (page: any, pageSize: any) => {

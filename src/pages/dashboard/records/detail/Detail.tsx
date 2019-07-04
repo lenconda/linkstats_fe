@@ -102,6 +102,7 @@ const Detail = (props: any): JSX.Element => {
 
   useEffect(() => {
     fetch()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.location.search])
 
   return (
