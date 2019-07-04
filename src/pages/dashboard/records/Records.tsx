@@ -150,9 +150,9 @@ const Records = (props: any): JSX.Element => {
                         cancelText={'取消'}
                         onConfirm={() => deleteRecords([record.uuid])}
             >
-              <a>
+              <Button type={'link'} style={{padding: 0}}>
                 <Typography.Text type={'danger'}><Icon type="delete"/>&nbsp;删除</Typography.Text>
-              </a>
+              </Button>
             </Popconfirm>
           </div>
     }

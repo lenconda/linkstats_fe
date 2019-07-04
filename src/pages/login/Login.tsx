@@ -37,6 +37,7 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
       }
       http.get(`/api/auth/active`, {params: query})
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleSubmit = (e: any) => {
@@ -75,7 +76,10 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
         <Col xs={24} sm={16} md={14} lg={10} xl={6} xxl={5}>
           <Card title={'验证你的凭据'}
                 type={'inner'}
-                actions={[<a onClick={() => handleForgotPassword()}>忘记密码</a>, <Link to={'/signin'}>创建一个账户</Link>]}
+                // eslint-disable-next-line jsx-a11y/anchor-is-valid
+                actions={[<a style={{padding: 0}}
+                             onClick={() => handleForgotPassword()}>忘记密码</a>, 
+                          <Link to={'/signin'}>创建一个账户</Link>]}
           >
             <Form onSubmit={handleSubmit} className={'login-form'}>
               <Form.Item>

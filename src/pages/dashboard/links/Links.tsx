@@ -34,8 +34,9 @@ const Links = (props: any): JSX.Element => {
   const [visible, setVisible] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
 
+  // eslint-disable-next-line no-useless-escape
   const urlChecker = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g
-
+  
   const page = parseInt(JSON.parse(JSON.stringify(qs.parse(props.location.search))).page) || 1
   const fetch = () => {
     setLoading(true)
@@ -140,16 +141,21 @@ const Links = (props: any): JSX.Element => {
       dataIndex: '',
       render: (text: any, record: any) =>
           <div>
-            <a onClick={() => viewQRCode(record.qrCode)}><Icon type="qrcode" />&nbsp;二维码</a>
+            <Button style={{padding: 0}}
+                    type={'link'} 
+                    onClick={() => viewQRCode(record.qrCode)}
+            >
+              <Typography.Text><Icon type="qrcode"/>&nbsp;二维码</Typography.Text>
+            </Button>
             <Divider type={'vertical'}/>
             <Popconfirm title={'你确定要删除这个链接吗？'}
                         okText={'确定'}
                         cancelText={'取消'}
                         onConfirm={() => deleteLink([record.uuid])}
             >
-              <a>
+              <Button type={'link'} style={{padding: 0}}>
                 <Typography.Text type={'danger'}><Icon type="delete"/>&nbsp;删除</Typography.Text>
-              </a>
+              </Button>
             </Popconfirm>
           </div>
     }

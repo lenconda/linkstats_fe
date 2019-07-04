@@ -17,6 +17,7 @@ const Redirect = (props: any): JSX.Element => {
       else
         message.error('参数错误')
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return <div>正在跳转...</div>

@@ -4,7 +4,6 @@ import {
   Form,
   Input,
   Button,
-  Spin,
   Row,
   Col
 } from 'antd'
@@ -25,6 +24,7 @@ const DetailForm = (props: any): JSX.Element => {
         props.form.setFieldsValue(res.data.data)
       }
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleSubmit = (e: any) => {

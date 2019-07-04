@@ -50,9 +50,7 @@ const Dashboard: React.FC = (props: any): JSX.Element => {
         </Menu.Item>
         <Menu.Divider/>
         <Menu.Item key={'signout'} onClick={() => handleSignout()}>
-          <a>
-            <Icon type={'logout'}/>&nbsp;退出登录
-          </a>
+          <Icon type={'logout'}/>&nbsp;退出登录
         </Menu.Item>
       </Menu>
   )
@@ -100,9 +98,7 @@ const Dashboard: React.FC = (props: any): JSX.Element => {
                 </Link>
               </Menu.Item>
               <Menu.Item onClick={() => handleSignout()}>
-                <a>
-                  <span className={'nav-text'}>退出登录</span>
-                </a>
+                <span className={'nav-text'}>退出登录</span>
               </Menu.Item>
             </Menu.SubMenu>
           </Menu>
@@ -111,9 +107,7 @@ const Dashboard: React.FC = (props: any): JSX.Element => {
           <Header className={'header'}>
             <Navigate pathname={props.location.pathname}/>
             <Dropdown overlay={menu} trigger={['click']} className={'dropdown'}>
-              <a className={'ant-dropdown-link'}>
-                <img src={'/user.svg'} alt={'user-logo'} height={30}/>
-              </a>
+              <img src={'/user.svg'} alt={'user-logo'} height={30}/>
             </Dropdown>
           </Header>
           <Content style={{margin: '24px 16px 0'}}>
