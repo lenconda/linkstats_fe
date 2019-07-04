@@ -11,6 +11,4 @@ notifications:
       - i@lenconda.top
     on_success: always
     on_failure: always
-before_install:
-  - unset CI
-  
+    
