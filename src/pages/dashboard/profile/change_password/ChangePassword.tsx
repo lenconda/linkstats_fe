@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import http from '../../../../util/http'
 import {
   Row,
@@ -10,6 +10,10 @@ import {
 import { history } from '../../../../App'
 
 const ChangePasswordForm = (props: any): JSX.Element => {
+  useEffect(() => {
+    http.get('/api/profile/info')
+  }, [])
+
   const { getFieldDecorator } = props.form
 
   const handleSubmit = (e: any) => {
