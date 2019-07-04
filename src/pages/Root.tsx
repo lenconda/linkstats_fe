@@ -11,7 +11,7 @@ const Root: React.FC = (): JSX.Element =>
     <div className={'root-container'}>
       <div>
         <h1>LinkStats</h1>
-        <p>轻量的链接访问数据分析工具</p>
+        <p>轻量的链接访问数据记录工具</p>
         <span>
           <a href="https://docs.linkstats.cc" target={'_blank'}><Icon type="file-text" />&nbsp;文档</a>
           <Divider type={'vertical'}/>
