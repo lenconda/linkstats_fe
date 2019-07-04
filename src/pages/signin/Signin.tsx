@@ -12,7 +12,6 @@ import {
 } from 'antd'
 import './Signin.css'
 import http from '../../util/http'
-import Loading from '../../components/loading/Loading'
 
 const SigninForm: React.FC = (props: any): JSX.Element => {
   const { getFieldDecorator } = props.form
