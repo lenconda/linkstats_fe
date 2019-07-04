@@ -5,3 +5,8 @@
   align-items: center;
   text-align: center;
 }
+
+.title {
+  display: flex;
+  align-items: center;
+}
