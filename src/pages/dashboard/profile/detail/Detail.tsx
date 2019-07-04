@@ -4,6 +4,7 @@ import {
   Form,
   Input,
   Button,
+  Spin,
   Row,
   Col
 } from 'antd'
@@ -39,6 +40,13 @@ const DetailForm = (props: any): JSX.Element => {
       <Row>
         <Col xxl={6} xl={8} lg={10} md={18} sm={24} xs={24}>
           <Form onSubmit={handleSubmit}>
+            <Form.Item label={'邮箱'}>
+              {getFieldDecorator('email', {
+                rules: [{ required: true, }],
+              })(
+                  <Input disabled={true}/>,
+              )}
+            </Form.Item>
             <Form.Item label={'昵称'}>
               {getFieldDecorator('name', {
                 rules: [{ required: true, message: '请输入你的昵称' }],
