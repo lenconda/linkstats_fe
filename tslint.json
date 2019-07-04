@@ -1,0 +1,9 @@
+{
+  "linterOptions": {
+    "exclude": [
+      "*.tsx",
+      "*.ts",
+      "*.js"
+    ]
+  }
+}
