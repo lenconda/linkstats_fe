@@ -1,4 +1,4 @@
-const deploy = require('ali-oss-deploy')
+var deploy = require('ali-oss-deploy')
 
 deploy({
   path: '../build',
