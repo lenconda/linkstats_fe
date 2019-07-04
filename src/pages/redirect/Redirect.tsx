@@ -19,7 +19,7 @@ const Redirect = (props: any): JSX.Element => {
     })
   }, [])
 
-  return <div></div>
+  return <div>正在跳转...</div>
 }
 
 export default Redirect

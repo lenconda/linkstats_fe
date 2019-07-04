@@ -34,6 +34,12 @@ interface IPInfo {
   longitude: string
 }
 
+interface ProxyInfo {
+  remoteAddr: string
+  httpVia: string
+  httpXForwardedFor: string
+}
+
 interface Detail {
   _id: string
   __v: number
@@ -65,6 +71,7 @@ const Detail = (props: any): JSX.Element => {
   const [locationInfo, setLocationInfo] = useState<Partial<IPInfo>>({})
   const [deviceInfo, setDeviceInfo] = useState<Partial<HardwareInfo>>({})
   const [osInfo, setOsInfo] = useState<Partial<SoftwareInfo>>({})
+  const [proxyInfo, setProxyInfo] = useState<Partial<ProxyInfo>>({})
   const [browserInfo, setBrowserInfo] = useState<Partial<SoftwareInfo>>({})
   const [engineInfo, setEngineInfo] = useState<Partial<SoftwareInfo>>({})
 
@@ -79,6 +86,7 @@ const Detail = (props: any): JSX.Element => {
         setLocationInfo(res.data.data.ipLocation)
         setDeviceInfo(res.data.data.device)
         setOsInfo(res.data.data.os)
+        setProxyInfo(res.data.data.proxy)
         setBrowserInfo(res.data.data.browser)
         setEngineInfo(res.data.data.engine)
         setLoading(false)
@@ -164,6 +172,26 @@ const Detail = (props: any): JSX.Element => {
         <Text ellipsis={true}>
           <Text strong>纬度: </Text>
           <Text copyable={true}>{locationInfo.latitude || 'Unknown'}</Text>
+        </Text>
+      </Paragraph>
+      <Title level={4} ellipsis={true}>
+        代理信息
+      </Title>
+      <Divider/>
+      <Paragraph ellipsis={true}>
+        <Text ellipsis={true}>
+          <Text strong>REMOTE_ADDR: </Text>
+          <Text copyable={true}>{proxyInfo.remoteAddr || 'null'}</Text>
+        </Text>
+        <br/>
+        <Text ellipsis={true}>
+          <Text strong>HTTP_VIA: </Text>
+          <Text copyable={true}>{proxyInfo.httpVia || 'null'}</Text>
+        </Text>
+        <br/>
+        <Text ellipsis={true}>
+          <Text strong>HTTP_X_FORWARDED_FOR: </Text>
+          <Text copyable={true}>{proxyInfo.httpXForwardedFor || 'null'}</Text>
         </Text>
       </Paragraph>
       <Title level={4} ellipsis={true}>
