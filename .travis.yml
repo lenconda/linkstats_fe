@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "10.0"
+  - "10.16.0"
 script:
   - npm run build
 after_success:
@@ -11,3 +11,6 @@ notifications:
       - i@lenconda.top
     on_success: always
     on_failure: always
+before_install:
+  - unset CI
+  
