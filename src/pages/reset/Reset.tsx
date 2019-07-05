@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Button,
   Input,
@@ -14,6 +14,8 @@ import http from '../../util/http'
 import { history } from '../../App'
 
 const ResetForm: React.FC = (props: any): JSX.Element => {
+  const [loading, setLoading] = useState<boolean>(false)
+
   const { getFieldDecorator } = props.form
   const search = JSON.parse(JSON.stringify(qs.parse(props.location.search)))
   const params = {
@@ -29,11 +31,14 @@ const ResetForm: React.FC = (props: any): JSX.Element => {
             ...params,
           password: values.password
         }
-        http.post('/api/auth/reset', data)
-            .then(res => {
-              if (res)
-                history.push('/login')
-            })
+        setLoading(true)
+        http
+        .post('/api/auth/reset', data)
+        .then(res => {
+          setLoading(false)
+          if (res)
+            history.push('/login')
+        })
       }
     })
   }

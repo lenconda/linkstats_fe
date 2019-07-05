@@ -33,6 +33,8 @@ const Links = (props: any): JSX.Element => {
   const [newLink, setNewLink] = useState<string>('')
   const [visible, setVisible] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
+  const [createLoading, setCreateLoading] = useState<boolean>(false)
+  const [deleteLoading, setDeleteLoading] = useState<boolean>(false)
 
   // eslint-disable-next-line no-useless-escape
   const urlChecker = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g
@@ -40,14 +42,15 @@ const Links = (props: any): JSX.Element => {
   const page = parseInt(JSON.parse(JSON.stringify(qs.parse(props.location.search))).page) || 1
   const fetch = () => {
     setLoading(true)
-    http.get(`/api/links?page=${page}`)
-        .then(res => {
-          if (res) {
-            setData(res.data.data.items)
-            setCount(res.data.data.count)
-            setLoading(false)
-          }
-        })
+    http
+    .get(`/api/links?page=${page}`)
+    .then(res => {
+      if (res) {
+        setData(res.data.data.items)
+        setCount(res.data.data.count)
+        setLoading(false)
+      }
+    })
   }
 
   useEffect(() => {
@@ -77,6 +80,9 @@ const Links = (props: any): JSX.Element => {
       title: `确定要删除这${selection.length}个链接吗？`,
       okText: '确定',
       cancelText: '取消',
+      okButtonProps: {
+        loading: deleteLoading
+      },
       onOk: () => {
         deleteLink(selection)
       }
@@ -84,23 +90,32 @@ const Links = (props: any): JSX.Element => {
   }
 
   const deleteLink = (links: string[]) => {
-    http.delete('/api/links', {
-      data: { links }})
-        .then(res => {
-          if (res) {
-            fetch()
-            setSelection([])
-          }
-        })
+    setDeleteLoading(true)
+    http
+    .delete('/api/links', {
+      data: { links }
+    })
+    .then(res => {
+      setDeleteLoading(false)
+      if (res) {
+        selection.splice(0, selection.length)
+        setSelection(selection)
+        fetch()
+      }
+    })
   }
 
   const handleCreateLink = (url: string) => {
+    setCreateLoading(true)
     http
     .post('/api/links', { url })
     .then(res => {
-      fetch()
-      setVisible(false)
-      setNewLink('')
+      setCreateLoading(false)
+      if (res) {
+        setNewLink('')
+        fetch()
+        setVisible(false)
+      }
     })
   }
 
@@ -167,7 +182,7 @@ const Links = (props: any): JSX.Element => {
           <Icon type="file-add" />&nbsp;创建链接
         </Button>&nbsp;&nbsp;
         {
-          selection.length > 0 ?
+          selection.length !== 0 ?
               <Button type={'danger'} onClick={handleDeleteLink}>
                 <Icon type="delete" />&nbsp;删除{selection.length}项
               </Button> : null
@@ -175,6 +190,7 @@ const Links = (props: any): JSX.Element => {
         <Table columns={columns}
                dataSource={data}
                loading={{
+                 tip: '加载中...',
                  spinning: loading,
                  indicator: <Loading/>
                }}
@@ -192,6 +208,7 @@ const Links = (props: any): JSX.Element => {
         />
         <Modal title={'创建一个新的链接'}
                visible={visible}
+               confirmLoading={createLoading}
                onOk={() => {
                  if (!newLink) {
                    message.error('请将URL填写完整')
@@ -206,6 +223,7 @@ const Links = (props: any): JSX.Element => {
                onCancel={() => setVisible(false)}
         >
           <Input type={'text'}
+                 value={newLink}
                  placeholder={'合法的URL，如 https://www.google.com'}
                  onChange={e => setNewLink(e.target.value)}
           />

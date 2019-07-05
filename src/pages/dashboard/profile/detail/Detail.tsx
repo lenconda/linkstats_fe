@@ -13,6 +13,7 @@ import Content from '../../../../components/content/Content'
 const DetailForm = (props: any): JSX.Element => {
   const { getFieldDecorator } = props.form
   const [loading, setLoading] = useState<boolean>(false)
+  const [updateLoading, setUpdateLoading] = useState<boolean>(false)
 
   useEffect(() => {
     setLoading(true)
@@ -30,8 +31,14 @@ const DetailForm = (props: any): JSX.Element => {
   const handleSubmit = (e: any) => {
     e.preventDefault()
     props.form.validateFields((err: any, values: any) => {
-      if (!err)
-        http.post('/api/profile/update', values)
+      if (!err) {
+        setUpdateLoading(true)
+        http
+        .post('/api/profile/update', values)
+        .then(res => {
+          setUpdateLoading(false)
+        })
+      }
     })
   }
 
@@ -97,6 +104,7 @@ const DetailForm = (props: any): JSX.Element => {
             <Form.Item>
               <Button type={'primary'}
                       htmlType={'submit'}
+                      loading={updateLoading}
                       disabled={!props.form.getFieldValue('name')}
               >
                 保存更改

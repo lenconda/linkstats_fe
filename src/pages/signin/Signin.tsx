@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Button,
   Input,
@@ -13,14 +13,22 @@ import './Signin.css'
 import http from '../../util/http'
 
 const SigninForm: React.FC = (props: any): JSX.Element => {
+  const [loading, setLoading] = useState<boolean>(false)
+
   const { getFieldDecorator } = props.form
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
     props.form.validateFields((err: any, values: any) => {
       const { name, email, password } = values
-      if (!err)
-        http.post('/api/auth/register', { email, name, password })
+      if (!err) {
+        setLoading(true)
+        http
+        .post('/api/auth/register', { email, name, password })
+        .then(res => {
+          setLoading(false)
+        })
+      }
     })
   }
 
@@ -102,6 +110,7 @@ const SigninForm: React.FC = (props: any): JSX.Element => {
               <section>
                 <Button type={'primary'}
                         block={true}
+                        loading={loading}
                         htmlType={'submit'}
                         className={'login-form-button'}
                         disabled={!props.form.getFieldValue('agree')}

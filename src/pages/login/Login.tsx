@@ -28,6 +28,7 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
   }
 
   const [email, setEmail] = useState<string>('')
+  const [loginLoading, setLoginLoading] = useState<boolean>(false)
 
   useEffect(() => {
     if (params.action === 'active' && params.user && params.code) {
@@ -46,15 +47,18 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
       if (!err) {
         const { email, password, remember } = values
         localStorage.setItem('persist', remember)
-        http.post('/api/auth/login', { email, password })
-            .then(res => {
-              if (res) {
-                remember
-                    ? localStorage.setItem('token', res.data.data.token)
-                    : sessionStorage.setItem('token', res.data.data.token)
-                history.push(params.redirect ? Base64.decode(params.redirect) : '/dashboard')
-              }
-            })
+        setLoginLoading(true)
+        http
+        .post('/api/auth/login', { email, password })
+        .then(res => {
+          setLoginLoading(false)
+          if (res) {
+            remember
+                ? localStorage.setItem('token', res.data.data.token)
+                : sessionStorage.setItem('token', res.data.data.token)
+            history.push(params.redirect ? Base64.decode(params.redirect) : '/dashboard')
+          }
+        })
       }
     })
   }
@@ -111,6 +115,7 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
                 })(<Checkbox>使我保持登录状态</Checkbox>)}
                 <section>
                   <Button type={'primary'}
+                          loading={loginLoading}
                           block={true}
                           htmlType={'submit'}
                           className={'login-form-button'}

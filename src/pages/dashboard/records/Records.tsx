@@ -32,6 +32,8 @@ const Records = (props: any): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(false)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [selection, setSelection] = useState<string[]>([])
+  const [deleteLoading, setDeleteLoading] = useState<boolean>(false)
+  const [downloadLoading, setDownloadLoading] = useState<boolean>(false)
 
   const page = parseInt(JSON.parse(JSON.stringify(qs.parse(props.location.search))).page) || 1
   const uuid = JSON.parse(JSON.stringify(qs.parse(props.location.search))).uuid || ''
@@ -58,15 +60,20 @@ const Records = (props: any): JSX.Element => {
   }
 
   const handleDownload = () => {
+    setDownloadLoading(true)
     http
     .get(`/api/record/export${uuid ? `?link=${uuid}` : ''}`)
     .then(res => {
-      if (res)
+      setDownloadLoading(false)
+      if (res) {
+        setDownloadLoading(false)
         download(res.data.data.text, `${Date.parse(new Date().toString())}.csv`)
+      }
     })
   }
 
   const deleteRecords = (records: string[]) => {
+    setDeleteLoading(true)
     http
     .delete('/api/record', {
       data: {
@@ -74,8 +81,11 @@ const Records = (props: any): JSX.Element => {
       }
     })
     .then(res => {
+      setDeleteLoading(false)
       if (res) {
-        setSelection([])
+        setDeleteLoading(false)
+        selection.splice(0, selection.length)
+        setSelection(selection)
         fetch()
       }
     })
@@ -86,6 +96,9 @@ const Records = (props: any): JSX.Element => {
       title: `确定要删除这${selection.length}条记录吗？`,
       okText: '确定',
       cancelText: '取消',
+      okButtonProps: {
+        loading: deleteLoading
+      },
       onOk: () => deleteRecords(selection)
     })
   }
@@ -160,7 +173,7 @@ const Records = (props: any): JSX.Element => {
 
   return (
       <main className="table-content">
-        <Button type={'primary'} icon={'download'} onClick={handleDownload}>导出记录</Button>&nbsp;&nbsp;
+        <Button type={'primary'} loading={downloadLoading} icon={'download'} onClick={handleDownload}>导出记录</Button>&nbsp;&nbsp;
         {
           selection.length === 0 ? null :
               <Button type={'danger'}
@@ -172,6 +185,7 @@ const Records = (props: any): JSX.Element => {
         }
         <Table columns={columns}
                loading={{
+                 tip: '加载中...',
                  spinning: loading,
                  indicator: <Loading/>
                }}

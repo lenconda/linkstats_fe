@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import http from '../../../../util/http'
 import {
   Row,
@@ -10,6 +10,8 @@ import {
 import { history } from '../../../../App'
 
 const ChangePasswordForm = (props: any): JSX.Element => {
+  const [changepwLoading, setChangepwLoading] = useState<boolean>(false)
+
   useEffect(() => {
     http.get('/api/profile/info')
   }, [])
@@ -20,10 +22,14 @@ const ChangePasswordForm = (props: any): JSX.Element => {
     e.preventDefault()
     props.form.validateFields((err: any, values: any) => {
       if (!err) {
+        setChangepwLoading(true)
         http
         .post('/api/profile/change_password', {
           old: values.old,
           new: values.new
+        })
+        .then(res => {
+          setChangepwLoading(false)
         })
       }
     })
@@ -69,6 +75,7 @@ const ChangePasswordForm = (props: any): JSX.Element => {
           <Form.Item>
             <Button type={'primary'}
                     htmlType={'submit'}
+                    loading={changepwLoading}
                     disabled={
                       !props.form.getFieldValue('old') 
                       || !props.form.getFieldValue('new')
