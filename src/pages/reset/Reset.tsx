@@ -12,6 +12,7 @@ import './Reset.css'
 import qs from 'query-string'
 import http from '../../util/http'
 import { history } from '../../App'
+import { Link } from 'react-router-dom'
 
 const ResetForm: React.FC = (props: any): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -101,6 +102,8 @@ const ResetForm: React.FC = (props: any): JSX.Element => {
               </Form.Item>
             </Form>
           </Card>
+          <br/>
+          <Link to={'/login'}>&larr; 返回登录页</Link>
         </Col>
       </Row>
   )

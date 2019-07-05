@@ -11,6 +11,7 @@ import {
 } from 'antd'
 import './Signin.css'
 import http from '../../util/http'
+import { Link } from 'react-router-dom'
 
 const SigninForm: React.FC = (props: any): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -121,6 +122,8 @@ const SigninForm: React.FC = (props: any): JSX.Element => {
             </Form.Item>
           </Form>
         </Card>
+        <br/>
+        <Link to={'/login'}>&larr; 返回登录页</Link>
       </Col>
     </Row>
   )
