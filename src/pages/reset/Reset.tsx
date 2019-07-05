@@ -93,6 +93,7 @@ const ResetForm: React.FC = (props: any): JSX.Element => {
                 <section>
                   <Button type={'primary'}
                           block={true}
+                          loading={loading}
                           htmlType={'submit'}
                           className={'login-form-button'}
                   >
