@@ -6,6 +6,8 @@ import qs from 'query-string'
 import http from '../../util/http'
 
 const Redirect = (props: any): JSX.Element => {
+  document.title = '跳转中...'
+
   const to = JSON.parse(JSON.stringify(qs.parse(props.location.search))).to || ''
 
   useEffect(() => {
