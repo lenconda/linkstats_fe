@@ -11,6 +11,7 @@ import http from '../../../../util/http'
 import moment from 'moment'
 import { history } from '../../../../App'
 import Content from '../../../../components/content/Content'
+import './Detail.css'
 
 interface SoftwareInfo {
   name: string
@@ -121,165 +122,167 @@ const Detail = (props: any): JSX.Element => {
         </Button>
       </Title>
       <Divider/>
-      <Title level={4} ellipsis={true}>
-        基本信息
-      </Title>
-      <Divider/>
-      <Paragraph ellipsis={true}>
-        <Text ellipsis={true}>
-          <Text strong>记录ID: </Text>
-          <Text copyable={true}>{basicInfo.uuid}</Text>
-        </Text>
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong>IP地址: </Text>
-          <Text copyable={true}>{basicInfo.ip}</Text>
-        </Text>
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong>访问时间: </Text>{moment(basicInfo.createTime).format('YY-MM-DD HH:mm:ss')}
-        </Text>
-      </Paragraph>
-      <Title level={4} ellipsis={true}>
-        基于IP的地理信息
-      </Title>
-      <Divider/>
-      <Paragraph ellipsis={true}>
-        <Text ellipsis={true}>
-          <Text strong>国家/地区: </Text>
-          <Text copyable={true}>{locationInfo.country || 'Unknown'}</Text>
-        </Text>
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong>国家/地区代码: </Text>
-          <Text copyable={true}>{locationInfo.countryCode || 'Unknown'}</Text>
-        </Text>
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong>州/省/自治区: </Text>
-          <Text copyable={true}>{locationInfo.region || 'Unknown'}</Text>
-        </Text>
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong>城市: </Text>
-          <Text copyable={true}>{locationInfo.city || 'Unknown'}</Text>
-        </Text>
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong>经度: </Text>
-          <Text copyable={true}>{locationInfo.longitude || 'Unknown'}</Text>
-        </Text>
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong>纬度: </Text>
-          <Text copyable={true}>{locationInfo.latitude || 'Unknown'}</Text>
-        </Text>
-      </Paragraph>
-      <Title level={4} ellipsis={true}>
-        代理信息
-      </Title>
-      <Divider/>
-      <Paragraph ellipsis={true}>
-        <Text ellipsis={true}>
-          <Text strong>REMOTE_ADDR: </Text>
-          <Text copyable={true}>{proxyInfo.remoteAddr || 'null'}</Text>
-        </Text>
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong>HTTP_VIA: </Text>
-          <Text copyable={true}>{proxyInfo.httpVia || 'null'}</Text>
-        </Text>
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong>HTTP_X_FORWARDED_FOR: </Text>
-          <Text copyable={true}>{proxyInfo.httpXForwardedFor || 'null'}</Text>
-        </Text>
-      </Paragraph>
-      <Title level={4} ellipsis={true}>
-        User-Agent
-      </Title>
-      <Divider/>
-      <Paragraph ellipsis={true}>
-        <Text code copyable={true} ellipsis={true}>{basicInfo.userAgent}</Text>
-      </Paragraph>
-      <Title level={4} ellipsis={true}>
-        设备及软件信息
-      </Title>
-      <Divider/>
-      <Paragraph ellipsis={true}>
-        <Collapse defaultActiveKey={['browser', 'os', 'device', 'engine']}>
-          <Panel header={'浏览器'} key={'browser'}>
-            <Text ellipsis={true}>
-              <Text strong>名称: </Text>{browserInfo.name || 'Unknown'}
-            </Text>
-            <br/>
-            <Text ellipsis={true}>
-              <Text strong>版本: </Text>{browserInfo.version || 'Unknown'}
-            </Text>
-          </Panel>
-          <Panel header={'操作系统'} key={'os'}>
-            <Text ellipsis={true}>
-              <Text strong>名称: </Text>{osInfo.name || 'Unknown'}
-            </Text>
-            <br/>
-            <Text ellipsis={true}>
-              <Text strong>版本: </Text>{osInfo.version || 'Unknown'}
-            </Text>
-          </Panel>
-          <Panel header={'渲染引擎'} key={'engine'}>
-            <Text ellipsis={true}>
-              <Text strong>名称: </Text>{engineInfo.name || 'Unknown'}
-            </Text>
-            <br/>
-            <Text ellipsis={true}>
-              <Text strong>版本: </Text>{engineInfo.version || 'Unknown'}
-            </Text>
-          </Panel>
-          <Panel header={'设备'} key={'device'}>
-            <Text ellipsis={true}>
-              <Text strong>类型: </Text>{deviceInfo.type || 'Unknown'}
-            </Text>
-            <br/>
-            <Text ellipsis={true}>
-              <Text strong>模型: </Text>{deviceInfo.model || 'Unknown'}
-            </Text>
-            <br/>
-            <Text ellipsis={true}>
-              <Text strong>生产商: </Text>{deviceInfo.manufacturer || 'Unknown'}
-            </Text>
-          </Panel>
-        </Collapse>
-      </Paragraph>
-      <Title level={4} ellipsis={true}>
-        链接信息
-      </Title>
-      <Divider/>
-      <Paragraph>
-        <Text ellipsis={true}>
-          <Text strong>链接ID: </Text>
-          <Text copyable={true}>{basicInfo.belongs}</Text>
-        </Text>
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong>原链接: </Text>
-          <Text copyable={true}>{linkInfo.originalUrl}</Text>
-        </Text>
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong>转换链接: </Text>
-          <Text copyable={true}>{linkInfo.shorternUrl}</Text>
-        </Text>
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong>创建日期: </Text>{moment(linkInfo.createTime).format('YY-MM-DD HH:mm:ss')}
-        </Text>
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong>二维码: </Text>
+      <div className={'information-container'}>
+        <Title level={4}>
+          基本信息
+        </Title>
+        <Divider/>
+        <Paragraph>
+          <Text>
+            <Text strong>记录ID: </Text>
+            <Text copyable={true}>{basicInfo.uuid}</Text>
+          </Text>
           <br/>
-          <img src={linkInfo.qrCode} alt={'QR Code'} width={120} height={120}/>
-        </Text>
-      </Paragraph>
+          <Text>
+            <Text strong>IP地址: </Text>
+            <Text copyable={true}>{basicInfo.ip}</Text>
+          </Text>
+          <br/>
+          <Text>
+            <Text strong>访问时间: </Text>{moment(basicInfo.createTime).format('YY-MM-DD HH:mm:ss')}
+          </Text>
+        </Paragraph>
+        <Title level={4}>
+          基于IP的地理信息
+        </Title>
+        <Divider/>
+        <Paragraph>
+          <Text>
+            <Text strong>国家/地区: </Text>
+            <Text copyable={true}>{locationInfo.country || 'Unknown'}</Text>
+          </Text>
+          <br/>
+          <Text>
+            <Text strong>国家/地区代码: </Text>
+            <Text copyable={true}>{locationInfo.countryCode || 'Unknown'}</Text>
+          </Text>
+          <br/>
+          <Text>
+            <Text strong>州/省/自治区: </Text>
+            <Text copyable={true}>{locationInfo.region || 'Unknown'}</Text>
+          </Text>
+          <br/>
+          <Text>
+            <Text strong>城市: </Text>
+            <Text copyable={true}>{locationInfo.city || 'Unknown'}</Text>
+          </Text>
+          <br/>
+          <Text>
+            <Text strong>经度: </Text>
+            <Text copyable={true}>{locationInfo.longitude || 'Unknown'}</Text>
+          </Text>
+          <br/>
+          <Text>
+            <Text strong>纬度: </Text>
+            <Text copyable={true}>{locationInfo.latitude || 'Unknown'}</Text>
+          </Text>
+        </Paragraph>
+        <Title level={4}>
+          代理信息
+        </Title>
+        <Divider/>
+        <Paragraph>
+          <Text>
+            <Text strong>REMOTE_ADDR: </Text>
+            <Text copyable={true}>{proxyInfo.remoteAddr || 'null'}</Text>
+          </Text>
+          <br/>
+          <Text>
+            <Text strong>HTTP_VIA: </Text>
+            <Text copyable={true}>{proxyInfo.httpVia || 'null'}</Text>
+          </Text>
+          <br/>
+          <Text>
+            <Text strong>HTTP_X_FORWARDED_FOR: </Text>
+            <Text copyable={true}>{proxyInfo.httpXForwardedFor || 'null'}</Text>
+          </Text>
+        </Paragraph>
+        <Title level={4}>
+          User-Agent
+        </Title>
+        <Divider/>
+        <Paragraph>
+          <Text code copyable={true}>{basicInfo.userAgent}</Text>
+        </Paragraph>
+        <Title level={4}>
+          设备及软件信息
+        </Title>
+        <Divider/>
+        <Paragraph>
+          <Collapse defaultActiveKey={['browser', 'os', 'device', 'engine']}>
+            <Panel header={'浏览器'} key={'browser'}>
+              <Text>
+                <Text strong>名称: </Text>{browserInfo.name || 'Unknown'}
+              </Text>
+              <br/>
+              <Text>
+                <Text strong>版本: </Text>{browserInfo.version || 'Unknown'}
+              </Text>
+            </Panel>
+            <Panel header={'操作系统'} key={'os'}>
+              <Text>
+                <Text strong>名称: </Text>{osInfo.name || 'Unknown'}
+              </Text>
+              <br/>
+              <Text>
+                <Text strong>版本: </Text>{osInfo.version || 'Unknown'}
+              </Text>
+            </Panel>
+            <Panel header={'渲染引擎'} key={'engine'}>
+              <Text>
+                <Text strong>名称: </Text>{engineInfo.name || 'Unknown'}
+              </Text>
+              <br/>
+              <Text>
+                <Text strong>版本: </Text>{engineInfo.version || 'Unknown'}
+              </Text>
+            </Panel>
+            <Panel header={'设备'} key={'device'}>
+              <Text>
+                <Text strong>类型: </Text>{deviceInfo.type || 'Unknown'}
+              </Text>
+              <br/>
+              <Text>
+                <Text strong>模型: </Text>{deviceInfo.model || 'Unknown'}
+              </Text>
+              <br/>
+              <Text>
+                <Text strong>生产商: </Text>{deviceInfo.manufacturer || 'Unknown'}
+              </Text>
+            </Panel>
+          </Collapse>
+        </Paragraph>
+        <Title level={4}>
+          链接信息
+        </Title>
+        <Divider/>
+        <Paragraph>
+          <Text>
+            <Text strong>链接ID: </Text>
+            <Text copyable={true}>{basicInfo.belongs}</Text>
+          </Text>
+          <br/>
+          <Text>
+            <Text strong>原链接: </Text>
+            <Text copyable={true}>{linkInfo.originalUrl}</Text>
+          </Text>
+          <br/>
+          <Text>
+            <Text strong>转换链接: </Text>
+            <Text copyable={true}>{linkInfo.shorternUrl}</Text>
+          </Text>
+          <br/>
+          <Text>
+            <Text strong>创建日期: </Text>{moment(linkInfo.createTime).format('YY-MM-DD HH:mm:ss')}
+          </Text>
+          <br/>
+          <Text>
+            <Text strong>二维码: </Text>
+            <br/>
+            <img src={linkInfo.qrCode} alt={'QR Code'} width={120} height={120}/>
+          </Text>
+        </Paragraph>
+      </div>
       <br/>
       <Button type={'ghost'}
               icon={'double-left'}
