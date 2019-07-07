@@ -108,10 +108,11 @@ const Detail = (props: any): JSX.Element => {
 
   return (
     <Content loading={loading}>
-      <Title level={3} ellipsis={true}
-             style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+      <Title level={3} 
+             ellipsis={true}
+             className={'content-title'}
+      >
         <Text ellipsis={true} strong>
-          <Icon type={'info-circle'}/>&nbsp;
           访问记录的详细信息
         </Text>
         <Button type={'ghost'}
