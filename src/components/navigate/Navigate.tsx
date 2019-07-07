@@ -17,7 +17,8 @@ const Navigate = (props: Props): JSX.Element => {
     '/dashboard/record/detail': '详细信息',
     '/dashboard/profile': '账户管理',
     '/dashboard/profile/detail': '我的资料',
-    '/dashboard/profile/changepw': '修改密码'
+    '/dashboard/profile/changepw': '修改密码',
+    '/dashboard/create': '创建探测链接'
   }
 
   const breadcrumbItems = pathSnippets.map((_, index) => {

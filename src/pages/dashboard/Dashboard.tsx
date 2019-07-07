@@ -4,6 +4,7 @@ import {
   Layout,
   Menu,
   Icon,
+  Tooltip,
   Dropdown
 } from 'antd'
 import './Dashboard.css'
@@ -21,6 +22,8 @@ const Detail = React.lazy(() => import('./records/detail/Detail'))
 
 const ProfileDetail = React.lazy(() => import('./profile/detail/Detail'))
 const ProfileChangepw = React.lazy(() => import('./profile/change_password/ChangePassword'))
+
+const Create = React.lazy(() => import('./create/Create'))
 
 const { Header, Content, Sider } = Layout
 
@@ -74,6 +77,12 @@ const Dashboard: React.FC = (props: any): JSX.Element => {
           <Menu theme={'dark'} mode={'inline'}
                 selectedKeys={[props.location.pathname]}
           >
+            <Menu.Item key={'/dashboard/create'}>
+              <Link to={'/dashboard/create'}>
+                <Icon type="bulb" theme="filled"/>
+                <span className={'nav-text'}>创建链接</span>
+              </Link>
+            </Menu.Item>
             <Menu.Item key={'/dashboard/links'}>
               <Link to={'/dashboard/links'}>
                 <Icon type="file-text" theme="filled"/>
@@ -106,14 +115,22 @@ const Dashboard: React.FC = (props: any): JSX.Element => {
         <Layout style={{overflowY: 'auto'}}>
           <Header className={'header'}>
             <Navigate pathname={props.location.pathname}/>
-            <Dropdown overlay={menu} trigger={['click']} className={'dropdown'}>
-              <img src={'/user.svg'} alt={'user-logo'} height={30}/>
-            </Dropdown>
+            <div className={'header-controls'}>
+              <Tooltip placement={'bottom'} title={'创建探测链接'}>
+                <Link to={'/dashboard/create'} className={'create-link'}>
+                  <Icon type={'bulb'} theme={'filled'}/>
+                </Link>
+              </Tooltip>
+              <Dropdown overlay={menu} trigger={['click']} className={'dropdown'}>
+                <img src={'/user.svg'} alt={'user-logo'} height={30}/>
+              </Dropdown>
+            </div>
           </Header>
           <Content style={{margin: '24px 16px 0'}}>
             <div className={'content'}>
               <Suspense fallback={null}>
                 <Switch>
+                  <Route path={'/dashboard/create'} component={Create}/>
                   <Route path={'/dashboard/links'} component={Links}/>
                   <Route path={'/dashboard/records'} component={Records}/>
                   <Route path={'/dashboard/record/detail'} component={Detail}/>
