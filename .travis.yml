@@ -3,7 +3,7 @@ node_js:
   - "10.0"
 deploy:
   provider: script
-  script: node ./deploy.js
+  script: npm run deploy
   skip_cleanup: true
   on:
     tags: true
