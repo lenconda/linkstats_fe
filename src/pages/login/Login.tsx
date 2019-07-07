@@ -41,6 +41,15 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+    http
+    .get('/api/profile/info')
+    .then(res => {
+      if (res)
+        history.goBack()
+    })
+  }, [props.location.pathname])
+
   const handleSubmit = (e: any) => {
     e.preventDefault()
     props.form.validateFields((err: any, values: any) => {
@@ -126,6 +135,8 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
               </Form.Item>
             </Form>
           </Card>
+          <br/>
+          <Link to={'/'}>&larr; 返回首页</Link>
         </Col>
       </Row>
   )

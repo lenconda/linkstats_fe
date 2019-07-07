@@ -28,7 +28,8 @@ axios.interceptors.response.use((response: any) => {
   if (error.response.status === 401) {
     localStorage.removeItem('token')
     const { pathname, search, hash } = history.location
-    history.push(`/login?redirect=${Base64.encode(`${pathname}${search}${hash}`)}`)
+    if (pathname !== '/login')
+      history.push(`/login?redirect=${Base64.encode(`${pathname}${search}${hash}`)}`)
   } else {
     if (error.response.data.message)
       message.error(error.response.data.message)
