@@ -82,6 +82,7 @@ const Detail = (props: any): JSX.Element => {
     http
     .get(`/api/record/detail/${uuid}`)
     .then(res => {
+      setLoading(false)
       if (res) {
         setBasicInfo(res.data.data)
         setLocationInfo(res.data.data.ipLocation)
@@ -90,7 +91,6 @@ const Detail = (props: any): JSX.Element => {
         setProxyInfo(res.data.data.proxy)
         setBrowserInfo(res.data.data.browser)
         setEngineInfo(res.data.data.engine)
-        setLoading(false)
         http
         .get(`/api/links/${res.data.data.belongs}`)
         .then(res => {
