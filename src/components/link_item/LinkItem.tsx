@@ -42,7 +42,7 @@ const LinkItem = (props: LinkItemProps): JSX.Element => {
       </Text>
       <br/>
       <Paragraph className={'comment'}>
-        {props.comment || '暂无描述。'}
+        {(props.comment && props.comment.length > 200 ? props.comment.substr(0, 200) + '...' : props.comment) || '暂无描述。'}
       </Paragraph>
       <br/>
       <Button type={'ghost'} 
