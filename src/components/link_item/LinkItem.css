@@ -1,0 +1,14 @@
+.time {
+  display: inline-block;
+  margin-right: 2rem;
+}
+
+.comment {
+  display: inline-block;
+  color: #7f8fa4;
+  margin: 1rem 0;
+}
+
+.detail-button {
+  display: block;
+}

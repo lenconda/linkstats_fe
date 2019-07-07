@@ -33,6 +33,16 @@ const CreateForm = (props: any): JSX.Element => {
     })
   }
 
+  const validateUrl = (rule: any, value: any, callback: any) => {
+    // eslint-disable-next-line no-useless-escape
+    const urlChecker = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g
+    
+    if (!urlChecker.test(props.form.getFieldValue('url')))
+      callback('请输入合法的URL')
+    else
+      callback()
+  }
+
   return (
     <Row>
       <Col xxl={6} xl={8} lg={10} md={18} sm={24} xs={24}>
@@ -47,8 +57,11 @@ const CreateForm = (props: any): JSX.Element => {
                 {
                   max: 200,
                   message: '超过最大长度限制'
+                },
+                {
+                  validator: validateUrl
                 }
-              ]
+              ],
             })(
                 <Input/>,
             )}
