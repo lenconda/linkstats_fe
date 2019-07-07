@@ -49,21 +49,43 @@ const DetailForm = (props: any): JSX.Element => {
           <Form onSubmit={handleSubmit}>
             <Form.Item label={'邮箱'}>
               {getFieldDecorator('email', {
-                rules: [{ required: true, }],
+                rules: [
+                  { 
+                    required: true
+                  }
+                ]
               })(
                   <Input disabled={true}/>,
               )}
             </Form.Item>
             <Form.Item label={'昵称'}>
               {getFieldDecorator('name', {
-                rules: [{ required: true, message: '请输入你的昵称' }],
+                rules: [
+                  { 
+                    required: true,
+                    message: '请输入你的昵称' 
+                  },
+                  {
+                    max: 20,
+                    message: '长度不能超过20个字符'
+                  }
+                ]
               })(
                   <Input/>,
               )}
             </Form.Item>
             <Form.Item label={'邮政编码'} hasFeedback={true}>
               {getFieldDecorator('zipCode', {
-                rules: [{ required: false, message: '请输入所在地的邮政编码' }],
+                rules: [
+                  { 
+                    required: false, 
+                    message: '请输入所在地的邮政编码' 
+                  },
+                  {
+                    max: 8,
+                    message: '长度不能超过8个字符'
+                  }
+                ],
                 initialValue: ''
               })(
                   <Input/>,
@@ -71,7 +93,16 @@ const DetailForm = (props: any): JSX.Element => {
             </Form.Item>
             <Form.Item label={'地址'} hasFeedback={true}>
               {getFieldDecorator('address', {
-                rules: [{ required: false, message: '请输入地址' }],
+                rules: [
+                  { 
+                    required: false, 
+                    message: '请输入地址' 
+                  },
+                  {
+                    max: 32,
+                    message: '长度不能超过32个字符'
+                  }
+                ],
                 initialValue: ''
               })(
                   <Input/>,
@@ -79,7 +110,16 @@ const DetailForm = (props: any): JSX.Element => {
             </Form.Item>
             <Form.Item label={'城市'} hasFeedback={true}>
               {getFieldDecorator('city', {
-                rules: [{ required: false, message: '请输入所在城市' }],
+                rules: [
+                  { 
+                    required: false, 
+                    message: '请输入所在城市' 
+                  },
+                  {
+                    max: 20,
+                    message: '长度不能超过20个字符'
+                  }
+                ],
                 initialValue: ''
               })(
                   <Input/>,
@@ -87,7 +127,16 @@ const DetailForm = (props: any): JSX.Element => {
             </Form.Item>
             <Form.Item label={'州/省/自治区'} hasFeedback={true}>
               {getFieldDecorator('region', {
-                rules: [{ required: false, message: '请输入所在州/省/自治区' }],
+                rules: [
+                  { 
+                    required: false, 
+                    message: '请输入所在州/省/自治区' 
+                  },
+                  {
+                    max: 20,
+                    message: '长度不能超过20个字符'
+                  }
+                ],
                 initialValue: ''
               })(
                   <Input/>,
@@ -95,7 +144,16 @@ const DetailForm = (props: any): JSX.Element => {
             </Form.Item>
             <Form.Item label={'国家/地区'} hasFeedback={true}>
               {getFieldDecorator('country', {
-                rules: [{ required: false, message: '请输入所在国家/地区' }],
+                rules: [
+                  { 
+                    required: false, 
+                    message: '请输入所在国家/地区' 
+                  },
+                  {
+                    max: 12,
+                    message: '长度不能超过12个字符'
+                  }
+                ],
                 initialValue: ''
               })(
                   <Input/>,

@@ -51,7 +51,16 @@ const SigninForm: React.FC = (props: any): JSX.Element => {
           <Form onSubmit={handleSubmit} className={'login-form'}>
             <Form.Item label={'邮箱地址'}>
               {getFieldDecorator('email', {
-                rules: [{ required: true, message: '请输入你的邮箱地址' }],
+                rules: [
+                  { 
+                    required: true, 
+                    message: '请输入你的邮箱地址' 
+                  },
+                  {
+                    max: 32,
+                    message: '长度不能超过32个字符'
+                  }
+                ],
               })(
                   <Input
                       prefix={<Icon type={'mail'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
@@ -61,7 +70,16 @@ const SigninForm: React.FC = (props: any): JSX.Element => {
             </Form.Item>
             <Form.Item label={'昵称'}>
               {getFieldDecorator('name', {
-                rules: [{ required: true, message: '请输入你的昵称' }],
+                rules: [
+                  { 
+                    required: true, 
+                    message: '请输入你的昵称' 
+                  },
+                  {
+                    max: 20,
+                    message: '长度不能超过20个字符'
+                  }
+                ],
               })(
                   <Input
                       prefix={<Icon type={'user'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
@@ -71,7 +89,16 @@ const SigninForm: React.FC = (props: any): JSX.Element => {
             </Form.Item>
             <Form.Item label={'密码'} hasFeedback={true}>
               {getFieldDecorator('password', {
-                rules: [{ required: true, message: '请输入你的密码' }],
+                rules: [
+                  { 
+                    required: true, 
+                    message: '请输入你的密码' 
+                  },
+                  {
+                    max: 18,
+                    message: '长度不能超过18个字符'
+                  }
+                ],
               })(
                   <Input
                       prefix={<Icon type={'lock'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
@@ -86,6 +113,10 @@ const SigninForm: React.FC = (props: any): JSX.Element => {
                     {
                       required: true,
                       message: '请输入你的密码'
+                    },
+                    {
+                      max: 18,
+                      message: '长度不能超过18个字符'
                     },
                     {
                       validator: compareToFirstPassword

@@ -62,7 +62,16 @@ const ResetForm: React.FC = (props: any): JSX.Element => {
             <Form onSubmit={handleSubmit} className={'login-form'}>
               <Form.Item hasFeedback={true}>
                 {getFieldDecorator('password', {
-                  rules: [{ required: true, message: '请输入你的密码' }],
+                  rules: [
+                    { 
+                      required: true, 
+                      message: '请输入你的密码' 
+                    },
+                    {
+                      max: 18,
+                      message: '长度不能超过18个字符'
+                    }
+                  ],
                 })(
                     <Input
                         prefix={<Icon type={'lock'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
@@ -77,6 +86,10 @@ const ResetForm: React.FC = (props: any): JSX.Element => {
                       {
                         required: true,
                         message: '请输入你的密码'
+                      },
+                      {
+                        max: 18,
+                        message: '长度不能超过18个字符'
                       },
                       {
                         validator: compareToFirstPassword
