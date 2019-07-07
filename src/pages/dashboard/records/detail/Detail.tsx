@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import qs from 'query-string'
 import {
   Typography,
-  Icon,
   Divider,
   Collapse,
   Button
