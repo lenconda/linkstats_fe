@@ -273,11 +273,15 @@ const Detail = (props: any): JSX.Element => {
             <Text strong>创建日期: </Text>{moment(linkInfo.createTime).format('YY-MM-DD HH:mm:ss')}
           </Text>
           <br/>
-          <Text>
-            <Text strong>二维码: </Text>
-            <br/>
-            <img src={linkInfo.qrCode} alt={'QR Code'} width={120} height={120}/>
-          </Text>
+          {
+            linkInfo.qrCode
+            ? <Text>
+                <Text strong>二维码: </Text>
+                <br/>
+                <img src={linkInfo.qrCode} alt={'QR Code'} width={120} height={120}/>
+              </Text>
+            : null
+          }
         </Paragraph>
       </div>
       <br/>

@@ -1,0 +1,231 @@
+import React, { useState, useEffect } from 'react'
+import qs from 'query-string'
+import http from '../../../../util/http'
+import {
+  Form,
+  Row,
+  Col,
+  Modal,
+  Button,
+  Input,
+  Divider,
+  Typography
+} from 'antd'
+import Content from '../../../../components/content/Content'
+import { history } from '../../../../App'
+import './Detail.css'
+import moment from 'moment'
+
+const {
+  Text
+} = Typography
+
+interface Record {
+  createTime: number
+  updateTime?: number
+  originalUrl: string
+  shorternUrl: string
+  comment: string
+  qrCode: string
+}
+
+const DetailForm = (props: any): JSX.Element => {
+  const { getFieldDecorator } = props.form
+  const uuid = JSON.parse(JSON.stringify(qs.parse(props.location.search))).uuid || undefined
+
+  const [loading, setLoading] = useState<boolean>(false)
+  const [data, setData] = useState<Partial<Record>>({})
+  const [updating, setUpdating] = useState<boolean>(false)
+  const [deleting, setDeleting] = useState<boolean>(false)
+
+  const fetch = () => {
+    setLoading(true)
+    http
+    .get(`/api/links/${uuid}`)
+    .then(res => {
+      setLoading(false)
+      if (res) {
+        setData(res.data.data)
+        props.form.setFieldsValue({ 
+          originalUrl: res.data.data.originalUrl,
+          comment: res.data.data.comment
+        })
+      }
+    })
+  }
+
+  const updateLink = (updates: any) => {
+    setUpdating(true)
+    http
+    .put(`/api/links/${uuid}`, { updates })
+    .then(res => {
+      setUpdating(false)
+      if (res)
+        fetch()
+    })
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    props.form.validateFields((err: any, values: any) => {
+      if (!err) {
+        updateLink(values)
+      }
+    })
+  }
+
+  const handleDeleteLink = () => {
+    setDeleting(true)
+    http
+    .delete(`/api/links`, {data: { links: [uuid] }})
+    .then(res => {
+      setDeleting(false)
+      if (res)
+        history.goBack()
+    })
+  }
+
+  const validateUrl = (rule: any, value: any, callback: any) => {
+    // eslint-disable-next-line no-useless-escape
+    const urlChecker = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g
+    
+    if (!urlChecker.test(props.form.getFieldValue('originalUrl')))
+      callback('请输入合法的URL')
+    else
+      callback()
+  }
+
+  useEffect(() => {
+    fetch()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uuid])
+
+  return (
+    <Content loading={loading}
+             title={'探测链接的详细信息'}
+             controls={
+               <div>
+                 <Button type={'danger'} 
+                         icon={'delete'}
+                         onClick={() => {
+                           Modal.confirm({
+                             title: '确实要删除这个探测链接吗？',
+                             content: '此操作将不可恢复',
+                             okText: '确定',
+                             cancelText: '取消',
+                             okButtonProps: {
+                               loading: deleting
+                             },
+                             onOk: () => handleDeleteLink(),
+                             onCancel: () => {}
+                           })
+                         }}
+                 >
+                   删除探测链接
+                 </Button>&nbsp;&nbsp;
+                 <Button type={'ghost'}
+                         icon={'double-left'}
+                         onClick={() => history.goBack()}
+                 >
+                   返回
+                 </Button>
+               </div>
+             }
+    >
+      <div className={'detail-container'}>
+        <Text ellipsis={true}>
+          <Text strong={true}>UUID: </Text>
+          <Text copyable={true}>{uuid}</Text>
+        </Text>
+        <br/>
+        <Text ellipsis={true}>
+          <Text strong={true}>创建时间: </Text>
+          {moment(data.createTime).format('YY-MM-DD HH:mm:ss')}
+        </Text>
+        <br/>
+        {
+          data.updateTime
+          ? <Text ellipsis={true}>
+              <Text strong={true}>更新时间: </Text>
+              {moment(data.updateTime).format('YY-MM-DD HH:mm:ss')}
+            </Text>
+          : null
+        }
+        <br/>
+        <Text ellipsis={true}>
+          <Text strong={true}>原始链接: </Text>
+          <Text copyable={true}>{data.originalUrl}</Text>
+        </Text>
+        <br/>
+        <Text ellipsis={true}>
+          <Text strong={true}>探测链接: </Text>
+          <Text copyable={true}>{data.shorternUrl}</Text>
+        </Text>
+        <br/>
+        {
+          data.qrCode
+          ? <Text>
+              <Text strong={true}>二维码: </Text>
+              <br/>
+              <img src={data.qrCode} alt={'QR Code'} width={120} height={120}/>
+            </Text>
+          : null
+        }
+      </div>
+      <Divider/>
+      <Row>
+        <Col xxl={6} xl={8} lg={10} md={18} sm={24} xs={24}>
+          <Form onSubmit={handleSubmit}>
+            <Form.Item label={'原始链接'}>
+              {getFieldDecorator('originalUrl', {
+                rules: [
+                  { 
+                    required: true,
+                    message: '请输入原始链接'
+                  },
+                  {
+                    max: 200,
+                    message: '超过最大长度限制'
+                  },
+                  {
+                    validator: validateUrl
+                  }
+                ],
+              })(
+                  <Input/>,
+              )}
+            </Form.Item>
+            <Form.Item label={'链接的描述'}>
+              {getFieldDecorator('comment', {
+                rules: [
+                  {
+                    max: 1000,
+                    message: '长度不能超过1000个字符'
+                  }
+                ]
+              })(
+                  <Input.TextArea autosize={{ minRows: 2 }}/>,
+              )}
+            </Form.Item>
+            <Form.Item>
+              <Button type={'primary'}
+                      htmlType={'submit'}
+                      loading={updating}
+              >
+                保存修改
+              </Button>&nbsp;&nbsp;
+              <Button type={'ghost'}
+                      onClick={() => history.goBack()}
+              >
+                取消
+              </Button>
+            </Form.Item>
+          </Form>
+        </Col>
+      </Row>
+    </Content>
+  )
+}
+
+const Detail = Form.create()(DetailForm)
+export default Detail
