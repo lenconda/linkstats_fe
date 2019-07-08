@@ -11,6 +11,7 @@ import moment from 'moment'
 import { history } from '../../../../App'
 import Content from '../../../../components/content/Content'
 import './Detail.css'
+import { Link } from 'react-router-dom'
 
 interface SoftwareInfo {
   name: string
@@ -256,7 +257,9 @@ const Detail = (props: any): JSX.Element => {
         <Paragraph>
           <Text>
             <Text strong>链接ID: </Text>
-            <Text copyable={true}>{basicInfo.belongs}</Text>
+            <Text copyable={true}>
+              <Link to={`/dashboard/link/detail?uuid=${basicInfo.belongs}`}/>
+            </Text>
           </Text>
           <br/>
           <Text>
