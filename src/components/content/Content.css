@@ -1,5 +1,5 @@
 .title-divider > .ant-divider {
-  margin-top: 0;
+  margin: 0;
 }
 
 .content-title {
@@ -23,5 +23,5 @@
 }
 
 .content-wrapper {
-  padding: 0 24px 24px;
+  padding: 24px;
 }
