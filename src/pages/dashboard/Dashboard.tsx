@@ -79,39 +79,49 @@ const Dashboard: React.FC = (props: any): JSX.Element => {
           <Menu theme={'dark'} mode={'inline'}
                 selectedKeys={[props.location.pathname]}
           >
-            <Menu.Item key={'/dashboard/create'}>
-              <Link to={'/dashboard/create'}>
-                <Icon type="bulb" theme="filled"/>
-                <span className={'nav-text'}>创建链接</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key={'/dashboard/links'}>
-              <Link to={'/dashboard/links'}>
-                <Icon type="file-text" theme="filled"/>
-                <span className={'nav-text'}>链接列表</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key={'/dashboard/records'}>
-              <Link to={'/dashboard/records'}>
-                <Icon type="unordered-list" />
-                <span className={'nav-text'}>访问记录</span>
-              </Link>
-            </Menu.Item>
-            <Menu.SubMenu title={<div><Icon type={'user'}/>&nbsp;账户管理</div>}>
-              <Menu.Item key={'/dashboard/profile/detail'}>
-                <Link to={'/dashboard/profile/detail'}>
-                  <span className={'nav-text'}>我的资料</span>
+            <Menu.ItemGroup title={'基础功能'}>
+              <Menu.Item key={'/dashboard/create'}>
+                <Link to={'/dashboard/create'}>
+                  <Icon type="bulb" theme="filled"/>
+                  <span className={'nav-text'}>创建链接</span>
                 </Link>
               </Menu.Item>
-              <Menu.Item key={'/dashboard/profile/changepw'}>
-                <Link to={'/dashboard/profile/changepw'}>
-                  <span className={'nav-text'}>修改密码</span>
+              <Menu.Item key={'/dashboard/links'}>
+                <Link to={'/dashboard/links'}>
+                  <Icon type="file-text" theme="filled"/>
+                  <span className={'nav-text'}>链接列表</span>
                 </Link>
               </Menu.Item>
-              <Menu.Item onClick={() => handleSignout()}>
-                <span className={'nav-text'}>退出登录</span>
+              <Menu.Item key={'/dashboard/records'}>
+                <Link to={'/dashboard/records'}>
+                  <Icon type="unordered-list" />
+                  <span className={'nav-text'}>访问记录</span>
+                </Link>
               </Menu.Item>
-            </Menu.SubMenu>
+              <Menu.SubMenu title={<div><Icon type={'user'}/>&nbsp;账户管理</div>}>
+                <Menu.Item key={'/dashboard/profile/detail'}>
+                  <Link to={'/dashboard/profile/detail'}>
+                    <span className={'nav-text'}>我的资料</span>
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key={'/dashboard/profile/changepw'}>
+                  <Link to={'/dashboard/profile/changepw'}>
+                    <span className={'nav-text'}>修改密码</span>
+                  </Link>
+                </Menu.Item>
+                <Menu.Item onClick={() => handleSignout()}>
+                  <span className={'nav-text'}>退出登录</span>
+                </Menu.Item>
+              </Menu.SubMenu>
+            </Menu.ItemGroup>
+            <Menu.ItemGroup title={'技术支持'}>
+              <Menu.Item>
+                <a href={'https://faq.linkstats.cc'} target={'_blank'}>
+                  <Icon type="question-circle" theme="filled" />
+                  <span className={'nav-text'}>常见问题</span>
+                </a>
+              </Menu.Item>
+            </Menu.ItemGroup>
           </Menu>
         </Sider>
         <Layout style={{overflowY: 'auto'}}>
