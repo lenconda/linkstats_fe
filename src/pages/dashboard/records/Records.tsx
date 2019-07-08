@@ -37,11 +37,12 @@ const Records = (props: any): JSX.Element => {
   const [downloadLoading, setDownloadLoading] = useState<boolean>(false)
 
   const page = parseInt(JSON.parse(JSON.stringify(qs.parse(props.location.search))).page) || 1
+  const size = parseInt(JSON.parse(JSON.stringify(qs.parse(props.location.search))).size) || 10
   const uuid = JSON.parse(JSON.stringify(qs.parse(props.location.search))).uuid || ''
   const fetch = () => {
     setLoading(true)
     http
-    .get(`/api/record?page=${page}${uuid ? `&uuid=${uuid}` : ''}`)
+    .get(`/api/record?page=${page}&size=${size}${uuid ? `&uuid=${uuid}` : ''}`)
     .then(res => {
       if (res) {
         setLoading(false)
@@ -54,10 +55,10 @@ const Records = (props: any): JSX.Element => {
     setCurrentPage(page)
     fetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location.search])
+  }, [page, size])
 
   const handlePageChange = (page: any, pageSize: any) => {
-    history.push(`/dashboard/records?page=${page}${uuid ? `&uuid=${uuid}` : ''}`)
+    history.push(`/dashboard/records?page=${page}&size=${size}${uuid ? `&uuid=${uuid}` : ''}`)
   }
 
   const handleDownload = () => {
