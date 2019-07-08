@@ -43,7 +43,9 @@ const DetailForm = (props: any): JSX.Element => {
   }
 
   return (
-    <Content loading={loading}>
+    <Content loading={loading}
+             title={'我的资料'}
+    >
       <Row>
         <Col xxl={6} xl={8} lg={10} md={18} sm={24} xs={24}>
           <Form onSubmit={handleSubmit}>

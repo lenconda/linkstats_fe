@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import http from '../../../util/http'
 import {
   Button,
-  Divider,
-  Typography,
   Pagination
 } from 'antd'
 import qs from 'query-string'
@@ -21,11 +19,6 @@ interface Item {
   shorternUrl: string
   qrCode: string
 }
-
-const {
-  Title,
-  Text
-} = Typography
 
 const Links = (props: any): JSX.Element => {
   const [data, setData] = useState<Item[]>([])
@@ -63,22 +56,19 @@ const Links = (props: any): JSX.Element => {
   }
 
   return (
-    <Content loading={loading}>
-      <Title level={3} 
-             ellipsis={true}
-             className={'content-title'}
-      >
-        <Text ellipsis={true} strong>
-          生成的探测链接列表
-        </Text>
-        <Button type={'ghost'}
-                icon={'bulb'}
-                onClick={() => history.push('/dashboard/create')}
-        >
-          创建链接
-        </Button>
-      </Title>
-      <Divider/>
+    <Content loading={loading} 
+             title={'生成的链接列表'}
+             controls={
+               <div>
+                 <Button type={'ghost'}
+                         icon={'bulb'}
+                         onClick={() => history.push('/dashboard/create')}
+                 >
+                   创建链接
+                 </Button>
+               </div>
+             }
+    >
       {
         data.map((value, index) => (
           <LinkItem uuid={value.uuid} 

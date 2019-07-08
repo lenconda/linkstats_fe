@@ -8,6 +8,7 @@ import {
 } from 'antd'
 import { history } from '../../../App'
 import http from '../../../util/http'
+import Content from '../../../components/content/Content'
 
 const CreateForm = (props: any): JSX.Element => {
   const { getFieldDecorator } = props.form
@@ -44,56 +45,58 @@ const CreateForm = (props: any): JSX.Element => {
   }
 
   return (
-    <Row>
-      <Col xxl={6} xl={8} lg={10} md={18} sm={24} xs={24}>
-        <Form onSubmit={handleSubmit}>
-          <Form.Item label={'原始链接'}>
-            {getFieldDecorator('url', {
-              rules: [
-                { 
-                  required: true,
-                  message: '请输入原始链接'
-                },
-                {
-                  max: 200,
-                  message: '超过最大长度限制'
-                },
-                {
-                  validator: validateUrl
-                }
-              ],
-            })(
-                <Input/>,
-            )}
-          </Form.Item>
-          <Form.Item label={'链接的描述'}>
-            {getFieldDecorator('comment', {
-              rules: [
-                {
-                  max: 1000,
-                  message: '长度不能超过1000个字符'
-                }
-              ]
-            })(
-                <Input.TextArea autosize={{ minRows: 2 }}/>,
-            )}
-          </Form.Item>
-          <Form.Item>
-            <Button type={'primary'}
-                    htmlType={'submit'}
-                    loading={createLoading}
-            >
-              生成探测链接
-            </Button>&nbsp;&nbsp;
-            <Button type={'ghost'}
-                    onClick={() => history.goBack()}
-            >
-              取消
-            </Button>
-          </Form.Item>
-        </Form>
-      </Col>
-    </Row>
+    <Content title={'创建探测链接'}>
+      <Row>
+        <Col xxl={6} xl={8} lg={10} md={18} sm={24} xs={24}>
+          <Form onSubmit={handleSubmit}>
+            <Form.Item label={'原始链接'}>
+              {getFieldDecorator('url', {
+                rules: [
+                  { 
+                    required: true,
+                    message: '请输入原始链接'
+                  },
+                  {
+                    max: 200,
+                    message: '超过最大长度限制'
+                  },
+                  {
+                    validator: validateUrl
+                  }
+                ],
+              })(
+                  <Input/>,
+              )}
+            </Form.Item>
+            <Form.Item label={'链接的描述'}>
+              {getFieldDecorator('comment', {
+                rules: [
+                  {
+                    max: 1000,
+                    message: '长度不能超过1000个字符'
+                  }
+                ]
+              })(
+                  <Input.TextArea autosize={{ minRows: 2 }}/>,
+              )}
+            </Form.Item>
+            <Form.Item>
+              <Button type={'primary'}
+                      htmlType={'submit'}
+                      loading={createLoading}
+              >
+                生成探测链接
+              </Button>&nbsp;&nbsp;
+              <Button type={'ghost'}
+                      onClick={() => history.goBack()}
+              >
+                取消
+              </Button>
+            </Form.Item>
+          </Form>
+        </Col>
+      </Row>
+    </Content>
   )
 }
 

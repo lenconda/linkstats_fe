@@ -16,6 +16,7 @@ import { history } from '../../../App'
 import './Records.css'
 import download from 'js-file-download'
 import Loading from '../../../components/loading/Loading'
+import Content from '../../../components/content/Content'
 
 interface RecordItem {
   uuid: string
@@ -172,17 +173,24 @@ const Records = (props: any): JSX.Element => {
   ]
 
   return (
+    <Content title={'访问记录'}
+             controls={
+               <div>
+                <Button type={'ghost'} loading={downloadLoading} icon={'download'} onClick={handleDownload}>导出记录</Button>
+                {
+                  selection.length === 0 
+                  ? null 
+                  : <Button type={'danger'}
+                            icon={'delete'}
+                            onClick={() => handleDeleteRecord()}
+                    >
+                      删除{selection.length}项
+                    </Button>
+                }
+               </div>
+             }
+    >
       <main className="table-content">
-        <Button type={'primary'} loading={downloadLoading} icon={'download'} onClick={handleDownload}>导出记录</Button>&nbsp;&nbsp;
-        {
-          selection.length === 0 ? null :
-              <Button type={'danger'}
-                      icon={'delete'}
-                      onClick={() => handleDeleteRecord()}
-              >
-                删除{selection.length}项
-              </Button>
-        }
         <Table columns={columns}
                loading={{
                  tip: '加载中...',
@@ -203,6 +211,7 @@ const Records = (props: any): JSX.Element => {
                }}
         />
       </main>
+    </Content>
   )
 }
 

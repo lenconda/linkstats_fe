@@ -106,22 +106,19 @@ const Detail = (props: any): JSX.Element => {
   }, [props.location.search])
 
   return (
-    <Content loading={loading}>
-      <Title level={3} 
-             ellipsis={true}
-             className={'content-title'}
-      >
-        <Text ellipsis={true} strong>
-          访问记录的详细信息
-        </Text>
-        <Button type={'ghost'}
-                icon={'double-left'}
-                onClick={() => history.goBack()}
-        >
-          返回
-        </Button>
-      </Title>
-      <Divider/>
+    <Content loading={loading}
+             title={'访问记录的详细信息'}
+             controls={
+               <div>
+                 <Button type={'ghost'}
+                         icon={'double-left'}
+                         onClick={() => history.goBack()}
+                 >
+                   返回
+                 </Button>
+               </div>
+             }
+    >
       <div className={'information-container'}>
         <Title level={4}>
           基本信息

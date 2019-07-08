@@ -11,3 +11,8 @@
 .detail-button {
   display: block;
 }
+
+h4.ant-typography {
+  font-size: 16px;
+  color: #354052;
+}

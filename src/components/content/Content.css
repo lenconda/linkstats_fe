@@ -1,0 +1,27 @@
+.title-divider > .ant-divider {
+  margin-top: 0;
+}
+
+.content-title {
+  margin-bottom: 0 !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content-title > .ant-typography {
+  font-size: 1.25rem;
+  color: #354052 !important;
+}
+
+.content-title > .ant-typography > strong {
+  font-weight: 400;
+}
+
+.title-wrapper {
+  padding: 24px;
+}
+
+.content-wrapper {
+  padding: 0 24px;
+}
