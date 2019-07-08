@@ -55,7 +55,7 @@ const Records = (props: any): JSX.Element => {
     setCurrentPage(page)
     fetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, size])
+  }, [page, size, uuid])
 
   const handlePageChange = (page: any, pageSize: any) => {
     history.push(`/dashboard/records?page=${page}&size=${size}${uuid ? `&uuid=${uuid}` : ''}`)
