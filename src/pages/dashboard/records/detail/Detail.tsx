@@ -256,9 +256,9 @@ const Detail = (props: any): JSX.Element => {
         <Divider/>
         <Paragraph>
           <Text>
-            <Text strong>链接ID: </Text>
+            <Text strong>探测链接ID: </Text>
             <Text copyable={true}>
-              <Link to={`/dashboard/link/detail?uuid=${basicInfo.belongs}`}/>
+              <Link to={`/dashboard/link/detail?uuid=${basicInfo.belongs}`}>{basicInfo.belongs}</Link>
             </Text>
           </Text>
           <br/>
@@ -268,7 +268,7 @@ const Detail = (props: any): JSX.Element => {
           </Text>
           <br/>
           <Text>
-            <Text strong>转换链接: </Text>
+            <Text strong>探测链接: </Text>
             <Text copyable={true}>{linkInfo.shorternUrl}</Text>
           </Text>
           <br/>

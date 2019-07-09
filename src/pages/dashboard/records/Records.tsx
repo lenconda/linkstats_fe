@@ -113,7 +113,7 @@ const Records = (props: any): JSX.Element => {
       sorter: (alpha: any, beta: any) => alpha.uuid.localeCompare(beta.uuid)
     },
     {
-      title: '对应链接',
+      title: '探测链接ID',
       dataIndex: 'belongs',
       key: 'belongs',
       sorter: (alpha: any, beta: any) => alpha.belongs.localeCompare(beta.belongs),
