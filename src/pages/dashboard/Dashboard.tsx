@@ -82,7 +82,7 @@ const Dashboard = (props: Props): JSX.Element => {
         <Menu theme={'dark'} mode={'inline'}
               selectedKeys={[props.location.pathname]}
         >
-          <Menu.ItemGroup title={'基础功能'}>
+          <Menu.ItemGroup title={'探测链接'}>
             <Menu.Item key={'/dashboard/create'}>
               <Link to={'/dashboard/create'}>
                 <Icon type="bulb" theme="filled"/>
@@ -101,6 +101,16 @@ const Dashboard = (props: Props): JSX.Element => {
                 <span className={'nav-text'}>访问记录</span>
               </Link>
             </Menu.Item>
+          </Menu.ItemGroup>
+          <Menu.ItemGroup title={'技术支持'}>
+            <Menu.Item>
+              <a href={'https://faq.linkstats.cc'} target={'_blank'}>
+                <Icon type="question-circle" theme="filled" />
+                <span className={'nav-text'}>常见问题</span>
+              </a>
+            </Menu.Item>
+          </Menu.ItemGroup>
+          <Menu.ItemGroup title={'其他功能'}>
             <Menu.SubMenu title={<div><Icon type={'user'}/>&nbsp;账户管理</div>}>
               <Menu.Item key={'/dashboard/profile/detail'}>
                 <Link to={'/dashboard/profile/detail'}>
@@ -116,14 +126,6 @@ const Dashboard = (props: Props): JSX.Element => {
                 <span className={'nav-text'}>退出登录</span>
               </Menu.Item>
             </Menu.SubMenu>
-          </Menu.ItemGroup>
-          <Menu.ItemGroup title={'技术支持'}>
-            <Menu.Item>
-              <a href={'https://faq.linkstats.cc'} target={'_blank'}>
-                <Icon type="question-circle" theme="filled" />
-                <span className={'nav-text'}>常见问题</span>
-              </a>
-            </Menu.Item>
           </Menu.ItemGroup>
         </Menu>
       </Sider>
