@@ -6,11 +6,15 @@ import {
   Input,
   Button
 } from 'antd'
+import { FormComponentProps } from 'antd/lib/form'
 import { history } from '../../../App'
+import { RouteComponentProps } from 'react-router-dom'
 import http from '../../../util/http'
 import Content from '../../../components/content/Content'
 
-const CreateForm = (props: any): JSX.Element => {
+interface Props extends RouteComponentProps, FormComponentProps {}
+
+const CreateForm = (props: Props): JSX.Element => {
   const { getFieldDecorator } = props.form
   const [createLoading, setCreateLoading] = useState<boolean>(false)
 

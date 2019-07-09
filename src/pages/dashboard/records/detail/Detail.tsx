@@ -11,7 +11,10 @@ import moment from 'moment'
 import { history } from '../../../../App'
 import Content from '../../../../components/content/Content'
 import './Detail.css'
-import { Link } from 'react-router-dom'
+import { 
+  Link,
+  RouteComponentProps 
+} from 'react-router-dom'
 
 interface SoftwareInfo {
   name: string
@@ -65,7 +68,9 @@ const {
 } = Typography
 const { Panel } = Collapse
 
-const Detail = (props: any): JSX.Element => {
+interface Props extends RouteComponentProps {}
+
+const Detail = (props: Props): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(false)
   const [linkInfo, setLinkInfo] = useState<Partial<LinkInfo>>({})
   const [basicInfo, setBasicInfo] = useState<Partial<Detail>>({})

@@ -4,8 +4,12 @@ import {
 } from 'antd'
 import qs from 'query-string'
 import http from '../../util/http'
+import { FormComponentProps } from 'antd/lib/form'
+import { RouteComponentProps } from 'react-router-dom'
 
-const Redirect = (props: any): JSX.Element => {
+interface Props extends FormComponentProps, RouteComponentProps {}
+
+const Redirect = (props: Props): JSX.Element => {
   document.title = '跳转中...'
 
   const to = JSON.parse(JSON.stringify(qs.parse(props.location.search))).to || ''

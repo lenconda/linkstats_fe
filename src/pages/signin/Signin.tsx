@@ -11,9 +11,15 @@ import {
 } from 'antd'
 import './Signin.css'
 import http from '../../util/http'
-import { Link } from 'react-router-dom'
+import { 
+  Link,
+  RouteComponentProps 
+} from 'react-router-dom'
+import { FormComponentProps } from 'antd/lib/form'
 
-const SigninForm: React.FC = (props: any): JSX.Element => {
+interface Props extends RouteComponentProps, FormComponentProps {}
+
+const SigninForm = (props: Props): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(false)
 
   const { getFieldDecorator } = props.form

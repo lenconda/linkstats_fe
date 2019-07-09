@@ -9,8 +9,12 @@ import {
 } from 'antd'
 import { history } from '../../../../App'
 import Content from '../../../../components/content/Content'
+import { FormComponentProps } from 'antd/lib/form'
+import { RouteComponentProps } from 'react-router-dom'
 
-const DetailForm = (props: any): JSX.Element => {
+interface Props extends FormComponentProps, RouteComponentProps {}
+
+const DetailForm = (props: Props): JSX.Element => {
   const { getFieldDecorator } = props.form
   const [loading, setLoading] = useState<boolean>(false)
   const [updateLoading, setUpdateLoading] = useState<boolean>(false)

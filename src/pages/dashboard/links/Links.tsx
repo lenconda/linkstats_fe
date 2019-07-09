@@ -9,6 +9,7 @@ import { history } from '../../../App'
 import './Links.css'
 import Content from '../../../components/content/Content'
 import LinkItem from '../../../components/link_item/LinkItem'
+import { RouteComponentProps } from 'react-router-dom'
 
 interface Item {
   uuid: string
@@ -20,7 +21,9 @@ interface Item {
   qrCode: string
 }
 
-const Links = (props: any): JSX.Element => {
+interface Props extends RouteComponentProps {}
+
+const Links = (props: Props): JSX.Element => {
   const [data, setData] = useState<Item[]>([])
   const [count, setCount] = useState<number>(0)
   const [currentPage, setCurrentPage] = useState<number>(1)

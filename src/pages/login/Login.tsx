@@ -10,14 +10,20 @@ import {
   Checkbox,
   message
 } from 'antd'
-import { Link } from 'react-router-dom'
+import { 
+  Link,
+  RouteComponentProps 
+} from 'react-router-dom'
 import qs from 'query-string'
 import { Base64 } from 'js-base64'
 import './Login.css'
 import http from '../../util/http'
 import { history } from '../../App'
+import { FormComponentProps } from 'antd/lib/form'
 
-const LoginForm: React.FC = (props: any): JSX.Element => {
+interface Props extends RouteComponentProps, FormComponentProps {}
+
+const LoginForm = (props: Props): JSX.Element => {
   const { getFieldDecorator } = props.form
   const search = JSON.parse(JSON.stringify(qs.parse(props.location.search)))
   const params = {
@@ -85,60 +91,60 @@ const LoginForm: React.FC = (props: any): JSX.Element => {
   }
 
   return (
-      <Row className={'login-box-wrapper'}>
-        <Col xs={24} sm={16} md={14} lg={10} xl={6} xxl={5}>
-          <Card title={'验证你的凭据'}
-                type={'inner'}
-                // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                actions={[<a style={{padding: 0}}
-                             onClick={() => handleForgotPassword()}>忘记密码</a>, 
-                          <Link to={'/signin'}>创建一个账户</Link>]}
-          >
-            <Form onSubmit={handleSubmit} className={'login-form'}>
-              <Form.Item>
-                {getFieldDecorator('email', {
-                  rules: [{ required: true, message: '请输入你的邮箱地址' }],
-                })(
-                    <Input
-                        prefix={<Icon type={'user'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
-                        placeholder={'邮箱地址'}
-                        onChange={e => setEmail(e.target.value)}
-                    />,
-                )}
-              </Form.Item>
-              <Form.Item>
-                {getFieldDecorator('password', {
-                  rules: [{ required: true, message: '请输入你的密码' }],
-                })(
-                    <Input
-                        prefix={<Icon type={'lock'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
-                        type={'password'}
-                        placeholder={'密码'}
-                    />,
-                )}
-              </Form.Item>
-              <Form.Item>
-                {getFieldDecorator('remember', {
-                  valuePropName: 'checked',
-                  initialValue: true,
-                })(<Checkbox>使我保持登录状态</Checkbox>)}
-                <section>
-                  <Button type={'primary'}
-                          loading={loginLoading}
-                          block={true}
-                          htmlType={'submit'}
-                          className={'login-form-button'}
-                  >
-                    登录
-                  </Button>
-                </section>
-              </Form.Item>
-            </Form>
-          </Card>
-          <br/>
-          <Link to={'/'}>&larr; 返回首页</Link>
-        </Col>
-      </Row>
+    <Row className={'login-box-wrapper'}>
+      <Col xs={24} sm={16} md={14} lg={10} xl={6} xxl={5}>
+        <Card title={'验证你的凭据'}
+              type={'inner'}
+              // eslint-disable-next-line jsx-a11y/anchor-is-valid
+              actions={[<a style={{padding: 0}}
+                            onClick={() => handleForgotPassword()}>忘记密码</a>, 
+                        <Link to={'/signin'}>创建一个账户</Link>]}
+        >
+          <Form onSubmit={handleSubmit} className={'login-form'}>
+            <Form.Item>
+              {getFieldDecorator('email', {
+                rules: [{ required: true, message: '请输入你的邮箱地址' }],
+              })(
+                  <Input
+                      prefix={<Icon type={'user'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
+                      placeholder={'邮箱地址'}
+                      onChange={e => setEmail(e.target.value)}
+                  />,
+              )}
+            </Form.Item>
+            <Form.Item>
+              {getFieldDecorator('password', {
+                rules: [{ required: true, message: '请输入你的密码' }],
+              })(
+                  <Input
+                      prefix={<Icon type={'lock'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
+                      type={'password'}
+                      placeholder={'密码'}
+                  />,
+              )}
+            </Form.Item>
+            <Form.Item>
+              {getFieldDecorator('remember', {
+                valuePropName: 'checked',
+                initialValue: true,
+              })(<Checkbox>使我保持登录状态</Checkbox>)}
+              <section>
+                <Button type={'primary'}
+                        loading={loginLoading}
+                        block={true}
+                        htmlType={'submit'}
+                        className={'login-form-button'}
+                >
+                  登录
+                </Button>
+              </section>
+            </Form.Item>
+          </Form>
+        </Card>
+        <br/>
+        <Link to={'/'}>&larr; 返回首页</Link>
+      </Col>
+    </Row>
   )
 }
 

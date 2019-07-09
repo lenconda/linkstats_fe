@@ -11,7 +11,7 @@ import {
   Icon,
   Popconfirm
 } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, RouteComponentProps } from 'react-router-dom'
 import { history } from '../../../App'
 import './Records.css'
 import download from 'js-file-download'
@@ -27,7 +27,9 @@ interface RecordItem {
   createTime: number
 }
 
-const Records = (props: any): JSX.Element => {
+interface Props extends RouteComponentProps {}
+
+const Records = (props: Props): JSX.Element => {
   const [data, setData] = useState<RecordItem[]>([])
   const [count, setCount] = useState<number>(0)
   const [loading, setLoading] = useState<boolean>(false)

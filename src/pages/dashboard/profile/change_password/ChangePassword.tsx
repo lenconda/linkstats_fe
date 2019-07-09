@@ -9,8 +9,12 @@ import {
 } from 'antd'
 import { history } from '../../../../App'
 import Content from '../../../../components/content/Content'
+import { FormComponentProps } from 'antd/lib/form'
+import { RouteComponentProps } from 'react-router-dom'
 
-const ChangePasswordForm = (props: any): JSX.Element => {
+interface Props extends FormComponentProps, RouteComponentProps {}
+
+const ChangePasswordForm = (props: Props): JSX.Element => {
   const [changepwLoading, setChangepwLoading] = useState<boolean>(false)
 
   useEffect(() => {

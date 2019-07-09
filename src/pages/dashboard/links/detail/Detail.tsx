@@ -15,6 +15,8 @@ import Content from '../../../../components/content/Content'
 import { history } from '../../../../App'
 import './Detail.css'
 import moment from 'moment'
+import { FormComponentProps } from 'antd/lib/form'
+import { RouteComponentProps } from 'react-router-dom'
 
 const {
   Text
@@ -29,7 +31,9 @@ interface Record {
   qrCode: string
 }
 
-const DetailForm = (props: any): JSX.Element => {
+interface Props extends FormComponentProps, RouteComponentProps {}
+
+const DetailForm = (props: Props): JSX.Element => {
   const { getFieldDecorator } = props.form
   const uuid = JSON.parse(JSON.stringify(qs.parse(props.location.search))).uuid || undefined
 

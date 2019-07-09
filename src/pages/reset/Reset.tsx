@@ -12,9 +12,15 @@ import './Reset.css'
 import qs from 'query-string'
 import http from '../../util/http'
 import { history } from '../../App'
-import { Link } from 'react-router-dom'
+import { 
+  Link,
+  RouteComponentProps 
+} from 'react-router-dom'
+import { FormComponentProps } from 'antd/lib/form'
 
-const ResetForm: React.FC = (props: any): JSX.Element => {
+interface Props extends RouteComponentProps, FormComponentProps {}
+
+const ResetForm = (props: Props): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(false)
 
   const { getFieldDecorator } = props.form
@@ -54,72 +60,72 @@ const ResetForm: React.FC = (props: any): JSX.Element => {
   }
 
   return (
-      <Row className={'signin-box-wrapper'}>
-        <Col xs={24} sm={16} md={14} lg={10} xl={6} xxl={5}>
-          <Card title={'重置密码'}
-                type={'inner'}
-          >
-            <Form onSubmit={handleSubmit} className={'login-form'}>
-              <Form.Item hasFeedback={true}>
-                {getFieldDecorator('password', {
-                  rules: [
-                    { 
-                      required: true, 
-                      message: '请输入你的密码' 
+    <Row className={'signin-box-wrapper'}>
+      <Col xs={24} sm={16} md={14} lg={10} xl={6} xxl={5}>
+        <Card title={'重置密码'}
+              type={'inner'}
+        >
+          <Form onSubmit={handleSubmit} className={'login-form'}>
+            <Form.Item hasFeedback={true}>
+              {getFieldDecorator('password', {
+                rules: [
+                  { 
+                    required: true, 
+                    message: '请输入你的密码' 
+                  },
+                  {
+                    max: 18,
+                    message: '长度不能超过18个字符'
+                  }
+                ],
+              })(
+                  <Input
+                      prefix={<Icon type={'lock'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
+                      type={'password'}
+                      placeholder={'密码'}
+                  />,
+              )}
+            </Form.Item>
+            <Form.Item hasFeedback={true}>
+              {getFieldDecorator('confirm', {
+                rules: [
+                    {
+                      required: true,
+                      message: '请输入你的密码'
                     },
                     {
                       max: 18,
                       message: '长度不能超过18个字符'
-                    }
-                  ],
-                })(
-                    <Input
-                        prefix={<Icon type={'lock'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
-                        type={'password'}
-                        placeholder={'密码'}
-                    />,
-                )}
-              </Form.Item>
-              <Form.Item hasFeedback={true}>
-                {getFieldDecorator('confirm', {
-                  rules: [
-                      {
-                        required: true,
-                        message: '请输入你的密码'
-                      },
-                      {
-                        max: 18,
-                        message: '长度不能超过18个字符'
-                      },
-                      {
-                        validator: compareToFirstPassword
-                      }],
-                })(
-                    <Input
-                        prefix={<Icon type={'lock'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
-                        type={'password'}
-                        placeholder={'确认密码'}
-                    />,
-                )}
-              </Form.Item>
-              <Form.Item>
-                <section>
-                  <Button type={'primary'}
-                          block={true}
-                          loading={loading}
-                          htmlType={'submit'}
-                          className={'login-form-button'}
-                  >
-                    重置密码
-                  </Button>
-                </section>
-              </Form.Item>
-            </Form>
-          </Card>
-          <br/>
-          <Link to={'/login'}>&larr; 返回登录页</Link>
-        </Col>
-      </Row>
+                    },
+                    {
+                      validator: compareToFirstPassword
+                    }],
+              })(
+                  <Input
+                      prefix={<Icon type={'lock'} style={{color: 'rgba(0, 0, 0, .25)'}}/>}
+                      type={'password'}
+                      placeholder={'确认密码'}
+                  />,
+              )}
+            </Form.Item>
+            <Form.Item>
+              <section>
+                <Button type={'primary'}
+                        block={true}
+                        loading={loading}
+                        htmlType={'submit'}
+                        className={'login-form-button'}
+                >
+                  重置密码
+                </Button>
+              </section>
+            </Form.Item>
+          </Form>
+        </Card>
+        <br/>
+        <Link to={'/login'}>&larr; 返回登录页</Link>
+      </Col>
+    </Row>
   )
 }
 
