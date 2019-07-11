@@ -8,6 +8,6 @@
       xhr = new ActiveXObject("Microsoft.XMLHTTP");
     xhr.open("POST", "https://linkstats.cc/api/redirect/code?id=" + id, true);
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send({ href: href });
+    xhr.send(JSON.stringify({ href: href }));
   }
 })(window);
