@@ -29,6 +29,8 @@ const LinkDetail = React.lazy(() => import('./links/detail/Detail'))
 
 const Create = React.lazy(() => import('./create/Create'))
 
+const Code = React.lazy(() => import('./code/Code'))
+
 const { Header, Content, Sider } = Layout
 
 interface Props extends RouteComponentProps {}
@@ -50,6 +52,17 @@ const Dashboard = (props: Props): JSX.Element => {
       </Menu.Item>
       <Menu.Item key={'records'}>
         <Link to={'/dashboard/records'}>
+          <Icon type={'unordered-list'}/>&nbsp;访问记录
+        </Link>
+      </Menu.Item>
+      <Menu.Divider/>
+      <Menu.Item key={'info'}>
+        <Link to={'/dashboard/code/info'}>
+          <Icon type="code" theme="filled" />&nbsp;探测代码
+        </Link>
+      </Menu.Item>
+      <Menu.Item key={'records'}>
+        <Link to={'/dashboard/code/records'}>
           <Icon type={'unordered-list'}/>&nbsp;访问记录
         </Link>
       </Menu.Item>
@@ -110,6 +123,20 @@ const Dashboard = (props: Props): JSX.Element => {
               </Link>
             </Menu.Item>
           </Menu.ItemGroup>
+          <Menu.ItemGroup title={'探测代码'}>
+            <Menu.Item key={'/dashboard/code/info'}>
+              <Link to={'/dashboard/code/info'}>
+                <Icon type="code" theme="filled" />
+                <span className={'nav-text'}>探测代码</span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key={'/dashboard/code/records'}>
+              <Link to={'/dashboard/code/records'}>
+                <Icon type="unordered-list" />
+                <span className={'nav-text'}>访问记录</span>
+              </Link>
+            </Menu.Item>
+          </Menu.ItemGroup>
           <Menu.ItemGroup title={'技术支持'}>
             <Menu.Item>
               <a href={'https://faq.linkstats.cc'} target={'_blank'}>
@@ -162,6 +189,7 @@ const Dashboard = (props: Props): JSX.Element => {
                 <Route path={'/dashboard/profile/detail'} component={ProfileDetail}/>
                 <Route path={'/dashboard/link/detail'} component={LinkDetail}/>
                 <Route path={'/dashboard/profile/changepw'} component={ProfileChangepw}/>
+                <Route path={'/dashboard/code'} component={Code}/>
                 <Redirect to={'/dashboard/links'}/>
               </Switch>
             </Suspense>
