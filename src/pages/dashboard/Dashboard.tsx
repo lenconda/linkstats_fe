@@ -5,6 +5,7 @@ import {
   Menu,
   Icon,
   Tooltip,
+  Spin,
   Dropdown
 } from 'antd'
 import './Dashboard.css'
@@ -185,7 +186,7 @@ const Dashboard = (props: Props): JSX.Element => {
         </Header>
         <Content style={{margin: '24px 16px 0'}}>
           <div className={'content'}>
-            <Suspense fallback={null}>
+            <Suspense fallback={<Spin indicator={<Icon type={'loading'} spin={true}/>}/>}>
               <Switch>
                 <Route path={'/dashboard/create'} component={Create}/>
                 <Route path={'/dashboard/links'} component={Links}/>

@@ -4,6 +4,10 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom'
+import {
+  Spin,
+  Icon
+} from 'antd'
 
 const Info = React.lazy(() => import('./info/Info'))
 const Records = React.lazy(() => import('./records/Records'))
@@ -11,7 +15,7 @@ const Records = React.lazy(() => import('./records/Records'))
 const Code = (props: any): JSX.Element => {
   return (
     <div>
-      <Suspense fallback={null}>
+      <Suspense fallback={<Spin indicator={<Icon type={'loading'} spin={true}/>}/>}>
         <Switch>
           <Route path={'/dashboard/code/info'} component={Info}/>
           <Route path={'/dashboard/code/records'} component={Records}/>
