@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import moment from 'moment'
-import http from '../../../util/http'
+import http from '../../../../util/http'
 import qs from 'query-string'
 import {
   Table,
@@ -12,15 +12,15 @@ import {
   Popconfirm
 } from 'antd'
 import { Link, RouteComponentProps } from 'react-router-dom'
-import { history } from '../../../App'
-import './Records.css'
+import { history } from '../../../../App'
 import download from 'js-file-download'
-import Loading from '../../../components/loading/Loading'
-import Content from '../../../components/content/Content'
+import Loading from '../../../../components/loading/Loading'
+import Content from '../../../../components/content/Content'
 
 interface RecordItem {
   uuid: string
   belongs: string
+  href: string
   ip: string
   country: string
   device: string
@@ -40,11 +40,10 @@ const Records = (props: Props): JSX.Element => {
 
   const page = parseInt(JSON.parse(JSON.stringify(qs.parse(props.location.search))).page) || 1
   const size = parseInt(JSON.parse(JSON.stringify(qs.parse(props.location.search))).size) || 10
-  const uuid = JSON.parse(JSON.stringify(qs.parse(props.location.search))).uuid || ''
   const fetch = () => {
     setLoading(true)
     http
-    .get(`/api/record?page=${page}&size=${size}${uuid ? `&link=${uuid}` : ''}`)
+    .get(`/api/code/record?page=${page}&size=${size} : ''}`)
     .then(res => {
       if (res) {
         setLoading(false)
@@ -57,16 +56,16 @@ const Records = (props: Props): JSX.Element => {
     setCurrentPage(page)
     fetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, size, uuid])
+  }, [page, size])
 
   const handlePageChange = (page: any, pageSize: any) => {
-    history.push(`/dashboard/records?page=${page}&size=${size}${uuid ? `&link=${uuid}` : ''}`)
+    history.push(`/dashboard/records?page=${page}&size=${size} : ''}`)
   }
 
   const handleDownload = () => {
     setDownloadLoading(true)
     http
-    .get(`/api/record/export${uuid ? `?link=${uuid}` : ''}`)
+    .get(`/api/code/record/export`)
     .then(res => {
       setDownloadLoading(false)
       if (res) {
@@ -79,7 +78,7 @@ const Records = (props: Props): JSX.Element => {
   const deleteRecords = (records: string[]) => {
     setDeleteLoading(true)
     http
-    .delete('/api/record', {
+    .delete('/api/code/record', {
       data: {
         records
       }
@@ -115,11 +114,10 @@ const Records = (props: Props): JSX.Element => {
       sorter: (alpha: any, beta: any) => alpha.uuid.localeCompare(beta.uuid)
     },
     {
-      title: '探测链接ID',
-      dataIndex: 'belongs',
-      key: 'belongs',
-      sorter: (alpha: any, beta: any) => alpha.belongs.localeCompare(beta.belongs),
-      render: ((text: any, record: any) => <Link to={`/dashboard/records?uuid=${record.belongs}`}>{record.belongs}</Link>)
+      title: '来源',
+      dataIndex: 'href',
+      key: 'href',
+      sorter: (alpha: any, beta: any) => alpha.href.localeCompare(beta.href)
     },
     {
       title: 'IP地址',

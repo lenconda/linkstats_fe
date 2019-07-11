@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 
 const Info = React.lazy(() => import('./info/Info'))
+const Records = React.lazy(() => import('./records/Records'))
 
 const Code = (props: any): JSX.Element => {
   return (
@@ -13,7 +14,7 @@ const Code = (props: any): JSX.Element => {
       <Suspense fallback={null}>
         <Switch>
           <Route path={'/dashboard/code/info'} component={Info}/>
-          <Route path={'/dashboard/code/records'}/>
+          <Route path={'/dashboard/code/records'} component={Records}/>
           <Redirect to={'/dashboard/code/info'}/>
         </Switch>
       </Suspense>
