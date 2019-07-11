@@ -49,6 +49,7 @@ interface Detail {
   __v: number
   uuid: string
   belongs: string
+  href?: string
   ip: string
   userAgent: string
   createTime: number
@@ -82,10 +83,11 @@ const Detail = (props: Props): JSX.Element => {
   const [engineInfo, setEngineInfo] = useState<Partial<SoftwareInfo>>({})
 
   const uuid = JSON.parse(JSON.stringify(qs.parse(props.location.search))).uuid || undefined
+  const src = JSON.parse(JSON.stringify(qs.parse(props.location.search))).src || 'link'
   const fetch = () => {
     setLoading(true)
     http
-    .get(`/api/record/detail/${uuid}`)
+    .get(`/api/${src === 'code' ? 'code/' : ''}record/detail/${uuid}`)
     .then(res => {
       setLoading(false)
       if (res) {
@@ -96,12 +98,13 @@ const Detail = (props: Props): JSX.Element => {
         setProxyInfo(res.data.data.proxy)
         setBrowserInfo(res.data.data.browser)
         setEngineInfo(res.data.data.engine)
-        http
-        .get(`/api/links/${res.data.data.belongs}`)
-        .then(res => {
-          if (res)
-            setLinkInfo(res.data.data)
-        })
+        if (src !== 'code')
+          http
+          .get(`/api/links/${res.data.data.belongs}`)
+          .then(res => {
+            if (res)
+              setLinkInfo(res.data.data)
+          })
       }
     })
   }
@@ -140,6 +143,17 @@ const Detail = (props: Props): JSX.Element => {
             <Text strong>IP地址: </Text>
             <Text copyable={true}>{basicInfo.ip}</Text>
           </Text>
+          {
+            src === 'code'
+            ? <span>
+                <br/>
+                <Text>
+                  <Text strong>来源: </Text>
+                  <Text copyable={true}>{basicInfo.href || 'Unknown'}</Text>
+                </Text>
+              </span>
+            : null
+          }
           <br/>
           <Text>
             <Text strong>访问时间: </Text>{moment(basicInfo.createTime).format('YY-MM-DD HH:mm:ss')}
@@ -255,42 +269,48 @@ const Detail = (props: Props): JSX.Element => {
             </Panel>
           </Collapse>
         </Paragraph>
-        <Title level={4}>
-          链接信息
-        </Title>
-        <Divider/>
-        <Paragraph>
-          <Text>
-            <Text strong>探测链接ID: </Text>
-            <Text copyable={true}>
-              <Link to={`/dashboard/link/detail?uuid=${basicInfo.belongs}`}>{basicInfo.belongs}</Link>
-            </Text>
-          </Text>
-          <br/>
-          <Text>
-            <Text strong>原链接: </Text>
-            <Text copyable={true}>{linkInfo.originalUrl}</Text>
-          </Text>
-          <br/>
-          <Text>
-            <Text strong>探测链接: </Text>
-            <Text copyable={true}>{linkInfo.shorternUrl}</Text>
-          </Text>
-          <br/>
-          <Text>
-            <Text strong>创建日期: </Text>{moment(linkInfo.createTime).format('YY-MM-DD HH:mm:ss')}
-          </Text>
-          <br/>
-          {
-            linkInfo.qrCode
-            ? <Text>
-                <Text strong>二维码: </Text>
+        {
+          src === 'link'
+          ? <section>
+              <Title level={4}>
+                链接信息
+              </Title>
+              <Divider/>
+              <Paragraph>
+                <Text>
+                  <Text strong>探测链接ID: </Text>
+                  <Text copyable={true}>
+                    <Link to={`/dashboard/link/detail?uuid=${basicInfo.belongs}`}>{basicInfo.belongs}</Link>
+                  </Text>
+                </Text>
                 <br/>
-                <img src={linkInfo.qrCode} alt={'QR Code'} width={120} height={120}/>
-              </Text>
+                <Text>
+                  <Text strong>原链接: </Text>
+                  <Text copyable={true}>{linkInfo.originalUrl}</Text>
+                </Text>
+                <br/>
+                <Text>
+                  <Text strong>探测链接: </Text>
+                  <Text copyable={true}>{linkInfo.shorternUrl}</Text>
+                </Text>
+                <br/>
+                <Text>
+                  <Text strong>创建日期: </Text>{moment(linkInfo.createTime).format('YY-MM-DD HH:mm:ss')}
+                </Text>
+                <br/>
+                {
+                  linkInfo.qrCode
+                  ? <Text>
+                      <Text strong>二维码: </Text>
+                      <br/>
+                      <img src={linkInfo.qrCode} alt={'QR Code'} width={120} height={120}/>
+                    </Text>
+                  : null
+                }
+              </Paragraph>
+            </section>
             : null
-          }
-        </Paragraph>
+        }
       </div>
       <br/>
       <Button type={'ghost'}

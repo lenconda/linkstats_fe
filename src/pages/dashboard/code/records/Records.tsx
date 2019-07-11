@@ -156,7 +156,7 @@ const Records = (props: Props): JSX.Element => {
       dataIndex: '',
       render: (text: any, record: any) =>
           <div>
-            <Link to={`/dashboard/record/detail?uuid=${record.uuid}`}>
+            <Link to={`/dashboard/record/detail?uuid=${record.uuid}&src=code`}>
               <Icon type={'info-circle'}/>&nbsp;详情
             </Link>
             <Divider type={'vertical'}/>
