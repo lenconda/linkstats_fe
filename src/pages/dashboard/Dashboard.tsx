@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import Navigate from '../../components/navigate/Navigate'
 import {
   Layout,
@@ -16,6 +16,7 @@ import {
   RouteComponentProps
 } from 'react-router-dom'
 import { history } from '../../App'
+import routesMap from '../../routes.json'
 
 const Links = React.lazy(() => import('./links/Links'))
 const Records = React.lazy(() => import('./records/Records'))
@@ -33,6 +34,13 @@ const { Header, Content, Sider } = Layout
 interface Props extends RouteComponentProps {}
 
 const Dashboard = (props: Props): JSX.Element => {
+  useEffect(() => {
+    const map: any = routesMap
+    const path: string = JSON.parse(JSON.stringify(props.location)).pathname || ''
+    document.title = `${map[path]} | LinkStats` || 'LinkStats'
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.location.pathname])
+
   const menu = (
     <Menu>
       <Menu.Item key={'links'}>
@@ -131,7 +139,7 @@ const Dashboard = (props: Props): JSX.Element => {
       </Sider>
       <Layout style={{overflowY: 'auto'}}>
         <Header className={'header'}>
-          <Navigate pathname={props.location.pathname}/>
+          <Navigate pathname={props.location.pathname} map={routesMap}/>
           <div className={'header-controls'}>
             <Tooltip placement={'bottom'} title={'创建探测链接'}>
               <Link to={'/dashboard/create'} className={'create-link'}>
