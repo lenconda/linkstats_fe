@@ -44,7 +44,7 @@ const Records = (props: Props): JSX.Element => {
   const fetch = () => {
     setLoading(true)
     http
-    .get(`/api/record?page=${page}&size=${size}${uuid ? `&uuid=${uuid}` : ''}`)
+    .get(`/api/record?page=${page}&size=${size}${uuid ? `&link=${uuid}` : ''}`)
     .then(res => {
       if (res) {
         setLoading(false)
@@ -60,7 +60,7 @@ const Records = (props: Props): JSX.Element => {
   }, [page, size, uuid])
 
   const handlePageChange = (page: any, pageSize: any) => {
-    history.push(`/dashboard/records?page=${page}&size=${size}${uuid ? `&uuid=${uuid}` : ''}`)
+    history.push(`/dashboard/records?page=${page}&size=${size}${uuid ? `&link=${uuid}` : ''}`)
   }
 
   const handleDownload = () => {
