@@ -173,6 +173,11 @@ const Dashboard = (props: Props): JSX.Element => {
                 <Icon type={'bulb'} theme={'filled'}/>
               </Link>
             </Tooltip>
+            <Tooltip placement={'bottom'} title={'我的探测代码'}>
+              <Link to={'/dashboard/create'} className={'create-link'}>
+                <Icon type={'code'} theme={'filled'}/>
+              </Link>
+            </Tooltip>
             <Dropdown overlay={menu} trigger={['click']} className={'dropdown'}>
               <img src={'/user.svg'} alt={'user-logo'} height={30}/>
             </Dropdown>
