@@ -1,5 +1,6 @@
 {
   "/dashboard": "控制台",
+  "/dashboard/home": "仪表盘",
   "/dashboard/links": "链接列表",
   "/dashboard/records": "访问记录",
   "/dashboard/record": "访问记录",

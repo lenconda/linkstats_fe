@@ -1,0 +1,35 @@
+img.avatar {
+  width: 64px;
+  height: 64px;
+}
+
+.wrapper {
+  padding: 12px;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button.edit-profile {
+  margin-top: 24px;
+}
+
+.day {
+  font-size: 1rem;
+}
+
+.container {
+  margin-top: 24px;
+}
+
+@media (min-width: 992px) {
+  .linkdata {
+    padding-right: 12px;
+  }
+  .codedata {
+    padding-left: 12px;
+  }
+}

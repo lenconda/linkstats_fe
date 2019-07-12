@@ -19,6 +19,8 @@ import {
 import { history } from '../../App'
 import routesMap from '../../routes.json'
 
+const Home = React.lazy(() => import('./home/Home'))
+
 const Links = React.lazy(() => import('./links/Links'))
 const Records = React.lazy(() => import('./records/Records'))
 const Detail = React.lazy(() => import('./records/detail/Detail'))
@@ -104,6 +106,12 @@ const Dashboard = (props: Props): JSX.Element => {
         <Menu theme={'dark'} mode={'inline'}
               selectedKeys={[props.location.pathname]}
         >
+          <Menu.Item key={'/dashboard/home'}>
+            <Link to={'/dashboard/home'}>
+              <Icon type="dashboard" theme="filled" />
+              <span className={'nav-text'}>仪表盘</span>
+            </Link>
+          </Menu.Item>
           <Menu.ItemGroup title={'探测链接'}>
             <Menu.Item key={'/dashboard/create'}>
               <Link to={'/dashboard/create'}>
@@ -188,6 +196,7 @@ const Dashboard = (props: Props): JSX.Element => {
           <div className={'content'}>
             <Suspense fallback={<Spin indicator={<Icon type={'loading'} spin={true}/>}/>}>
               <Switch>
+                <Route path={'/dashboard/home'} component={Home}/>
                 <Route path={'/dashboard/create'} component={Create}/>
                 <Route path={'/dashboard/links'} component={Links}/>
                 <Route path={'/dashboard/records'} component={Records}/>
@@ -196,7 +205,7 @@ const Dashboard = (props: Props): JSX.Element => {
                 <Route path={'/dashboard/link/detail'} component={LinkDetail}/>
                 <Route path={'/dashboard/profile/changepw'} component={ProfileChangepw}/>
                 <Route path={'/dashboard/code'} component={Code}/>
-                <Redirect to={'/dashboard/links'}/>
+                <Redirect to={'/dashboard/home'}/>
               </Switch>
             </Suspense>
           </div>

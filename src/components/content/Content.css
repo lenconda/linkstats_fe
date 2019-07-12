@@ -25,3 +25,8 @@
 .content-wrapper {
   padding: 24px;
 }
+
+.ant-spin-container {
+  background-color: #fff;
+  margin-bottom: 24px;
+}
