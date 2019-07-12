@@ -5,11 +5,7 @@ import qs from 'query-string'
 import {
   Table,
   Button,
-  Modal,
-  Divider,
-  Typography,
-  Icon,
-  Popconfirm
+  Icon
 } from 'antd'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import { history } from '../../../App'
@@ -34,8 +30,6 @@ const Records = (props: Props): JSX.Element => {
   const [count, setCount] = useState<number>(0)
   const [loading, setLoading] = useState<boolean>(false)
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const [selection, setSelection] = useState<string[]>([])
-  const [deleteLoading, setDeleteLoading] = useState<boolean>(false)
   const [downloadLoading, setDownloadLoading] = useState<boolean>(false)
 
   const page = parseInt(JSON.parse(JSON.stringify(qs.parse(props.location.search))).page) || 1
@@ -73,37 +67,6 @@ const Records = (props: Props): JSX.Element => {
         setDownloadLoading(false)
         download(res.data.data.text, `${Date.parse(new Date().toString())}.csv`)
       }
-    })
-  }
-
-  const deleteRecords = (records: string[]) => {
-    setDeleteLoading(true)
-    http
-    .delete('/api/record', {
-      data: {
-        records
-      }
-    })
-    .then(res => {
-      setDeleteLoading(false)
-      if (res) {
-        setDeleteLoading(false)
-        selection.splice(0, selection.length)
-        setSelection(selection)
-        fetch()
-      }
-    })
-  }
-
-  const handleDeleteRecord = () => {
-    Modal.confirm({
-      title: `确定要删除这${selection.length}条记录吗？`,
-      okText: '确定',
-      cancelText: '取消',
-      okButtonProps: {
-        loading: deleteLoading
-      },
-      onOk: () => deleteRecords(selection)
     })
   }
 
@@ -161,16 +124,6 @@ const Records = (props: Props): JSX.Element => {
             <Link to={`/dashboard/record/detail?uuid=${record.uuid}`}>
               <Icon type={'info-circle'}/>&nbsp;详情
             </Link>
-            <Divider type={'vertical'}/>
-            <Popconfirm title={'你确定要删除这个链接吗？'}
-                        okText={'确定'}
-                        cancelText={'取消'}
-                        onConfirm={() => deleteRecords([record.uuid])}
-            >
-              <Button type={'link'} style={{padding: 0}}>
-                <Typography.Text type={'danger'}><Icon type="delete"/>&nbsp;删除</Typography.Text>
-              </Button>
-            </Popconfirm>
           </div>
     }
   ]
@@ -179,20 +132,7 @@ const Records = (props: Props): JSX.Element => {
     <Content title={'探测链接的访问记录'}
              controls={
                <div>
-                <Button type={'ghost'} loading={downloadLoading} icon={'download'} onClick={handleDownload}>导出记录</Button>
-                {
-                  selection.length === 0 
-                  ? null 
-                  : <span>
-                      &nbsp;
-                      <Button type={'danger'}
-                              icon={'delete'}
-                              onClick={() => handleDeleteRecord()}
-                      >
-                        删除{selection.length}项
-                      </Button>
-                    </span>
-                }
+                <Button type={'primary'} loading={downloadLoading} icon={'download'} onClick={handleDownload}>导出记录</Button>
                </div>
              }
     >
@@ -212,9 +152,6 @@ const Records = (props: Props): JSX.Element => {
                style={{marginTop: 20}}
                rowKey={record => record.uuid}
                onChange={(page, size) => handlePageChange(page.current, size)}
-               rowSelection={{
-                 onChange: (rows: any[]) => setSelection(rows)
-               }}
         />
       </main>
     </Content>

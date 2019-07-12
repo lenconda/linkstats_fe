@@ -18,36 +18,45 @@ interface ContentProps {
   tip?: string
   title?: string
   controls?: React.ReactNode[] | React.ReactNode
+  className?: string
 }
 
 const Content = (props: ContentProps): JSX.Element => 
-  <Spin spinning={props.loading || false}
-        tip={props.tip || '加载中...'}
-        indicator={<Icon type={'loading'} spin/>}
-  >
-    {
-      props.title
-      ? <div className={'title-divider'}>
-          <div className={'title-wrapper'}>
-            <Title level={3}
-                 ellipsis={true}
-                 className={'content-title'}
-            >
-              <Text ellipsis={true} strong>
-                {props.title}
-              </Text>
+  (
+    <div className={props.className || ''}>
+      <Spin spinning={props.loading || false}
+            tip={props.tip || '加载中...'}
+            indicator={<Icon type={'loading'} spin/>}
+      >
+        {
+          props.title
+          ? <div className={'title-divider'}>
+              <div className={'title-wrapper'}>
+                <Title level={3}
+                    ellipsis={true}
+                    className={'content-title'}
+                >
+                  <Text ellipsis={true} strong>
+                    {props.title}
+                  </Text>
+                </Title>
+              </div>
+              <Divider/>
               {
-                props.controls || null
+                props.controls
+                ? <div className={'controls-wrapper'}>
+                    {props.controls}
+                  </div>
+                : null
               }
-            </Title>
-          </div>
-          <Divider/>
-        </div>  
-      : null
-    }
-    <div className={'content-wrapper'}>
-      {props.children}
+            </div>  
+          : null
+        }
+        <div className={'content-wrapper'}>
+          {props.children}
+        </div>
+      </Spin>
     </div>
-  </Spin>
+  )
 
 export default Content

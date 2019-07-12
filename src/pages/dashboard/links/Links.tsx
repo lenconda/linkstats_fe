@@ -63,7 +63,7 @@ const Links = (props: Props): JSX.Element => {
              title={'生成的链接列表'}
              controls={
                <div>
-                 <Button type={'ghost'}
+                 <Button type={'primary'}
                          icon={'bulb'}
                          onClick={() => history.push('/dashboard/create')}
                  >

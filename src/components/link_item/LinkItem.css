@@ -1,6 +1,6 @@
 .time {
-  display: inline-block;
-  margin-right: 2rem;
+  /* display: inline-block; */
+  /* margin-right: 2rem; */
 }
 
 .comment {
@@ -9,6 +9,7 @@
 }
 
 .detail-button {
+  padding: 0;
   display: block;
 }
 

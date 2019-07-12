@@ -26,26 +26,24 @@ const LinkItem = (props: LinkItemProps): JSX.Element => {
   return (
     <section>
       <Title level={4} ellipsis={true}>{props.uuid}</Title>
-      <Text ellipsis={true}>
-        <Text className={'time'}>
-          <Icon type={'calendar'} theme={'filled'}/>&nbsp;
-          {moment(props.createTime).format('YY-MM-DD HH:mm:ss')}
-        </Text>
-        {
-          props.updateTime
-          ? <Text className={'time'}>
-              <Icon type={'edit'} theme={'filled'}/>&nbsp;
-              {moment(props.createTime).format('YY-MM-DD HH:mm:ss')}
-            </Text>
-          : null
-        }
+      <Text>
+        <Icon type={'calendar'} theme={'filled'}/>&nbsp;
+        {moment(props.createTime).format('YY-MM-DD HH:mm:ss')}
       </Text>
+      {
+        props.updateTime
+        ? <Text className={'time'}>
+            <Icon type={'edit'} theme={'filled'}/>&nbsp;
+            {moment(props.createTime).format('YY-MM-DD HH:mm:ss')}
+          </Text>
+        : null
+      }
       <br/>
       <Paragraph className={'comment'}>
         {(props.comment && props.comment.length > 200 ? props.comment.substr(0, 200) + '...' : props.comment) || '暂无描述。'}
       </Paragraph>
       <br/>
-      <Button type={'ghost'} 
+      <Button type={'link'} 
               size={'small'} 
               className={'detail-button'}
               onClick={() => props.onDetail(props.uuid)}

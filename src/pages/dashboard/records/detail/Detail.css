@@ -2,3 +2,7 @@
   width: 100%;
   overflow-x: auto;
 }
+
+.detail-card {
+  padding: 0 6px;
+}
