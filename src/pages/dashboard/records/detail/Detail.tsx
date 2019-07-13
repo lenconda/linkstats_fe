@@ -124,7 +124,7 @@ const Detail = (props: Props): JSX.Element => {
             <Col span={12}>
               <Text type={'secondary'}>记录ID</Text>
             </Col>
-            <Col span={12} style={{wordWrap: 'break-word'}}>
+            <Col span={12} className={'info-item'}>
               <Text copyable code>{basicInfo.uuid}</Text>
             </Col>
           </Row>
@@ -132,36 +132,167 @@ const Detail = (props: Props): JSX.Element => {
             <Col span={12}>
               <Text type={'secondary'}>IP地址</Text>
             </Col>
-            <Col span={12} style={{wordWrap: 'break-word'}}>
+            <Col span={12} className={'info-item'}>
               <Text copyable>{basicInfo.ip}</Text>
             </Col>
           </Row>
+          {
+            src === 'code'
+            ? <Row>
+                <Col span={12}>
+                  <Text type={'secondary'}>来源</Text>
+                </Col>
+                <Col span={12} className={'info-item'}>
+                  <Text copyable>{basicInfo.href || 'Unknown'}</Text>
+                </Col>
+              </Row>
+            : null
+          }
           <Row>
             <Col span={12}>
               <Text type={'secondary'}>访问时间</Text>
             </Col>
-            <Col span={12} style={{wordWrap: 'break-word'}}>
+            <Col span={12} className={'info-item'}>
               <Text>{moment(basicInfo.createTime).format('YY-MM-DD HH:mm:ss')}</Text>
             </Col>
           </Row>
         </Content>
         <Content title={'基于IP的地理信息'} className={'detail-card'}>
-          
+          <Row>
+            <Col span={12}>
+              <Text type={'secondary'}>国家/地区</Text>
+            </Col>
+            <Col span={12} className={'info-item'}>
+              <Text>{locationInfo.country || 'Unknown'}</Text>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={12}>
+              <Text type={'secondary'}>国家/地区代码</Text>
+            </Col>
+            <Col span={12} className={'info-item'}>
+              <Text>{locationInfo.countryCode || 'Unknown'}</Text>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={12}>
+              <Text type={'secondary'}>州/省/自治区</Text>
+            </Col>
+            <Col span={12} className={'info-item'}>
+              <Text>{locationInfo.region || 'Unknown'}</Text>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={12}>
+              <Text type={'secondary'}>城市</Text>
+            </Col>
+            <Col span={12} className={'info-item'}>
+              <Text>{locationInfo.city || 'Unknown'}</Text>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={12}>
+              <Text type={'secondary'}>经度</Text>
+            </Col>
+            <Col span={12} className={'info-item'}>
+              <Text>{locationInfo.longitude || 'Unknown'}</Text>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={12}>
+              <Text type={'secondary'}>纬度</Text>
+            </Col>
+            <Col span={12} className={'info-item'}>
+              <Text>{locationInfo.latitude || 'Unknown'}</Text>
+            </Col>
+          </Row>
         </Content>
+      </Col>
+      <Col xxl={8} xl={8} md={12} sm={24} xs={24}>
+        <Content title={'代理信息'} className={'detail-card'}>
+          <Row>
+            <Col span={12}>
+              <Text type={'secondary'}>REMOTE_ADDR</Text>
+            </Col>
+            <Col span={12} className={'info-item'}>
+              <Text copyable>{proxyInfo.remoteAddr || 'Unknown'}</Text>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={12}>
+              <Text type={'secondary'}>HTTP_X_FORWARDED_FOR</Text>
+            </Col>
+            <Col span={12} className={'info-item'}>
+              <Text copyable>{proxyInfo.httpXForwardedFor || 'Unknown'}</Text>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={12}>
+              <Text type={'secondary'}>HTTP_VIA</Text>
+            </Col>
+            <Col span={12} className={'info-item'}>
+              <Text copyable>{proxyInfo.httpVia || 'Unknown'}</Text>
+            </Col>
+          </Row>
+        </Content>
+        <Content title={'User-Agent'} className={'detail-card'}>
+          <code>{basicInfo.userAgent}</code>
+        </Content>
+        {
+          src === 'link'
+          ? <Content title={'链接信息'} className={'detail-card'}>
+              <Row>
+                <Col span={12}>
+                  <Text type={'secondary'}>探测链接ID</Text>
+                </Col>
+                <Col span={12} className={'info-item'}>
+                  <Text copyable={true} code>
+                    <Link to={`/dashboard/link/detail?uuid=${basicInfo.belongs}`}>{basicInfo.belongs}</Link>
+                  </Text>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={12}>
+                  <Text type={'secondary'}>原链接</Text>
+                </Col>
+                <Col span={12} className={'info-item'}>
+                  <Text copyable code>{linkInfo.originalUrl}</Text>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={12}>
+                  <Text type={'secondary'}>探测链接</Text>
+                </Col>
+                <Col span={12} className={'info-item'}>
+                  <Text copyable>{linkInfo.shorternUrl}</Text>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={12}>
+                  <Text type={'secondary'}>创建日期</Text>
+                </Col>
+                <Col span={12} className={'info-item'}>
+                  <Text copyable>{moment(linkInfo.createTime).format('YY-MM-DD HH:mm:ss')}</Text>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={12}>
+                  <Text type={'secondary'}>探测二维码</Text>
+                </Col>
+                <Col span={12} className={'info-item'}>
+                  <Text>
+                    <img src={linkInfo.qrCode} alt={'QR Code'} width={120} height={120}/>
+                  </Text>
+                </Col>
+              </Row>
+            </Content>
+          : null
+        }
       </Col>
 
       <Col xxl={8} xl={8} md={12} sm={24} xs={24}>
         <Content title={'基本信息'} className={'detail-card'}>
-
-        </Content>
-        <Content title={'基本信息'} className={'detail-card'}>
           
-        </Content>
-      </Col>
-
-      <Col xxl={8} xl={8} md={12} sm={24} xs={24}>
-        <Content title={'基本信息'} className={'detail-card'}>
-
         </Content>
         <Content title={'基本信息'} className={'detail-card'}>
           

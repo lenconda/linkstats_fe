@@ -6,3 +6,16 @@
 .detail-card {
   padding: 0 6px;
 }
+
+.detail-card .ant-row {
+  margin: .5em 0;
+}
+
+.info-item {
+  word-wrap: break-word;
+  text-align: right;
+}
+
+.info-item > .ant-typography {
+  color: #333;
+}
