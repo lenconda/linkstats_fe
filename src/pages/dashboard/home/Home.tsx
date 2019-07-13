@@ -86,7 +86,7 @@ const Home = (): JSX.Element => {
             <Link to={'/dashboard/links'}>查看链接...</Link>
             <br/>
             <Typography.Text ellipsis>
-              <Link to={'/dashboard/create'}>创建一个探测链接</Link>
+              <Link to={'/dashboard/create'}>创建探测链接...</Link>
             </Typography.Text>
           </Col>
           <Col xxl={6} xl={6} lg={6} md={24} sm={24} xs={24} className={'wrapper'}>
