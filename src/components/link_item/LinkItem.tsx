@@ -32,10 +32,13 @@ const LinkItem = (props: LinkItemProps): JSX.Element => {
       </Text>
       {
         props.updateTime
-        ? <Text className={'time'}>
-            <Icon type={'edit'} theme={'filled'}/>&nbsp;
-            {moment(props.createTime).format('YY-MM-DD HH:mm:ss')}
-          </Text>
+        ? <span>
+            <br/>
+            <Text className={'time'}>
+              <Icon type={'edit'} theme={'filled'}/>&nbsp;
+              {moment(props.createTime).format('YY-MM-DD HH:mm:ss')}
+            </Text>
+          </span>
         : null
       }
       <br/>

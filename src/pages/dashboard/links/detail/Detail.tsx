@@ -19,7 +19,8 @@ import { FormComponentProps } from 'antd/lib/form'
 import { RouteComponentProps } from 'react-router-dom'
 
 const {
-  Text
+  Text,
+  Paragraph
 } = Typography
 
 interface Record {
@@ -105,80 +106,55 @@ const DetailForm = (props: Props): JSX.Element => {
   }, [uuid])
 
   return (
-    <Content loading={loading}
-             title={'探测链接的详细信息'}
-             controls={
-               <div>
-                 <Button type={'danger'} 
-                         icon={'delete'}
-                         onClick={() => {
-                           Modal.confirm({
-                             title: '确实要删除这个探测链接吗？',
-                             content: '此操作将不可恢复',
-                             okText: '确定',
-                             cancelText: '取消',
-                             okButtonProps: {
-                               loading: deleting
-                             },
-                             onOk: () => handleDeleteLink(),
-                             onCancel: () => {}
-                           })
-                         }}
-                 >
-                   删除探测链接
-                 </Button>&nbsp;&nbsp;
-                 <Button type={'ghost'}
-                         icon={'double-left'}
-                         onClick={() => history.goBack()}
-                 >
-                   返回
-                 </Button>
-               </div>
-             }
-    >
-      <div className={'detail-container'}>
-        <Text ellipsis={true}>
-          <Text strong={true}>UUID: </Text>
-          <Text copyable={true}>{uuid}</Text>
-        </Text>
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong={true}>创建时间: </Text>
-          {moment(data.createTime).format('YY-MM-DD HH:mm:ss')}
-        </Text>
-        <br/>
-        {
-          data.updateTime
-          ? <Text ellipsis={true}>
-              <Text strong={true}>更新时间: </Text>
-              {moment(data.updateTime).format('YY-MM-DD HH:mm:ss')}
-            </Text>
-          : null
-        }
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong={true}>原始链接: </Text>
-          <Text copyable={true}>{data.originalUrl}</Text>
-        </Text>
-        <br/>
-        <Text ellipsis={true}>
-          <Text strong={true}>探测链接: </Text>
-          <Text copyable={true}>{data.shorternUrl}</Text>
-        </Text>
-        <br/>
-        {
-          data.qrCode
-          ? <Text>
-              <Text strong={true}>二维码: </Text>
-              <br/>
-              <img src={data.qrCode} alt={'QR Code'} width={120} height={120}/>
-            </Text>
-          : null
-        }
-      </div>
-      <Divider/>
-      <Row>
-        <Col xxl={6} xl={8} lg={10} md={18} sm={24} xs={24}>
+    <Row>
+      <Col xxl={12} xl={12} md={12} sm={24} xs={24}>
+        <Content title={'链接信息'} className={'detail-card'} loading={loading}>
+          <Row>
+            <Col span={12}>
+              <Text type={'secondary'}>UUID</Text>
+            </Col>
+            <Col span={12} className={'info-item'}>
+              <Text copyable code>{uuid}</Text>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={12}>
+              <Text type={'secondary'}>原始URL</Text>
+            </Col>
+            <Col span={12} className={'info-item'}>
+              <Text copyable>{data.originalUrl}</Text>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={12}>
+              <Text type={'secondary'}>探测链接</Text>
+            </Col>
+            <Col span={12} className={'info-item'}>
+              <Text copyable>{data.shorternUrl}</Text>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={12}>
+              <Text type={'secondary'}>创建时间</Text>
+            </Col>
+            <Col span={12} className={'info-item'}>
+              <Text>{moment(data.createTime).format('YY-MM-DD HH:mm:ss')}</Text>
+            </Col>
+          </Row>
+          {
+            data.updateTime
+            ? <Row>
+                <Col span={12}>
+                  <Text type={'secondary'}>更新时间</Text>
+                </Col>
+                <Col span={12} className={'info-item'}>
+                  <Text>{moment(data.updateTime).format('YY-MM-DD HH:mm:ss')}</Text>
+                </Col>
+              </Row>
+            : null
+          }
+        </Content>
+        <Content title={'更新信息'} className={'detail-card'} loading={loading}>
           <Form onSubmit={handleSubmit}>
             <Form.Item label={'原始链接'}>
               {getFieldDecorator('originalUrl', {
@@ -196,7 +172,7 @@ const DetailForm = (props: Props): JSX.Element => {
                   }
                 ],
               })(
-                  <Input/>,
+                <Input/>,
               )}
             </Form.Item>
             <Form.Item label={'链接的描述'}>
@@ -208,7 +184,7 @@ const DetailForm = (props: Props): JSX.Element => {
                   }
                 ]
               })(
-                  <Input.TextArea autosize={{ minRows: 2 }}/>,
+                <Input.TextArea autosize={{ minRows: 2 }}/>,
               )}
             </Form.Item>
             <Form.Item>
@@ -225,9 +201,171 @@ const DetailForm = (props: Props): JSX.Element => {
               </Button>
             </Form.Item>
           </Form>
-        </Col>
-      </Row>
-    </Content>
+        </Content>
+      </Col>
+      <Col xxl={12} xl={12} md={12} sm={24} xs={24}>
+        <Content title={'操作'} className={'detail-card'}>
+          <Button type={'primary'} 
+                  icon={'bulb'}
+                  onClick={() => history.push('/dashboard/create')}
+          >
+            创建一个新链接...
+          </Button>
+          <Divider/>
+          <Row>
+            <Col span={12}>
+              <Text strong>删除链接</Text>
+              <Paragraph>
+                一旦删除，操作将无法挽回
+              </Paragraph>
+            </Col>
+            <Col span={12} style={{textAlign: 'right'}}>
+              <Button type={'danger'} 
+                      icon={'delete'}
+                      onClick={() => {
+                        Modal.confirm({
+                          title: '确实要删除这个探测链接吗？',
+                          content: '此操作将不可恢复',
+                          okText: '确定',
+                          cancelText: '取消',
+                          okButtonProps: {
+                            loading: deleting
+                          },
+                          onOk: () => handleDeleteLink(),
+                          onCancel: () => {}
+                        })
+                      }}
+              >
+                删除这个链接...
+              </Button>
+            </Col>
+          </Row>
+        </Content>
+      </Col>
+    </Row>
+    // <Content loading={loading}
+    //          title={'探测链接的详细信息'}
+    //          controls={
+    //            <div>
+    //              <Button type={'danger'} 
+    //                      icon={'delete'}
+    //                      onClick={() => {
+    //                        Modal.confirm({
+    //                          title: '确实要删除这个探测链接吗？',
+    //                          content: '此操作将不可恢复',
+    //                          okText: '确定',
+    //                          cancelText: '取消',
+    //                          okButtonProps: {
+    //                            loading: deleting
+    //                          },
+    //                          onOk: () => handleDeleteLink(),
+    //                          onCancel: () => {}
+    //                        })
+    //                      }}
+    //              >
+    //                删除探测链接
+    //              </Button>&nbsp;&nbsp;
+    //              <Button type={'ghost'}
+    //                      icon={'double-left'}
+    //                      onClick={() => history.goBack()}
+    //              >
+    //                返回
+    //              </Button>
+    //            </div>
+    //          }
+    // >
+    //   <div className={'detail-container'}>
+    //     <Text ellipsis={true}>
+    //       <Text strong={true}>UUID: </Text>
+    //       <Text copyable={true}>{uuid}</Text>
+    //     </Text>
+    //     <br/>
+    //     <Text ellipsis={true}>
+    //       <Text strong={true}>创建时间: </Text>
+    //       {moment(data.createTime).format('YY-MM-DD HH:mm:ss')}
+    //     </Text>
+    //     <br/>
+    //     {
+    //       data.updateTime
+    //       ? <Text ellipsis={true}>
+    //           <Text strong={true}>更新时间: </Text>
+    //           {moment(data.updateTime).format('YY-MM-DD HH:mm:ss')}
+    //         </Text>
+    //       : null
+    //     }
+    //     <br/>
+    //     <Text ellipsis={true}>
+    //       <Text strong={true}>原始链接: </Text>
+    //       <Text copyable={true}>{data.originalUrl}</Text>
+    //     </Text>
+    //     <br/>
+    //     <Text ellipsis={true}>
+    //       <Text strong={true}>探测链接: </Text>
+    //       <Text copyable={true}>{data.shorternUrl}</Text>
+    //     </Text>
+    //     <br/>
+    //     {
+    //       data.qrCode
+    //       ? <Text>
+    //           <Text strong={true}>二维码: </Text>
+    //           <br/>
+    //           <img src={data.qrCode} alt={'QR Code'} width={120} height={120}/>
+    //         </Text>
+    //       : null
+    //     }
+    //   </div>
+    //   <Divider/>
+    //   <Row>
+    //     <Col xxl={6} xl={8} lg={10} md={18} sm={24} xs={24}>
+    //       <Form onSubmit={handleSubmit}>
+    //         <Form.Item label={'原始链接'}>
+    //           {getFieldDecorator('originalUrl', {
+    //             rules: [
+    //               { 
+    //                 required: true,
+    //                 message: '请输入原始链接'
+    //               },
+    //               {
+    //                 max: 200,
+    //                 message: '超过最大长度限制'
+    //               },
+    //               {
+    //                 validator: validateUrl
+    //               }
+    //             ],
+    //           })(
+    //               <Input/>,
+    //           )}
+    //         </Form.Item>
+    //         <Form.Item label={'链接的描述'}>
+    //           {getFieldDecorator('comment', {
+    //             rules: [
+    //               {
+    //                 max: 1000,
+    //                 message: '长度不能超过1000个字符'
+    //               }
+    //             ]
+    //           })(
+    //               <Input.TextArea autosize={{ minRows: 2 }}/>,
+    //           )}
+    //         </Form.Item>
+    //         <Form.Item>
+    //           <Button type={'primary'}
+    //                   htmlType={'submit'}
+    //                   loading={updating}
+    //           >
+    //             保存修改
+    //           </Button>&nbsp;&nbsp;
+    //           <Button type={'ghost'}
+    //                   onClick={() => history.goBack()}
+    //           >
+    //             取消
+    //           </Button>
+    //         </Form.Item>
+    //       </Form>
+    //     </Col>
+    //   </Row>
+    // </Content>
   )
 }
 
