@@ -99,11 +99,15 @@ const Home = (): JSX.Element => {
         <Col span={24}>
           <Content title={'捕获数据'} loading={recordsLoading}>
             <Row>
-              <Col xxl={12} xl={12} lg={12} md={24} sm={24} xs={24}>
+              <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>
+                <Typography.Text type={'secondary'} ellipsis>捕获总量</Typography.Text>
+                <Typography.Title>{((recordsData.link || 0) + (recordsData.code || 0))}<Typography.Text className={'day'}>次</Typography.Text></Typography.Title>
+              </Col>
+              <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>
                 <Typography.Text type={'secondary'} ellipsis>链接捕获总量</Typography.Text>
                 <Typography.Title>{recordsData.link}<Typography.Text className={'day'}>次</Typography.Text></Typography.Title>
               </Col>
-              <Col xxl={12} xl={12} lg={12} md={24} sm={24} xs={24}>
+              <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>
                 <Typography.Text type={'secondary'} ellipsis>代码捕获总量</Typography.Text>
                 <Typography.Title>{recordsData.code}<Typography.Text className={'day'}>次</Typography.Text></Typography.Title>
               </Col>
