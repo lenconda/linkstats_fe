@@ -6,7 +6,8 @@ import {
   Row,
   Col,
   Typography,
-  Button
+  Button,
+  Progress
 } from 'antd'
 import './Home.css'
 import { history } from '../../../App'
@@ -105,11 +106,19 @@ const Home = (): JSX.Element => {
               </Col>
               <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>
                 <Typography.Text type={'secondary'} ellipsis>链接捕获总量</Typography.Text>
-                <Typography.Title>{recordsData.link}<Typography.Text className={'day'}>次</Typography.Text></Typography.Title>
+                <br/><br/>
+                <Progress type={'circle'} 
+                          percent={(recordsData.link || 0) / (((recordsData.link || 0) + (recordsData.code || 0)) || 1) * 100}
+                          format={(percent?: number, successPercent?: number) => `${recordsData.link}次`}
+                />
               </Col>
               <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>
                 <Typography.Text type={'secondary'} ellipsis>代码捕获总量</Typography.Text>
-                <Typography.Title>{recordsData.code}<Typography.Text className={'day'}>次</Typography.Text></Typography.Title>
+                <br/><br/>
+                <Progress type={'circle'} 
+                          percent={(recordsData.code || 0) / (((recordsData.link || 0) + (recordsData.code || 0)) || 1) * 100}
+                          format={(percent?: number, successPercent?: number) => `${recordsData.code}次`}
+                />
               </Col>
             </Row>
           </Content>
