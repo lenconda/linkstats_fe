@@ -37,3 +37,18 @@ button.edit-profile {
 .percentage {
   margin-bottom: 12px;
 }
+
+.info-card, .info-card-stats {
+  margin-bottom: 24px;
+}
+
+.country-name {
+  word-wrap: break-word;
+  text-align: right;
+}
+
+.info-card-stats .ant-card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
