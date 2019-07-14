@@ -7,6 +7,7 @@ import {
   Col,
   Typography,
   Button,
+  Card,
   Progress
 } from 'antd'
 import './Home.css'
@@ -74,25 +75,29 @@ const Home = (): JSX.Element => {
             </div>
           </Col>
           <Col xxl={6} xl={6} lg={6} md={24} sm={24} xs={24} className={'wrapper'}>
-            <Typography.Text type={'secondary'} ellipsis>使用时长</Typography.Text>
-            <Typography.Title>
-              {numeral(Math.round((userData.joinTime || 0) / 1000 / 60 / 60 / 24)).format('0 a')}
-              <Typography.Text className={'day'}>天</Typography.Text>
-            </Typography.Title>
+            <Card title={'使用时长'}>
+              {/* <Typography.Text type={'secondary'} ellipsis>使用时长</Typography.Text> */}
+              <Typography.Title>
+                {numeral(Math.round((userData.joinTime || 0) / 1000 / 60 / 60 / 24)).format('0 a')}
+                <Typography.Text className={'day'}>天</Typography.Text>
+              </Typography.Title>
+            </Card>
           </Col>
           <Col xxl={6} xl={6} lg={6} md={24} sm={24} xs={24} className={'wrapper'}>
-            <Typography.Text type={'secondary'} ellipsis>探测链接</Typography.Text>
-            <Typography.Title>{linkCount}<Typography.Text className={'day'}>条</Typography.Text></Typography.Title>
-            <Link to={'/dashboard/links'}>查看链接...</Link>
-            <br/>
-            <Typography.Text ellipsis>
-              <Link to={'/dashboard/create'}>创建探测链接...</Link>
-            </Typography.Text>
+            <Card title={'探测链接'}>
+              <Typography.Title>{linkCount}<Typography.Text className={'day'}>条</Typography.Text></Typography.Title>
+              <Link to={'/dashboard/links'}>查看链接...</Link>
+              <br/>
+              <Typography.Text ellipsis>
+                <Link to={'/dashboard/create'}>创建探测链接...</Link>
+              </Typography.Text>
+            </Card>
           </Col>
           <Col xxl={6} xl={6} lg={6} md={24} sm={24} xs={24} className={'wrapper'}>
-            <Typography.Text type={'secondary'} ellipsis>探测代码</Typography.Text>
-            <Typography.Title>{code ? '已' : '未'}启用</Typography.Title>
-            <Link to={'/dashboard/code/info'}>查看代码...</Link>
+            <Card title={'探测代码'}>
+              <Typography.Title>{code ? '已' : '未'}启用</Typography.Title>
+              <Link to={'/dashboard/code/info'}>查看代码...</Link>
+            </Card>
           </Col>
         </Row>
       </Content>
@@ -100,29 +105,28 @@ const Home = (): JSX.Element => {
         <Col span={24}>
           <Content title={'捕获数据'} loading={recordsLoading}>
             <Row>
-              <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>
-                <Typography.Text type={'secondary'} ellipsis>捕获总量</Typography.Text>
-                <Typography.Title>{((recordsData.link || 0) + (recordsData.code || 0))}<Typography.Text className={'day'}>次</Typography.Text></Typography.Title>
+              <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24} className={'wrapper'}>
+                <Card title={'捕获总量'}>
+                  <Typography.Title>
+                    {((recordsData.link || 0) + (recordsData.code || 0))}<Typography.Text className={'day'}>次</Typography.Text>
+                  </Typography.Title>
+                </Card>
               </Col>
-              <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>
-                <Typography.Text type={'secondary'} ellipsis>链接捕获总量</Typography.Text>
-                <br/><br/>
-                <Progress type={'circle'} 
-                          percent={(recordsData.link || 0) / (((recordsData.link || 0) + (recordsData.code || 0)) || 1) * 100}
-                          format={(percent?: number, successPercent?: number) => `${recordsData.link}次`}
-                />
-                <br/><br/>
-                <Link to={'/dashboard/records'}>查看记录...</Link>
+              <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24} className={'wrapper'}>
+                <Card title={'链接捕获量'} extra={<Link to={'/dashboard/records'}>查看记录</Link>}>
+                  <Progress type={'circle'} 
+                            percent={(recordsData.link || 0) / (((recordsData.link || 0) + (recordsData.code || 0)) || 1) * 100}
+                            format={(percent?: number, successPercent?: number) => `${recordsData.link}次`}
+                  />
+                </Card>
               </Col>
-              <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>
-                <Typography.Text type={'secondary'} ellipsis>代码捕获总量</Typography.Text>
-                <br/><br/>
-                <Progress type={'circle'} 
-                          percent={(recordsData.code || 0) / (((recordsData.link || 0) + (recordsData.code || 0)) || 1) * 100}
-                          format={(percent?: number, successPercent?: number) => `${recordsData.code}次`}
-                />
-                <br/><br/>
-                <Link to={'/dashboard/code/records'}>查看记录...</Link>
+              <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24} className={'wrapper'}>
+                <Card title={'代码捕获量'} extra={<Link to={'/dashboard/code/records'}>查看记录</Link>}>
+                  <Progress type={'circle'} 
+                            percent={(recordsData.code || 0) / (((recordsData.link || 0) + (recordsData.code || 0)) || 1) * 100}
+                            format={(percent?: number, successPercent?: number) => `${recordsData.code}次`}
+                  />
+                </Card>
               </Col>
             </Row>
           </Content>
