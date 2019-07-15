@@ -179,16 +179,16 @@ const Dashboard = (props: Props): JSX.Element => {
           <div className={'header-controls'}>
             <Tooltip placement={'bottom'} title={'创建探测链接'}>
               <Link to={'/dashboard/create'} className={'create-link'}>
-                <Icon type={'bulb'} theme={'filled'}/>
+                <Icon type={'bulb'}/>
               </Link>
             </Tooltip>
             <Tooltip placement={'bottom'} title={'我的探测代码'}>
               <Link to={'/dashboard/code/info'} className={'create-link'}>
-                <Icon type={'code'} theme={'filled'}/>
+                <Icon type={'code'}/>
               </Link>
             </Tooltip>
             <Dropdown overlay={menu} trigger={['click']} className={'dropdown'}>
-              <img src={'/user.svg'} alt={'user-logo'} height={30}/>
+              <Icon type={'user'}/>
             </Dropdown>
           </div>
         </Header>
