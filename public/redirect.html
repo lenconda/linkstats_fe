@@ -22,8 +22,6 @@
         var data = JSON.parse(xhr.responseText);
         window.location.href = data.data.href;
       }
-      else
-        document.getElementById("message").innerText = 'loading...';
     }
     xhr.open("GET", "/api/redirect" + searchString, true);
     xhr.send();
