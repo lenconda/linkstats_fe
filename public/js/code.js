@@ -6,7 +6,7 @@
     else
       // eslint-disable-next-line no-undef
       xhr = new ActiveXObject("Microsoft.XMLHTTP");
-    xhr.open("POST", "https://linkstats.cc/api/redirect/code?id=" + id, true);
+    xhr.open("POST", "/api/redirect/code?id=" + id, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify({ href: href }));
   }

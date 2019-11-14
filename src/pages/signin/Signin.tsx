@@ -11,9 +11,9 @@ import {
 } from 'antd'
 import './Signin.css'
 import http from '../../util/http'
-import { 
+import {
   Link,
-  RouteComponentProps 
+  RouteComponentProps
 } from 'react-router-dom'
 import { FormComponentProps } from 'antd/lib/form'
 
@@ -58,9 +58,9 @@ const SigninForm = (props: Props): JSX.Element => {
             <Form.Item label={'邮箱地址'}>
               {getFieldDecorator('email', {
                 rules: [
-                  { 
-                    required: true, 
-                    message: '请输入你的邮箱地址' 
+                  {
+                    required: true,
+                    message: '请输入你的邮箱地址'
                   },
                   {
                     max: 32,
@@ -77,9 +77,9 @@ const SigninForm = (props: Props): JSX.Element => {
             <Form.Item label={'昵称'}>
               {getFieldDecorator('name', {
                 rules: [
-                  { 
-                    required: true, 
-                    message: '请输入你的昵称' 
+                  {
+                    required: true,
+                    message: '请输入你的昵称'
                   },
                   {
                     max: 20,
@@ -96,9 +96,9 @@ const SigninForm = (props: Props): JSX.Element => {
             <Form.Item label={'密码'} hasFeedback={true}>
               {getFieldDecorator('password', {
                 rules: [
-                  { 
-                    required: true, 
-                    message: '请输入你的密码' 
+                  {
+                    required: true,
+                    message: '请输入你的密码'
                   },
                   {
                     max: 18,
@@ -141,8 +141,8 @@ const SigninForm = (props: Props): JSX.Element => {
                 initialValue: false,
               })(
                   <Checkbox>已同意
-                    <a href={'https://legal.linkstats.cc/license'} target={'_blank'}>用户协议</a>和
-                    <a href={'https://legal.linkstats.cc/privacy_polity'} target={'_blank'}>隐私政策</a>
+                    <a href={'/license'} target={'_blank'}>用户协议</a>和
+                    <a href={'/privacy_polity'} target={'_blank'}>隐私政策</a>
                   </Checkbox>
               )}
               <section>

@@ -148,7 +148,7 @@ const Dashboard = (props: Props): JSX.Element => {
           </Menu.ItemGroup>
           <Menu.ItemGroup title={'技术支持'}>
             <Menu.Item>
-              <a href={'https://faq.linkstats.cc'} target={'_blank'}>
+              <a href={'/faq'} target={'_blank'}>
                 <Icon type="question-circle" theme="filled" />
                 <span className={'nav-text'}>常见问题</span>
               </a>

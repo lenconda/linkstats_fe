@@ -30,7 +30,7 @@ const Info = (): JSX.Element => {
       <Row>
         <Col xxl={12} xl={12} lg={24} md={24} sm={24} xs={24}>
           <pre style={{ color: '#333' }}>
-            &lt;script src="https://linkstats.cc/js/code.js"&gt;&lt;/script&gt;
+            &lt;script src="https://linkstats.lenconda.top/js/code.js"&gt;&lt;/script&gt;
             <br/>
             &lt;script&gt;
             <br/>

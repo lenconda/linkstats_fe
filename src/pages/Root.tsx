@@ -22,7 +22,7 @@ const Root: React.FC = (): JSX.Element =>
         </Title>
         <p>轻量的链接访问数据记录工具</p>
         <span>
-          <a href="https://docs.linkstats.cc" target={'_blank'}><Icon type="file-text" />&nbsp;文档</a>
+          <a href="/docs" target={'_blank'}><Icon type="file-text" />&nbsp;文档</a>
           <Divider type={'vertical'}/>
           <a href="https://github.com/lenconda" target={'_blank'}><Icon type="github" />&nbsp;GitHub</a>
           <Divider type={'vertical'}/>

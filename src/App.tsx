@@ -4,7 +4,7 @@ import {
   Router,
   Route
 } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
+import { createHashHistory } from 'history'
 import {
   Icon,
   Spin
@@ -16,7 +16,7 @@ const Dashboard = React.lazy(() => import('./pages/dashboard/Dashboard'))
 const Signin = React.lazy(() => import('./pages/signin/Signin'))
 const Reset = React.lazy(() => import('./pages/reset/Reset'))
 
-export const history = createBrowserHistory()
+export const history = createHashHistory()
 
 const App: React.FC = (props): JSX.Element =>
   <div className="App">
