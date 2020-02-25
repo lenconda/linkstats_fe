@@ -5,11 +5,21 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const env = require('./env.config');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+const developmentPlugins = env.isDev
+  ? [
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'server',
+      openAnalyzer: false,
+    }),
+  ]
+  : [];
+
 module.exports = {
+  mode: (env.isDev ? 'development' : 'production'),
+
   entry: [
     path.resolve(__dirname, '../src/index.tsx')
   ],
@@ -53,7 +63,6 @@ module.exports = {
     },
 
     minimizer: [
-      new UglifyJsPlugin(),
       new TerserWebpackPlugin({
         cache: true,
         parallel: true,
@@ -69,7 +78,7 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', 'jsx']
   },
 
-  devtool: 'eval',
+  devtool: false,
 
   devServer: {
     hot: true,
@@ -153,28 +162,19 @@ module.exports = {
       inject: true,
       chunksSortMode: 'none',
     }),
-
     new MiniCssExtractPlugin({
       filename: env.isDev ? 'static/css/[name].css' : 'static/css/[name].[contenthash].css',
       chunkFilename: env.isDev ? 'static/css/[id].css' : 'static/css/[id].[contenthash].css'
     }),
-
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../assets/'),
         to: path.resolve(__dirname, '../dist/assets')
       }
     ]),
-
     new CleanWebpackPlugin(),
-
     new webpack.HotModuleReplacementPlugin(),
-
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'server',
-      openAnalyzer: false,
-    }),
-
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    ...developmentPlugins,
   ]
 };
