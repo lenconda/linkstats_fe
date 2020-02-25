@@ -1,34 +1,32 @@
-import React, { Suspense } from 'react'
-import './App.css'
+import React, { Suspense } from 'react';
 import {
   Router,
-  Route
-} from 'react-router-dom'
-import { createHashHistory } from 'history'
-import {
-  Icon,
-  Spin
-} from 'antd'
+  Route,
+} from 'react-router-dom';
+import { createHashHistory } from 'history';
+import Loading from './components/Loading';
+import './App.less';
 
-const Login = React.lazy(() => import('./pages/login/Login'))
-const Root = React.lazy(() => import('./pages/Root'))
-const Dashboard = React.lazy(() => import('./pages/dashboard/Dashboard'))
-const Signin = React.lazy(() => import('./pages/signin/Signin'))
-const Reset = React.lazy(() => import('./pages/reset/Reset'))
+const Root = React.lazy(() => import('./pages'));
+const Signin = React.lazy(() => import('./pages/signin'));
+const Signup = React.lazy(() => import('./pages/signup'));
+const Reset = React.lazy(() => import('./pages/reset'));
+const Dashboard = React.lazy(() => import('./pages/dashboard'));
 
-export const history = createHashHistory()
+export const history = createHashHistory();
 
-const App: React.FC = (props): JSX.Element =>
+const App: React.FC = (props): JSX.Element => (
   <div className="App">
-    <Suspense fallback={<Spin indicator={<Icon type={'loading'} spin={true}/>}/>}>
+    <Suspense fallback={<Loading />}>
       <Router history={history}>
-        <Route path={'/'} exact={true} component={Root}/>
-        <Route path={'/login'} component={Login}/>
-        <Route path={'/signin'} component={Signin}/>
-        <Route path={'/reset'} component={Reset}/>
-        <Route path={'/dashboard'} component={Dashboard}/>
+        <Route path="/" exact={true} component={Root} />
+        <Route path="/signin" component={Signin} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/reset" component={Reset} />
+        <Route path="/dashboard" component={Dashboard} />
       </Router>
     </Suspense>
   </div>
+);
 
-export default App
+export default App;

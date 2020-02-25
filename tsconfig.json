@@ -1,25 +1,42 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "module": "commonjs",
+    "target": "es6",
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
+    "jsx": "react",
+    "typeRoots": [
+      "typings",
+      "./node_modules/@types/"
+    ],
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "strictNullChecks": false,
+    "allowJs": true,
+    "pretty": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "preserve"
+    "noEmit": false,
+    "lib": [
+      "es5",
+      "dom",
+      "esnext",
+      "es2017",
+      "es2015",
+      "es2016"
+    ]
   },
+  "compileOnSave": false,
   "include": [
-    "src"
+    "src", "../common/src/pages/Hello"
+  ],
+  "exclude": [
+    "./node_modules/**/*",
+    "./node_modules/@types/**/*",
+    "dist/**/*",
+    "**/*.js",
   ]
 }

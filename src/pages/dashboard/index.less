@@ -1,0 +1,61 @@
+.logo {
+  height: 63px;
+  border-bottom: 1px solid #404a57;
+  margin-bottom: 24px;
+  font-size: 28px;
+  font-weight: 200;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .sidebar {
+    position: fixed;
+  }
+}
+
+.sidebar {
+  height: 100%;
+  z-index: 99;
+}
+
+.content {
+  text-align: left;
+  margin-bottom: 48px;
+}
+
+.header {
+  background: #fff;
+  padding: 0;
+  padding: 0 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .header-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.header .header-controls .create-link {
+  color: #333;
+  margin-right: 1.5rem;
+}
+
+@media (max-width: 721px) {
+  .dropdown {
+    display: none;
+  }
+  .create-link {
+    display: none;
+  }
+}
+
+.dropdown {
+  cursor: pointer;
+}
