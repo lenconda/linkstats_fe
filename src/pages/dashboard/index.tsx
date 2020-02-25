@@ -94,11 +94,12 @@ const Dashboard = (props: Props): JSX.Element => {
         breakpoint="lg"
         collapsedWidth="0"
         className="sidebar"
+        theme="light"
       >
         <div className="logo">
           LinkStats, Inc.
         </div>
-        <Menu theme="dark" mode="inline"
+        <Menu mode="inline"
           selectedKeys={[props.location.pathname]}
         >
           <Menu.Item key="/dashboard/home">

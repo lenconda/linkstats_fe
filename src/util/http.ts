@@ -4,6 +4,7 @@ import { message } from 'antd';
 import { Base64 } from 'js-base64';
 
 axios.defaults.timeout = 3600000;
+axios.defaults.baseURL = 'https://linkstats-api.lenconda.top';
 axios.interceptors.request.use(config => {
   if (localStorage.getItem('token') || sessionStorage.getItem('token')) { config.headers = {
     Authorization:

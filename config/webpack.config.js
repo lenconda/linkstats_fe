@@ -84,16 +84,16 @@ module.exports = {
     hot: true,
     host: '0.0.0.0',
     inline: true,
-    proxy: {
-      '/api': {
-        target: 'https://linkstats.lenconda.top',
-        secure: true,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api': '/api'
-        }
-      }
-    },
+    // proxy: {
+    //   '/api': {
+    //     target: 'http://101.132.184.52:6217',
+    //     secure: true,
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/api': '/api'
+    //     }
+    //   }
+    // },
     contentBase: path.resolve(__dirname, '../public')
   },
 
