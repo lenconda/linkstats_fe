@@ -1,7 +1,7 @@
-var deploy = require('ali-oss-deploy')
+let deploy = require('ali-oss-deploy');
 
 deploy({
-  path: '../build',
+  path: '../dist',
   ossConfig: {
     region: 'oss-ap-northeast-1',
     accessKeyId: process.env.ACCESS_KEY_ID,
@@ -14,7 +14,7 @@ deploy({
     },
     test: {
       name: 'linkstats-static',
-      projectPath: ''
+      projectPath: '',
     },
   },
-})
+});
