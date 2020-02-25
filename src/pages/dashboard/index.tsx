@@ -85,7 +85,7 @@ const Dashboard = (props: Props): JSX.Element => {
   const handleSignout = () => {
     localStorage.removeItem('token');
     sessionStorage.removeItem('token');
-    history.push('/login');
+    history.push('/signin');
   };
 
   return (

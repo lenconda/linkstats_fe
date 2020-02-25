@@ -95,7 +95,7 @@ const LoginForm = (props: Props): JSX.Element => {
           type="inner"
           actions={[
             <a key={0} style={{ padding: 0 }} onClick={() => handleForgotPassword()}>忘记密码</a>,
-            <Link key={1} to="/signin">创建一个账户</Link>,
+            <Link key={1} to="/signup">创建一个账户</Link>,
           ]}
         >
           <Form onSubmit={handleSubmit} className="login-form">

@@ -150,7 +150,7 @@ const SigninForm = (props: Props): JSX.Element => {
           </Form>
         </Card>
         <br />
-        <Link to="/login">&larr; 返回登录页</Link>
+        <Link to="/signin">&larr; 返回登录页</Link>
       </Col>
     </Row>
   );

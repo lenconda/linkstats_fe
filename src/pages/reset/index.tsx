@@ -43,7 +43,7 @@ const ResetForm = (props: Props): JSX.Element => {
           .post('/api/auth/reset', data)
           .then(res => {
             setLoading(false);
-            if (res) { history.push('/login') }
+            if (res) { history.push('/signin') }
           });
       }
     });
@@ -118,7 +118,7 @@ const ResetForm = (props: Props): JSX.Element => {
           </Form>
         </Card>
         <br />
-        <Link to="/login">&larr; 返回登录页</Link>
+        <Link to="/signin">&larr; 返回登录页</Link>
       </Col>
     </Row>
   );
