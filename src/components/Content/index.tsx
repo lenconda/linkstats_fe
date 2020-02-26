@@ -1,9 +1,8 @@
 import React from 'react';
 import {
-  Spin,
-  Icon,
   Typography,
   Divider,
+  Card,
 } from 'antd';
 import './index.less';
 
@@ -23,9 +22,10 @@ interface ContentProps {
 
 const Content = (props: ContentProps): JSX.Element => (
   <div className={props.className || ''}>
-    <Spin spinning={props.loading || false}
-      tip={props.tip || '加载中...'}
-      indicator={<Icon type="loading" spin />}
+    <Card
+      loading={props.loading || false}
+      bordered={false}
+      className="profile-card"
     >
       {
         props.title
@@ -54,7 +54,7 @@ const Content = (props: ContentProps): JSX.Element => (
       <div className="content-wrapper">
         {props.children}
       </div>
-    </Spin>
+    </Card>
   </div>
 );
 

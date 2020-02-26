@@ -1,10 +1,27 @@
+.loop(@n) when (@n > 0) {
+  .wrapper:nth-child(@{n}){
+      animation-delay:(@n * .15s) ;
+  }
+
+  .loop((@n - 1));
+}
+
+.loop(5);
+
+.cards-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 img.avatar {
   width: 64px;
   height: 64px;
 }
 
 .wrapper {
-  padding: 12px;
+  padding: 0 24px;
+  animation: slideIn .68s ease-in-out both;
 }
 
 .info-container {
@@ -36,10 +53,6 @@ button.edit-profile {
 
 .percentage {
   margin-bottom: 12px;
-}
-
-.info-card, .info-card-stats {
-  margin-bottom: 24px;
 }
 
 .country-name {

@@ -127,7 +127,7 @@ const Records = (props: Props): JSX.Element => {
   ];
 
   return (
-    <Content title="探测链接的访问记录"
+    <Content title="探测链接的捕获记录"
       controls={
         <div>
           <Button type="primary" loading={downloadLoading} icon="download" onClick={handleDownload}>导出记录</Button>

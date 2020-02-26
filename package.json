@@ -65,12 +65,13 @@
     "webpack-dev-server": "3.1.14"
   },
   "dependencies": {
+    "@ant-design/pro-layout": "^5.0.3",
+    "ali-oss-deploy": "^1.0.4",
     "antd": "^3.26.12",
     "autoprefixer": "^9.6.1",
     "axios": "^0.19.2",
     "js-base64": "^2.5.2",
     "js-file-download": "^0.4.10",
-    "ali-oss-deploy": "^1.0.4",
     "moment": "^2.24.0",
     "numeral": "^2.0.6",
     "query-string": "^6.8.1",

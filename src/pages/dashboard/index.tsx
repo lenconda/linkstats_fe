@@ -27,7 +27,6 @@ const ProfileDetail = React.lazy(() => import('./profile/detail'));
 const ProfileChangepw = React.lazy(() => import('./profile/change_password'));
 const LinkDetail = React.lazy(() => import('./links/detail'));
 const Create = React.lazy(() => import('./create'));
-const Code = React.lazy(() => import('./code'));
 
 const { Header, Content, Sider } = Layout;
 
@@ -45,34 +44,23 @@ const Dashboard = (props: Props): JSX.Element => {
     <Menu>
       <Menu.Item key="links">
         <Link to="/dashboard/links">
-          <Icon type="file-text" theme="filled" />&nbsp;链接列表
+          <Icon type="file-text" />&nbsp;链接列表
         </Link>
       </Menu.Item>
       <Menu.Item key="records">
         <Link to="/dashboard/records">
-          <Icon type="unordered-list" />&nbsp;访问记录
-        </Link>
-      </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item key="info">
-        <Link to="/dashboard/code/info">
-          <Icon type="code" theme="filled" />&nbsp;探测代码
-        </Link>
-      </Menu.Item>
-      <Menu.Item key="records">
-        <Link to="/dashboard/code/records">
-          <Icon type="unordered-list" />&nbsp;访问记录
+          <Icon type="unordered-list" />&nbsp;捕获记录
         </Link>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="detail">
         <Link to="/dashboard/profile/detail">
-          <Icon type="idcard" theme="filled" />&nbsp;我的资料
+          <Icon type="idcard" />&nbsp;我的资料
         </Link>
       </Menu.Item>
       <Menu.Item key="changepw">
         <Link to="/dashboard/profile/changepw">
-          <Icon type="lock" theme="filled" />&nbsp;修改密码
+          <Icon type="lock" />&nbsp;修改密码
         </Link>
       </Menu.Item>
       <Menu.Divider />
@@ -104,48 +92,34 @@ const Dashboard = (props: Props): JSX.Element => {
         >
           <Menu.Item key="/dashboard/home">
             <Link to="/dashboard/home">
-              <Icon type="dashboard" theme="filled" />
+              <Icon type="dashboard" />
               <span className="nav-text">仪表盘</span>
             </Link>
           </Menu.Item>
           <Menu.ItemGroup title="探测链接">
             <Menu.Item key="/dashboard/create">
               <Link to="/dashboard/create">
-                <Icon type="bulb" theme="filled" />
+                <Icon type="bulb" />
                 <span className="nav-text">创建链接</span>
               </Link>
             </Menu.Item>
             <Menu.Item key="/dashboard/links">
               <Link to="/dashboard/links">
-                <Icon type="file-text" theme="filled" />
+                <Icon type="file-text" />
                 <span className="nav-text">链接列表</span>
               </Link>
             </Menu.Item>
             <Menu.Item key="/dashboard/records">
               <Link to="/dashboard/records">
                 <Icon type="unordered-list" />
-                <span className="nav-text">访问记录</span>
-              </Link>
-            </Menu.Item>
-          </Menu.ItemGroup>
-          <Menu.ItemGroup title="探测代码">
-            <Menu.Item key="/dashboard/code/info">
-              <Link to="/dashboard/code/info">
-                <Icon type="code" theme="filled" />
-                <span className="nav-text">探测代码</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="/dashboard/code/records">
-              <Link to="/dashboard/code/records">
-                <Icon type="unordered-list" />
-                <span className="nav-text">访问记录</span>
+                <span className="nav-text">捕获记录</span>
               </Link>
             </Menu.Item>
           </Menu.ItemGroup>
           <Menu.ItemGroup title="技术支持">
             <Menu.Item>
               <a href="/faq" target="_blank">
-                <Icon type="question-circle" theme="filled" />
+                <Icon type="question-circle" />
                 <span className="nav-text">常见问题</span>
               </a>
             </Menu.Item>
@@ -178,11 +152,6 @@ const Dashboard = (props: Props): JSX.Element => {
                 <Icon type="bulb" />
               </Link>
             </Tooltip>
-            <Tooltip placement="bottom" title="我的探测代码">
-              <Link to="/dashboard/code/info" className="create-link">
-                <Icon type="code" />
-              </Link>
-            </Tooltip>
             <Dropdown overlay={menu} trigger={['click']} className="dropdown">
               <Icon type="user" />
             </Dropdown>
@@ -200,7 +169,6 @@ const Dashboard = (props: Props): JSX.Element => {
                 <Route path="/dashboard/profile/detail" component={ProfileDetail} />
                 <Route path="/dashboard/link/detail" component={LinkDetail} />
                 <Route path="/dashboard/profile/changepw" component={ProfileChangepw} />
-                <Route path="/dashboard/code" component={Code} />
                 <Redirect to="/dashboard/home" />
               </Switch>
             </Suspense>

@@ -60,9 +60,10 @@ const ResetForm = (props: Props): JSX.Element => {
 
   return (
     <Row className="signin-box-wrapper">
-      <Col xs={24} sm={16} md={14} lg={10} xl={6} xxl={5}>
-        <Card title="重置密码"
-          type="inner"
+      <Col xs={24} sm={16} md={14} lg={10} xl={8} xxl={6}>
+        <Card
+          title="重置密码"
+          className="info-card slideIn"
         >
           <Form onSubmit={handleSubmit} className="login-form">
             <Form.Item hasFeedback={true}>
@@ -80,6 +81,7 @@ const ResetForm = (props: Props): JSX.Element => {
               })(<Input
                 prefix={<Icon type="lock" style={{ color: 'rgba(0, 0, 0, .25)' }} />}
                 type="password"
+                size="large"
                 placeholder="密码"
               />)}
             </Form.Item>
@@ -100,6 +102,7 @@ const ResetForm = (props: Props): JSX.Element => {
               })(<Input
                 prefix={<Icon type="lock" style={{ color: 'rgba(0, 0, 0, .25)' }} />}
                 type="password"
+                size="large"
                 placeholder="确认密码"
               />)}
             </Form.Item>
@@ -110,6 +113,7 @@ const ResetForm = (props: Props): JSX.Element => {
                   loading={loading}
                   htmlType="submit"
                   className="login-form-button"
+                  size="large"
                 >
                   重置密码
                 </Button>

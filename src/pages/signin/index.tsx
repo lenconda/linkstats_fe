@@ -90,19 +90,16 @@ const LoginForm = (props: Props): JSX.Element => {
 
   return (
     <Row className="login-box-wrapper">
-      <Col xs={24} sm={16} md={14} lg={10} xl={6} xxl={5}>
+      <Col xs={24} sm={16} md={14} lg={10} xl={8} xxl={6}>
         <Card title="验证你的凭据"
-          type="inner"
-          actions={[
-            <a key={0} style={{ padding: 0 }} onClick={() => handleForgotPassword()}>忘记密码</a>,
-            <Link key={1} to="/signup">创建一个账户</Link>,
-          ]}
+          className="info-card slideIn"
         >
           <Form onSubmit={handleSubmit} className="login-form">
             <Form.Item>
               {getFieldDecorator('email', {
                 rules: [{ required: true, message: '请输入你的邮箱地址' }],
               })(<Input
+                size="large"
                 prefix={<Icon type="user" style={{ color: 'rgba(0, 0, 0, .25)' }} />}
                 placeholder="邮箱地址"
                 onChange={e => setEmail(e.target.value)}
@@ -112,6 +109,7 @@ const LoginForm = (props: Props): JSX.Element => {
               {getFieldDecorator('password', {
                 rules: [{ required: true, message: '请输入你的密码' }],
               })(<Input
+                size="large"
                 prefix={<Icon type="lock" style={{ color: 'rgba(0, 0, 0, .25)' }} />}
                 type="password"
                 placeholder="密码"
@@ -122,16 +120,32 @@ const LoginForm = (props: Props): JSX.Element => {
                 valuePropName: 'checked',
                 initialValue: true,
               })(<Checkbox>使我保持登录状态</Checkbox>)}
-              <section>
+              <>
                 <Button type="primary"
                   loading={loginLoading}
                   block={true}
+                  size="large"
                   htmlType="submit"
                   className="login-form-button"
                 >
                   登录
                 </Button>
-              </section>
+              </>
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type="link"
+                onClick={() => handleForgotPassword()}
+              >
+                忘记密码
+              </Button>
+              <br />
+              <Button
+                type="link"
+                onClick={() => history.push('/signup')}
+              >
+                创建一个账户 &rarr;
+              </Button>
             </Form.Item>
           </Form>
         </Card>

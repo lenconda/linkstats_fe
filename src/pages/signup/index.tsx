@@ -50,9 +50,10 @@ const SigninForm = (props: Props): JSX.Element => {
 
   return (
     <Row className="signin-box-wrapper">
-      <Col xs={24} sm={16} md={14} lg={10} xl={6} xxl={5}>
-        <Card title="创建一个账户"
-          type="inner"
+      <Col xs={24} sm={16} md={14} lg={10} xl={8} xxl={6}>
+        <Card
+          title="创建一个账户"
+          className="info-card slideIn"
         >
           <Form onSubmit={handleSubmit} className="login-form">
             <Form.Item label="邮箱地址">
@@ -70,6 +71,7 @@ const SigninForm = (props: Props): JSX.Element => {
               })(<Input
                 prefix={<Icon type="mail" style={{ color: 'rgba(0, 0, 0, .25)' }} />}
                 placeholder="邮箱地址"
+                size="large"
               />)}
             </Form.Item>
             <Form.Item label="昵称">
@@ -87,6 +89,7 @@ const SigninForm = (props: Props): JSX.Element => {
               })(<Input
                 prefix={<Icon type="user" style={{ color: 'rgba(0, 0, 0, .25)' }} />}
                 placeholder="昵称"
+                size="large"
               />)}
             </Form.Item>
             <Form.Item label="密码" hasFeedback={true}>
@@ -104,6 +107,7 @@ const SigninForm = (props: Props): JSX.Element => {
               })(<Input
                 prefix={<Icon type="lock" style={{ color: 'rgba(0, 0, 0, .25)' }} />}
                 type="password"
+                size="large"
                 placeholder="密码"
               />)}
             </Form.Item>
@@ -122,6 +126,7 @@ const SigninForm = (props: Props): JSX.Element => {
                     validator: compareToFirstPassword,
                   }],
               })(<Input
+                size="large"
                 prefix={<Icon type="lock" style={{ color: 'rgba(0, 0, 0, .25)' }} />}
                 type="password"
                 placeholder="确认密码"
@@ -139,6 +144,7 @@ const SigninForm = (props: Props): JSX.Element => {
                 <Button type="primary"
                   block={true}
                   loading={loading}
+                  size="large"
                   htmlType="submit"
                   className="login-form-button"
                   disabled={!props.form.getFieldValue('agree')}

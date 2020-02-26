@@ -21,3 +21,39 @@ code {
   justify-content: space-between;
   align-items: center;
 }
+
+.info-card, .info-card-stats {
+  margin: 24px 0;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, .02);
+  // animation-delay: .5s;
+
+  &:hover {
+    box-shadow: 0 0 40px 10px rgba(0, 0, 0, .04);
+  }
+
+  & .ant-card-head {
+    border: 0;
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(10%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slideIn {
+  animation: slideIn .48s ease-in-out both;
+}

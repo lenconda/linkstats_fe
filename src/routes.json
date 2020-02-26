@@ -2,16 +2,13 @@
   "/dashboard": "控制台",
   "/dashboard/home": "仪表盘",
   "/dashboard/links": "链接列表",
-  "/dashboard/records": "访问记录",
-  "/dashboard/record": "访问记录",
+  "/dashboard/records": "捕获记录",
+  "/dashboard/record": "捕获记录",
   "/dashboard/record/detail": "详细信息",
   "/dashboard/profile": "账户管理",
   "/dashboard/profile/detail": "我的资料",
   "/dashboard/profile/changepw": "修改密码",
   "/dashboard/create": "创建探测链接",
   "/dashboard/link": "链接列表",
-  "/dashboard/link/detail": "探测链接的详细信息",
-  "/dashboard/code": "探测代码",
-  "/dashboard/code/info": "探测代码的详细信息",
-  "/dashboard/code/records": "访问记录"
+  "/dashboard/link/detail": "探测链接的详细信息"
 }

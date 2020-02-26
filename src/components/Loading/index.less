@@ -14,4 +14,15 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 32px;
+  animation: rotate 1s infinite both ease-in-out;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
