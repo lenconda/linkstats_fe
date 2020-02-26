@@ -57,7 +57,7 @@ const ChangePasswordForm = (props: Props): JSX.Element => {
             <Form.Item label="旧密码">
               {getFieldDecorator('old', {
                 rules: [{ required: true, message: '请输入旧密码' }],
-              })(<Input type="password" />)}
+              })(<Input size="large" type="password" />)}
             </Form.Item>
             <Form.Item label="新密码">
               {getFieldDecorator('new', {
@@ -71,7 +71,7 @@ const ChangePasswordForm = (props: Props): JSX.Element => {
                     message: '长度不能超过18个字符',
                   },
                 ],
-              })(<Input type="password" />)}
+              })(<Input size="large" type="password" />)}
             </Form.Item>
             <Form.Item label="确认新密码">
               {getFieldDecorator('confirm', {
@@ -88,7 +88,7 @@ const ChangePasswordForm = (props: Props): JSX.Element => {
                     validator: compareToFirstPassword,
                   },
                 ],
-              })(<Input type="password" />)}
+              })(<Input size="large" type="password" />)}
             </Form.Item>
             <Form.Item>
               <Button type="primary"

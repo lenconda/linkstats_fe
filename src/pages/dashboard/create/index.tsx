@@ -68,7 +68,7 @@ const CreateForm = (props: Props): JSX.Element => {
                     validator: validateUrl,
                   },
                 ],
-              })(<Input />)}
+              })(<Input size="large" />)}
             </Form.Item>
             <Form.Item label="链接的描述">
               {getFieldDecorator('comment', {

@@ -75,7 +75,7 @@ const Home = (): JSX.Element => {
   }, []);
 
   return (
-    <Row className="cards-container">
+    <Row>
       <Col xxl={12} xl={12} lg={12} md={24} sm={24} xs={24} className="wrapper">
         <Content className="info-card" loading={basicLoading}>
           <div className="info-container">
@@ -91,20 +91,6 @@ const Home = (): JSX.Element => {
             </Button>
           </div>
         </Content>
-      </Col>
-      <Col xxl={12} xl={12} lg={12} md={24} sm={24} xs={24} className="wrapper">
-        <Card title="链接捕获量"
-          className="info-card info-card-stats"
-          loading={recordsLoading}
-          extra={<Link to="/dashboard/records">查看记录</Link>}
-        >
-          <Progress type="circle"
-            percent={(recordsData.link || 0) / (((recordsData.link || 0) + (recordsData.code || 0)) || 1) * 100}
-            format={(percent?: number, successPercent?: number) => `${recordsData.link}次`}
-          />
-        </Card>
-      </Col>
-      <Col xxl={12} xl={12} lg={12} md={24} sm={24} xs={24} className="wrapper">
         <Card title="使用时长" className="info-card" loading={basicLoading}>
           <Typography.Title>
             {numeral(Math.round((userData.joinTime || 0) / 1000 / 60 / 60 / 24)).format('0 a')}
@@ -113,6 +99,22 @@ const Home = (): JSX.Element => {
         </Card>
       </Col>
       <Col xxl={12} xl={12} lg={12} md={24} sm={24} xs={24} className="wrapper">
+        <Card title="探测链接"
+          className="info-card"
+          loading={basicLoading}
+          extra={<Link to="/dashboard/links">链接列表</Link>}
+        >
+          <Typography.Title>{linkCount}<Typography.Text className="day">条</Typography.Text></Typography.Title>
+          <br />
+          <Typography.Text ellipsis><Link to="/dashboard/create">创建探测链接</Link></Typography.Text>
+        </Card>
+        <Card title="捕获次数"
+          className="info-card"
+          loading={basicLoading}
+          extra={<Link to="/dashboard/records">捕获记录</Link>}
+        >
+          <Typography.Title>{recordsData.link}<Typography.Text className="day">次</Typography.Text></Typography.Title>
+        </Card>
         <Card title="国家/地区"
           className="info-card"
           loading={countryLoading}
@@ -131,17 +133,6 @@ const Home = (): JSX.Element => {
               </Row>
             ))
           }
-        </Card>
-      </Col>
-      <Col xxl={12} xl={12} lg={12} md={24} sm={24} xs={24} className="wrapper">
-        <Card title="探测链接"
-          className="info-card"
-          loading={basicLoading}
-          extra={<Link to="/dashboard/links">查看链接</Link>}
-        >
-          <Typography.Title>{linkCount}<Typography.Text className="day">条</Typography.Text></Typography.Title>
-          <br />
-          <Typography.Text ellipsis><Link to="/dashboard/create">创建探测链接</Link></Typography.Text>
         </Card>
       </Col>
     </Row>

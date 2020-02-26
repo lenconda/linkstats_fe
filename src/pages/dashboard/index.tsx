@@ -157,8 +157,8 @@ const Dashboard = (props: Props): JSX.Element => {
             </Dropdown>
           </div>
         </Header>
-        <Content style={{ margin: '24px 16px 0' }}>
-          <div className="content">
+        <Content className="main">
+          <div>
             <Suspense fallback={<Loading />}>
               <Switch>
                 <Route path="/dashboard/home" component={Home} />

@@ -8,7 +8,6 @@ import {
   Icon,
   Form,
 } from 'antd';
-import './index.less';
 import qs from 'query-string';
 import http from '../../util/http';
 import { history } from '../../App';
@@ -59,7 +58,7 @@ const ResetForm = (props: Props): JSX.Element => {
   };
 
   return (
-    <Row className="signin-box-wrapper">
+    <Row className="form-box-wrapper">
       <Col xs={24} sm={16} md={14} lg={10} xl={8} xxl={6}>
         <Card
           title="重置密码"

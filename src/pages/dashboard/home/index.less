@@ -1,6 +1,6 @@
 .loop(@n) when (@n > 0) {
-  .wrapper:nth-child(@{n}){
-      animation-delay:(@n * .15s) ;
+  .info-card:nth-child(@{n}){
+      animation-delay:(@n * .25s) ;
   }
 
   .loop((@n - 1));
@@ -10,7 +10,7 @@
 
 .cards-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
 }
 
@@ -21,6 +21,11 @@ img.avatar {
 
 .wrapper {
   padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-card {
   animation: slideIn .68s ease-in-out both;
 }
 
@@ -60,8 +65,8 @@ button.edit-profile {
   text-align: right;
 }
 
-.info-card-stats .ant-card-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+// .info-card-stats .ant-card-body {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }

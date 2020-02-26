@@ -16,7 +16,6 @@ import {
 } from 'react-router-dom';
 import qs from 'query-string';
 import { Base64 } from 'js-base64';
-import './index.less';
 import http from '../../util/http';
 import { history } from '../../App';
 import { FormComponentProps } from 'antd/lib/form';
@@ -89,7 +88,7 @@ const LoginForm = (props: Props): JSX.Element => {
   };
 
   return (
-    <Row className="login-box-wrapper">
+    <Row className="form-box-wrapper">
       <Col xs={24} sm={16} md={14} lg={10} xl={8} xxl={6}>
         <Card title="验证你的凭据"
           className="info-card slideIn"

@@ -60,7 +60,7 @@ const DetailForm = (props: Props): JSX.Element => {
                     required: true,
                   },
                 ],
-              })(<Input disabled={true} />)}
+              })(<Input size="large" disabled={true} />)}
             </Form.Item>
             <Form.Item label="昵称">
               {getFieldDecorator('name', {
@@ -74,7 +74,7 @@ const DetailForm = (props: Props): JSX.Element => {
                     message: '长度不能超过20个字符',
                   },
                 ],
-              })(<Input />)}
+              })(<Input size="large" />)}
             </Form.Item>
             <Form.Item label="邮政编码" hasFeedback={true}>
               {getFieldDecorator('zipCode', {
@@ -89,7 +89,7 @@ const DetailForm = (props: Props): JSX.Element => {
                   },
                 ],
                 initialValue: '',
-              })(<Input />)}
+              })(<Input size="large" />)}
             </Form.Item>
             <Form.Item label="地址" hasFeedback={true}>
               {getFieldDecorator('address', {
@@ -104,7 +104,7 @@ const DetailForm = (props: Props): JSX.Element => {
                   },
                 ],
                 initialValue: '',
-              })(<Input />)}
+              })(<Input size="large" />)}
             </Form.Item>
             <Form.Item label="城市" hasFeedback={true}>
               {getFieldDecorator('city', {
@@ -119,7 +119,7 @@ const DetailForm = (props: Props): JSX.Element => {
                   },
                 ],
                 initialValue: '',
-              })(<Input />)}
+              })(<Input size="large" />)}
             </Form.Item>
             <Form.Item label="州/省/自治区" hasFeedback={true}>
               {getFieldDecorator('region', {
@@ -134,7 +134,7 @@ const DetailForm = (props: Props): JSX.Element => {
                   },
                 ],
                 initialValue: '',
-              })(<Input />)}
+              })(<Input size="large" />)}
             </Form.Item>
             <Form.Item label="国家/地区" hasFeedback={true}>
               {getFieldDecorator('country', {
@@ -149,7 +149,7 @@ const DetailForm = (props: Props): JSX.Element => {
                   },
                 ],
                 initialValue: '',
-              })(<Input />)}
+              })(<Input size="large" />)}
             </Form.Item>
             <Form.Item>
               <Button type="primary"

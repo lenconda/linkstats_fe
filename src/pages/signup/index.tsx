@@ -9,7 +9,6 @@ import {
   Form,
   Checkbox,
 } from 'antd';
-import './index.less';
 import http from '../../util/http';
 import {
   Link,
@@ -49,7 +48,7 @@ const SigninForm = (props: Props): JSX.Element => {
   };
 
   return (
-    <Row className="signin-box-wrapper">
+    <Row className="form-box-wrapper">
       <Col xs={24} sm={16} md={14} lg={10} xl={8} xxl={6}>
         <Card
           title="创建一个账户"
