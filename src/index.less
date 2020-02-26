@@ -58,6 +58,16 @@ code {
   animation: slideIn .48s ease-in-out both;
 }
 
+.loop(@n) when (@n > 0) {
+  .info-card:nth-child(@{n}){
+      animation-delay:(@n * .25s) ;
+  }
+
+  .loop((@n - 1));
+}
+
+.loop(5);
+
 .form-box-wrapper {
   background: #f1f1f1;
   padding: 20px;
@@ -66,4 +76,13 @@ code {
   justify-content: center;
   align-items: center;
   overflow-y: auto;
+}
+
+.detail-card {
+  margin: 12px;
+}
+
+.detail-wrapper {
+  display: flex;
+  flex-direction: column;
 }

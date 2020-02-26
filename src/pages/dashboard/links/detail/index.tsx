@@ -104,8 +104,8 @@ const DetailForm = (props: Props): JSX.Element => {
 
   return (
     <Row>
-      <Col xxl={12} xl={12} md={12} sm={24} xs={24}>
-        <Content title="链接信息" className="detail-card" loading={loading}>
+      <Col className="detail-wrapper" xxl={12} xl={12} md={12} sm={24} xs={24}>
+        <Content title="链接信息" className="info-card slideIn detail-card" loading={loading}>
           <Row>
             <Col span={12}>
               <Text type="secondary">UUID</Text>
@@ -151,7 +151,7 @@ const DetailForm = (props: Props): JSX.Element => {
               : null
           }
         </Content>
-        <Content title="更新信息" className="detail-card" loading={loading}>
+        <Content title="更新信息" className="info-card slideIn detail-card" loading={loading}>
           <Form onSubmit={handleSubmit}>
             <Form.Item label="原始链接">
               {getFieldDecorator('originalUrl', {
@@ -196,8 +196,8 @@ const DetailForm = (props: Props): JSX.Element => {
           </Form>
         </Content>
       </Col>
-      <Col xxl={12} xl={12} md={12} sm={24} xs={24}>
-        <Content title="操作" className="detail-card">
+      <Col className="detail-wrapper" xxl={12} xl={12} md={12} sm={24} xs={24}>
+        <Content title="操作" className="info-card slideIn detail-card">
           <Button type="primary"
             icon="bulb"
             onClick={() => history.push('/dashboard/create')}

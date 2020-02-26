@@ -1,13 +1,3 @@
-.loop(@n) when (@n > 0) {
-  .info-card:nth-child(@{n}){
-      animation-delay:(@n * .25s) ;
-  }
-
-  .loop((@n - 1));
-}
-
-.loop(5);
-
 .cards-container {
   display: flex;
   flex-direction: column;

@@ -109,8 +109,8 @@ const Detail = (props: Props): JSX.Element => {
 
   return (
     <Row>
-      <Col xxl={12} xl={12} md={12} sm={24} xs={24}>
-        <Content title="基本信息" className="detail-card" loading={loading}>
+      <Col className="detail-wrapper" xxl={12} xl={12} md={12} sm={24} xs={24}>
+        <Content title="基本信息" className="info-card slideIn detail-card" loading={loading}>
           <Row>
             <Col span={12}>
               <Text type="secondary">记录ID</Text>
@@ -148,7 +148,7 @@ const Detail = (props: Props): JSX.Element => {
             </Col>
           </Row>
         </Content>
-        <Content title="基于IP的地理信息" className="detail-card" loading={loading}>
+        <Content title="基于IP的地理信息" className="info-card slideIn detail-card" loading={loading}>
           <Row>
             <Col span={12}>
               <Text type="secondary">国家/地区</Text>
@@ -198,7 +198,7 @@ const Detail = (props: Props): JSX.Element => {
             </Col>
           </Row>
         </Content>
-        <Content title="代理信息" className="detail-card" loading={loading}>
+        <Content title="代理信息" className="info-card slideIn detail-card" loading={loading}>
           <Row>
             <Col span={12}>
               <Text type="secondary">REMOTE_ADDR</Text>
@@ -224,12 +224,12 @@ const Detail = (props: Props): JSX.Element => {
             </Col>
           </Row>
         </Content>
-        <Content title="User-Agent" className="detail-card" loading={loading}>
+        <Content title="User-Agent" className="info-card slideIn detail-card" loading={loading}>
           <code>{basicInfo.userAgent}</code>
         </Content>
         {
           src === 'link'
-            ? <Content title="链接信息" className="detail-card" loading={loading}>
+            ? <Content title="链接信息" className="info-card slideIn detail-card" loading={loading}>
               <Row>
                 <Col span={12}>
                   <Text type="secondary">探测链接ID</Text>
@@ -278,8 +278,8 @@ const Detail = (props: Props): JSX.Element => {
             : null
         }
       </Col>
-      <Col xxl={12} xl={12} md={12} sm={24} xs={24}>
-        <Content title="浏览器信息" className="detail-card" loading={loading}>
+      <Col className="detail-wrapper" xxl={12} xl={12} md={12} sm={24} xs={24}>
+        <Content title="浏览器信息" className="info-card slideIn detail-card" loading={loading}>
           <Row>
             <Col span={12}>
               <Text type="secondary">名称</Text>
@@ -297,7 +297,7 @@ const Detail = (props: Props): JSX.Element => {
             </Col>
           </Row>
         </Content>
-        <Content title="操作系统信息" className="detail-card" loading={loading}>
+        <Content title="操作系统信息" className="info-card slideIn detail-card" loading={loading}>
           <Row>
             <Col span={12}>
               <Text type="secondary">名称</Text>
@@ -315,7 +315,7 @@ const Detail = (props: Props): JSX.Element => {
             </Col>
           </Row>
         </Content>
-        <Content title="渲染引擎信息" className="detail-card" loading={loading}>
+        <Content title="渲染引擎信息" className="info-card slideIn detail-card" loading={loading}>
           <Row>
             <Col span={12}>
               <Text type="secondary">名称</Text>
@@ -333,7 +333,7 @@ const Detail = (props: Props): JSX.Element => {
             </Col>
           </Row>
         </Content>
-        <Content title="硬件设备信息" className="detail-card" loading={loading}>
+        <Content title="硬件设备信息" className="info-card slideIn detail-card" loading={loading}>
           <Row>
             <Col span={12}>
               <Text type="secondary">类型</Text>
